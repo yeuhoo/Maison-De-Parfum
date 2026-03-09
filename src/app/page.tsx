@@ -33,7 +33,7 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Placeholder products */}
-            <div className="bg-(--bridal-white) rounded-lg shadow-sm overflow-hidden border border-(--muted-sand)">
+            <div className="card-hover bg-(--bridal-white) rounded-lg shadow-sm overflow-hidden border border-(--muted-sand)">
               <div className="h-64 bg-(--soft-cream) flex items-center justify-center">
                 <span className="text-(--warm-taupe)">Perfume Image</span>
               </div>
@@ -54,7 +54,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="bg-(--bridal-white) rounded-lg shadow-sm overflow-hidden border border-(--muted-sand)">
+            <div className="card-hover bg-(--bridal-white) rounded-lg shadow-sm overflow-hidden border border-(--muted-sand)">
               <div className="h-64 bg-(--soft-cream) flex items-center justify-center">
                 <span className="text-(--warm-taupe)">Perfume Image</span>
               </div>
@@ -75,7 +75,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="bg-(--bridal-white) rounded-lg shadow-sm overflow-hidden border border-(--muted-sand)">
+            <div className="card-hover bg-(--bridal-white) rounded-lg shadow-sm overflow-hidden border border-(--muted-sand)">
               <div className="h-64 bg-(--soft-cream) flex items-center justify-center">
                 <span className="text-(--warm-taupe)">Perfume Image</span>
               </div>
