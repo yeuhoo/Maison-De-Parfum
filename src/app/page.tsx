@@ -1,65 +1,144 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="bg-(--bridal-white) text-(--text-primary) py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <div className="text-center">
+            <h1
+              className="text-5xl md:text-7xl font-bold mb-6 font-heading leading-tight"
+              style={{ color: "var(--text-primary)" }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
+              Discover Your Signature Scent
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-(--text-secondary)">
+              Explore our curated collection of luxury perfumes, crafted with
+              the finest ingredients for an unforgettable experience.
+            </p>
             <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="/shop"
+              className="inline-block bg-(--button-gold) text-(--bridal-white) px-8 py-3 rounded font-medium hover:bg-(--button-gold-hover) transition-colors uppercase text-sm"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              Shop Now
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Featured Products */}
+      <section className="py-16 bg-(--soft-cream)">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-12 font-heading">
+            Featured Fragrances
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Placeholder products */}
+            <div className="bg-(--bridal-white) rounded-lg shadow-sm overflow-hidden border border-(--muted-sand)">
+              <div className="h-64 bg-(--soft-cream) flex items-center justify-center">
+                <span className="text-(--warm-taupe)">Perfume Image</span>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2 font-heading">
+                  Elegant Rose
+                </h3>
+                <p className="text-(--text-secondary) mb-4">
+                  A floral masterpiece with notes of rose and jasmine.
+                </p>
+                <div className="flex justify-between items-center">
+                  <span className="text-2xl font-bold text-(--text-primary)">
+                    $89.99
+                  </span>
+                  <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 rounded hover:bg-(--button-gold-hover) transition-colors uppercase text-sm font-medium">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="bg-(--bridal-white) rounded-lg shadow-sm overflow-hidden border border-(--muted-sand)">
+              <div className="h-64 bg-(--soft-cream) flex items-center justify-center">
+                <span className="text-(--warm-taupe)">Perfume Image</span>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2 font-heading">
+                  Midnight Amber
+                </h3>
+                <p className="text-(--text-secondary) mb-4">
+                  Warm and mysterious with amber and vanilla notes.
+                </p>
+                <div className="flex justify-between items-center">
+                  <span className="text-2xl font-bold text-(--text-primary)">
+                    $79.99
+                  </span>
+                  <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 rounded hover:bg-(--button-gold-hover) transition-colors uppercase text-sm font-medium">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="bg-(--bridal-white) rounded-lg shadow-sm overflow-hidden border border-(--muted-sand)">
+              <div className="h-64 bg-(--soft-cream) flex items-center justify-center">
+                <span className="text-(--warm-taupe)">Perfume Image</span>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2 font-heading">
+                  Citrus Breeze
+                </h3>
+                <p className="text-(--text-secondary) mb-4">
+                  Fresh and invigorating with citrus and marine notes.
+                </p>
+                <div className="flex justify-between items-center">
+                  <span className="text-2xl font-bold text-(--text-primary)">
+                    $69.99
+                  </span>
+                  <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 rounded hover:bg-(--button-gold-hover) transition-colors uppercase text-sm font-medium">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* About Section */}
+      <section className="py-16 bg-(--bridal-white)">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold mb-8 font-heading">
+              Why Choose Maison de Parfum?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold mb-4 font-heading">
+                  Premium Ingredients
+                </h3>
+                <p className="text-(--text-secondary)">
+                  We source only the finest essential oils and fragrances from
+                  around the world.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-4 font-heading">
+                  Artisan Crafted
+                </h3>
+                <p className="text-(--text-secondary)">
+                  Each perfume is carefully crafted by master perfumers with
+                  years of experience.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-4 font-heading">
+                  Sustainable Packaging
+                </h3>
+                <p className="text-(--text-secondary)">
+                  Our eco-friendly packaging ensures your perfume arrives
+                  beautifully and responsibly.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
