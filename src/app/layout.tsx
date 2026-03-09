@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${playfair.variable} ${montserrat.variable} antialiased`}
       >
         <Header />
-        {children}
+        <main className="pt-20">{children}</main>
         <Footer />
       </body>
     </html>

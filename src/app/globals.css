@@ -23,7 +23,7 @@
   --text-secondary: #b8a999; /* Warm Taupe – body copy & subtext */
 }
 
-:root {
+@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-text-primary: var(--text-primary);
@@ -33,13 +33,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
   background: var(--background);
   color: var(--text-primary);

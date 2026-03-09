@@ -9,10 +9,10 @@ Rules: generous white space, no heavy shadows, no glossy gradients, no cool tone
 
 **Primary Colors:**
 
-- Champagne Gold #C6A75E – Primary buttons and accents
-- Warm Ivory #F6F1E8 – Main background
-- Soft Cream #EDE3D3 – Section background
-- Deep Espresso #2B2622 – Primary text
+- Champagne Gold HEX: #FAEEC8 RGB: (250, 238, 200) – Primary buttons and accents
+- Warm Ivory HEX: #EFE0CD RGB: (239, 224, 205) – Main background
+- Soft Cream HEX: #F9F9E0 RGB: (249, 249, 224) – Section background
+- Deep Espresso HEX: #3C2218 RGB: (60, 34, 24) – Primary text
 - Matte Black #111111 – High contrast
 
 **Supporting Neutrals:** Warm Taupe #B8A999, Muted Sand #D8C6AF, Bridal White #FAF8F5, Blush Nude #E7D5C8
