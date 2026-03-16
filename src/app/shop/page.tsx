@@ -192,9 +192,19 @@ const BottleIcon = () => (
 
 export default function ShopPage() {
   const [active, setActive] = useState<Category>("All");
+  const [query, setQuery] = useState("");
 
-  const filtered =
-    active === "All" ? products : products.filter((p) => p.category === active);
+  const filtered = products.filter((p) => {
+    const matchesCategory = active === "All" || p.category === active;
+    const q = query.toLowerCase().trim();
+    const matchesSearch =
+      q === "" ||
+      p.name.toLowerCase().includes(q) ||
+      p.notes.toLowerCase().includes(q) ||
+      p.description.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q);
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <div className="min-h-screen">
@@ -238,27 +248,60 @@ export default function ShopPage() {
       {/* ── Filter Bar ───────────────────────────────────────── */}
       <div className="bg-background sticky top-20 z-30 border-b border-(--muted-sand)">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center overflow-x-auto">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActive(cat)}
-                className={`relative px-5 py-5 text-[11px] tracking-[0.2em] uppercase font-medium whitespace-nowrap transition-colors duration-200 ${
-                  active === cat
-                    ? "text-(--button-gold)"
-                    : "text-text-secondary hover:text-text-primary"
-                }`}
+          <div className="flex items-center gap-4">
+            {/* Category tabs */}
+            <div className="flex items-center overflow-x-auto shrink-0">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActive(cat)}
+                  className={`relative px-5 py-5 text-[11px] tracking-[0.2em] uppercase font-medium whitespace-nowrap transition-colors duration-200 ${
+                    active === cat
+                      ? "text-(--button-gold)"
+                      : "text-text-secondary hover:text-text-primary"
+                  }`}
+                >
+                  {cat}
+                  {active === cat && (
+                    <motion.div
+                      layoutId="filter-underline"
+                      className="absolute bottom-0 left-0 right-0 h-px bg-(--button-gold)"
+                      transition={{ duration: 0.3, ease: EASE }}
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+
+            {/* Search input */}
+            <div className="ml-auto relative flex items-center py-3">
+              <svg
+                className="absolute left-3 w-3.5 h-3.5 text-text-secondary pointer-events-none"
+                viewBox="0 0 16 16"
+                fill="none"
               >
-                {cat}
-                {active === cat && (
-                  <motion.div
-                    layoutId="filter-underline"
-                    className="absolute bottom-0 left-0 right-0 h-px bg-(--button-gold)"
-                    transition={{ duration: 0.3, ease: EASE }}
-                  />
-                )}
-              </button>
-            ))}
+                <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" strokeWidth="1.4" />
+                <path d="M10.5 10.5l3.5 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+              </svg>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search fragrances…"
+                className="pl-8 pr-4 py-2 w-44 md:w-56 bg-(--soft-cream) border border-(--muted-sand) rounded text-[12px] text-text-primary placeholder:text-(--warm-taupe) focus:outline-none focus:border-(--button-gold) focus:w-64 transition-all duration-300"
+              />
+              {query && (
+                <button
+                  onClick={() => setQuery("")}
+                  className="absolute right-3 text-text-secondary hover:text-(--button-gold) transition-colors"
+                  aria-label="Clear search"
+                >
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <path d="M1 1l8 8M9 1L1 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                  </svg>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -266,6 +309,35 @@ export default function ShopPage() {
       {/* ── Product Grid ─────────────────────────────────────── */}
       <section className="py-16 md:py-24 bg-background">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <AnimatePresence mode="wait">
+            {filtered.length === 0 && (
+              <motion.div
+                key="empty"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35, ease: EASE }}
+                className="flex flex-col items-center justify-center py-28 text-center gap-4"
+              >
+                <svg className="text-(--muted-sand) mb-2" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                  <circle cx="18" cy="18" r="13" stroke="currentColor" strokeWidth="1.5" />
+                  <path d="M28 28l8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M13 18h10M18 13v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+                <p className="font-heading text-xl text-text-primary">No fragrances found</p>
+                <p className="text-text-secondary text-sm">
+                  Try a different search term or{" "}
+                  <button
+                    onClick={() => { setQuery(""); setActive("All"); }}
+                    className="text-(--button-gold) hover:underline"
+                  >
+                    clear filters
+                  </button>
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <motion.div
             layout
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
