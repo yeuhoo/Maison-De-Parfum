@@ -138,37 +138,41 @@ export default function Header() {
             className="fixed top-20 left-0 right-0 z-40 md:hidden bg-(--bridal-white) border-b border-(--muted-sand) shadow-md"
           >
             <nav className="flex flex-col px-6 py-5">
-              {[...navLinks, { href: "#", label: `Bag${count > 0 ? ` (${count})` : ""}` }].map(
-                ({ href, label }, i) => (
-                  <motion.div
-                    key={href}
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 0.28,
-                      delay: i * 0.06,
-                      ease: [0.25, 0.1, 0.25, 1],
-                    }}
-                  >
-                    {href === "#" ? (
-                      <button
-                        onClick={() => { setMenuOpen(false); openDrawer(); }}
-                        className="flex items-center w-full py-3 text-[13px] tracking-[0.12em] uppercase font-medium text-text-primary hover:text-(--button-gold) transition-colors duration-300 border-b border-(--muted-sand) last:border-0"
-                      >
-                        {label}
-                      </button>
-                    ) : (
-                      <Link
-                        href={href}
-                        onClick={() => setMenuOpen(false)}
-                        className="flex items-center py-3 text-[13px] tracking-[0.12em] uppercase font-medium text-text-primary hover:text-(--button-gold) transition-colors duration-300 border-b border-(--muted-sand) last:border-0"
-                      >
-                        {label}
-                      </Link>
-                    )}
-                  </motion.div>
-                ),
-              )}
+              {[
+                ...navLinks,
+                { href: "#", label: `Bag${count > 0 ? ` (${count})` : ""}` },
+              ].map(({ href, label }, i) => (
+                <motion.div
+                  key={href}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    duration: 0.28,
+                    delay: i * 0.06,
+                    ease: [0.25, 0.1, 0.25, 1],
+                  }}
+                >
+                  {href === "#" ? (
+                    <button
+                      onClick={() => {
+                        setMenuOpen(false);
+                        openDrawer();
+                      }}
+                      className="flex items-center w-full py-3 text-[13px] tracking-[0.12em] uppercase font-medium text-text-primary hover:text-(--button-gold) transition-colors duration-300 border-b border-(--muted-sand) last:border-0"
+                    >
+                      {label}
+                    </button>
+                  ) : (
+                    <Link
+                      href={href}
+                      onClick={() => setMenuOpen(false)}
+                      className="flex items-center py-3 text-[13px] tracking-[0.12em] uppercase font-medium text-text-primary hover:text-(--button-gold) transition-colors duration-300 border-b border-(--muted-sand) last:border-0"
+                    >
+                      {label}
+                    </Link>
+                  )}
+                </motion.div>
+              ))}
             </nav>
           </motion.div>
         )}
