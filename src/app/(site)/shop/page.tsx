@@ -191,10 +191,24 @@ const BottleIcon = () => (
   </svg>
 );
 
+type Product = (typeof products)[number];
+
 export default function ShopPage() {
   const [active, setActive] = useState<Category>("All");
   const [query, setQuery] = useState("");
+  const [quickView, setQuickView] = useState<Product | null>(null);
+  const [qty, setQty] = useState(1);
   const { addToCart } = useCart();
+
+  const openQuickView = (p: Product) => {
+    setQuickView(p);
+    setQty(1);
+    document.body.style.overflow = "hidden";
+  };
+  const closeQuickView = () => {
+    setQuickView(null);
+    document.body.style.overflow = "";
+  };
 
   const filtered = products.filter((p) => {
     const matchesCategory = active === "All" || p.category === active;
@@ -422,14 +436,14 @@ export default function ShopPage() {
                     {/* Subtle hover overlay */}
                     <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300" />
                     {/* Quick View */}
-                    <Link
-                      href={`/shop/${product.id}`}
+                    <button
+                      onClick={() => openQuickView(product)}
                       className="absolute inset-x-0 bottom-0 flex justify-center pb-5 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 z-20"
                     >
                       <span className="text-[10px] tracking-[0.25em] uppercase text-(--button-gold) bg-background border border-(--muted-sand) px-5 py-2">
                         Quick View
                       </span>
-                    </Link>
+                    </button>
                   </div>
 
                   {/* Card info */}
@@ -557,6 +571,161 @@ export default function ShopPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* ── Quick View Modal ─────────────────────────────────── */}
+      <AnimatePresence>
+        {quickView && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="qv-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25, ease: EASE }}
+              className="fixed inset-0 bg-black/40 z-50"
+              onClick={closeQuickView}
+            />
+
+            {/* Panel */}
+            <motion.div
+              key="qv-panel"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 24 }}
+              transition={{ duration: 0.38, ease: EASE }}
+              className="fixed inset-0 z-50 flex items-center justify-center px-4 pointer-events-none"
+            >
+              <div
+                className="bg-background w-full max-w-3xl pointer-events-auto relative overflow-hidden"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Close */}
+                <button
+                  onClick={closeQuickView}
+                  className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors"
+                  aria-label="Close quick view"
+                >
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path
+                      d="M1 1l10 10M11 1L1 11"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </button>
+
+                <div className="grid grid-cols-1 md:grid-cols-2">
+                  {/* Left — visual */}
+                  <div className="relative h-72 md:h-auto min-h-75 bg-(--bridal-white) border-b md:border-b-0 md:border-r border-(--muted-sand) flex flex-col items-center justify-center gap-5">
+                    {quickView.bestseller && (
+                      <span className="absolute top-4 left-4 text-[10px] tracking-[0.18em] uppercase text-(--button-gold) bg-background border border-(--muted-sand) px-2.5 py-1">
+                        Bestseller
+                      </span>
+                    )}
+                    <div className="text-(--muted-sand) scale-150">
+                      <BottleIcon />
+                    </div>
+                    <span className="text-[10px] tracking-[0.3em] uppercase text-(--warm-taupe)">
+                      {quickView.category}
+                    </span>
+                  </div>
+
+                  {/* Right — details */}
+                  <div className="px-8 py-10 flex flex-col justify-between gap-6">
+                    <div className="space-y-4">
+                      {/* Name + notes */}
+                      <div>
+                        <p className="text-[10px] tracking-[0.25em] uppercase text-(--button-gold) mb-2">
+                          {quickView.notes}
+                        </p>
+                        <h2 className="font-heading text-2xl md:text-3xl font-semibold text-text-primary leading-tight">
+                          {quickView.name}
+                        </h2>
+                      </div>
+
+                      {/* Divider */}
+                      <div className="w-8 h-px bg-(--muted-sand)" />
+
+                      {/* Description */}
+                      <p className="text-text-secondary text-sm leading-relaxed">
+                        {quickView.description}
+                      </p>
+
+                      {/* Scent profile pills */}
+                      <div className="flex flex-wrap gap-2 pt-1">
+                        {quickView.notes.split(" · ").map((note) => (
+                          <span
+                            key={note}
+                            className="text-[10px] tracking-[0.12em] uppercase text-(--warm-taupe) border border-(--muted-sand) px-2.5 py-1"
+                          >
+                            {note}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Price + size */}
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-heading text-2xl font-semibold text-text-primary">
+                        ${quickView.price}
+                      </span>
+                      <span className="text-[12px] text-text-secondary">
+                        / {quickView.size}
+                      </span>
+                    </div>
+
+                    {/* Qty + Add to Bag */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center border border-(--muted-sand)">
+                          <button
+                            onClick={() => setQty((q) => Math.max(1, q - 1))}
+                            className="w-9 h-9 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors text-lg leading-none"
+                            aria-label="Decrease quantity"
+                          >
+                            −
+                          </button>
+                          <span className="w-8 text-center text-[13px] text-text-primary font-medium">
+                            {qty}
+                          </span>
+                          <button
+                            onClick={() => setQty((q) => q + 1)}
+                            className="w-9 h-9 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors text-lg leading-none"
+                            aria-label="Increase quantity"
+                          >
+                            +
+                          </button>
+                        </div>
+                        <button
+                          onClick={() => {
+                            for (let i = 0; i < qty; i++) {
+                              addToCart({
+                                id: quickView.id,
+                                name: quickView.name,
+                                price: quickView.price,
+                                size: quickView.size,
+                              });
+                            }
+                            closeQuickView();
+                          }}
+                          className="flex-1 text-[11px] tracking-[0.2em] uppercase text-(--bridal-white) bg-(--button-gold) py-3 hover:bg-(--button-gold-hover) transition-colors duration-300"
+                        >
+                          Add to Bag
+                        </button>
+                      </div>
+                      <p className="text-[11px] text-text-secondary text-center">
+                        Free shipping on orders over $150
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
