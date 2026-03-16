@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
+import { products, CATEGORIES } from "@/lib/products";
+import type { Category } from "@/lib/products";
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
@@ -15,154 +17,6 @@ const fadeUp = {
     transition: { duration: 0.55, delay: i * 0.07, ease: EASE },
   }),
 };
-
-type Category = "All" | "Floral" | "Woody" | "Oriental" | "Fresh";
-
-const products: {
-  id: number;
-  name: string;
-  category: Category;
-  notes: string;
-  price: number;
-  size: string;
-  bestseller: boolean;
-  description: string;
-}[] = [
-  {
-    id: 1,
-    name: "Elegant Rose",
-    category: "Floral",
-    notes: "Rose · Jasmine · White Musk",
-    price: 89,
-    size: "50ml",
-    bestseller: true,
-    description:
-      "A feminine masterpiece anchored in velvety rose petals and a luminous jasmine heart.",
-  },
-  {
-    id: 2,
-    name: "Blush Peony",
-    category: "Floral",
-    notes: "Peony · White Tea · Sandalwood",
-    price: 95,
-    size: "50ml",
-    bestseller: false,
-    description:
-      "Delicate and airy — the scent of a sun-lit garden in full, unhurried bloom.",
-  },
-  {
-    id: 3,
-    name: "White Gardenia",
-    category: "Floral",
-    notes: "Gardenia · Ylang Ylang · Amber",
-    price: 110,
-    size: "50ml",
-    bestseller: false,
-    description:
-      "Rich and intoxicating with lush white florals and a warm, resinous finish.",
-  },
-  {
-    id: 4,
-    name: "Cedar & Oud",
-    category: "Woody",
-    notes: "Oud · Cedarwood · Vetiver",
-    price: 125,
-    size: "50ml",
-    bestseller: true,
-    description:
-      "A commanding presence — smoky oud enveloped in warm cedarwood and earthy vetiver.",
-  },
-  {
-    id: 5,
-    name: "Sandalwood Dreams",
-    category: "Woody",
-    notes: "Sandalwood · Vanilla · Tonka Bean",
-    price: 99,
-    size: "50ml",
-    bestseller: false,
-    description:
-      "Creamy, warm, and deeply sensual — a scent that lingers like a whispered memory.",
-  },
-  {
-    id: 6,
-    name: "Amber Forest",
-    category: "Woody",
-    notes: "Amber · Patchouli · Oakmoss",
-    price: 115,
-    size: "50ml",
-    bestseller: false,
-    description:
-      "Deep and earthy, reminiscent of ancient forest floors at the edge of dusk.",
-  },
-  {
-    id: 7,
-    name: "Midnight Amber",
-    category: "Oriental",
-    notes: "Amber · Vanilla · Dark Musk",
-    price: 79,
-    size: "50ml",
-    bestseller: false,
-    description:
-      "Warm and mysterious — amber and rich vanilla unfold slowly on the skin.",
-  },
-  {
-    id: 8,
-    name: "Saffron Noir",
-    category: "Oriental",
-    notes: "Saffron · Rose · Leather",
-    price: 135,
-    size: "50ml",
-    bestseller: true,
-    description:
-      "A bold, opulent signature inspired by the gilded spice markets of the East.",
-  },
-  {
-    id: 9,
-    name: "Spiced Vanilla",
-    category: "Oriental",
-    notes: "Vanilla · Cardamom · Benzoin",
-    price: 85,
-    size: "50ml",
-    bestseller: false,
-    description:
-      "Sweet and spiced — a comforting oriental with depth for every season.",
-  },
-  {
-    id: 10,
-    name: "Citrus Breeze",
-    category: "Fresh",
-    notes: "Bergamot · Lemon · Marine",
-    price: 69,
-    size: "50ml",
-    bestseller: false,
-    description:
-      "Fresh and invigorating — bright citrus lifted by a cool marine breeze.",
-  },
-  {
-    id: 11,
-    name: "Sea Salt Mist",
-    category: "Fresh",
-    notes: "Sea Salt · Driftwood · Iris",
-    price: 75,
-    size: "50ml",
-    bestseller: false,
-    description:
-      "Clean, crisp, and effortlessly coastal — inspired by open water at sunrise.",
-  },
-  {
-    id: 12,
-    name: "Green Tea Garden",
-    category: "Fresh",
-    notes: "Green Tea · Jasmine · Cedarwood",
-    price: 72,
-    size: "50ml",
-    bestseller: false,
-    description:
-      "Light and serene — a breath of fresh botanical air with a lingering woody base.",
-  },
-];
-
-const CATEGORIES: Category[] = ["All", "Floral", "Woody", "Oriental", "Fresh"];
 
 const BottleIcon = () => (
   <svg
@@ -191,24 +45,10 @@ const BottleIcon = () => (
   </svg>
 );
 
-type Product = (typeof products)[number];
-
 export default function ShopPage() {
   const [active, setActive] = useState<Category>("All");
   const [query, setQuery] = useState("");
-  const [quickView, setQuickView] = useState<Product | null>(null);
-  const [qty, setQty] = useState(1);
   const { addToCart } = useCart();
-
-  const openQuickView = (p: Product) => {
-    setQuickView(p);
-    setQty(1);
-    document.body.style.overflow = "hidden";
-  };
-  const closeQuickView = () => {
-    setQuickView(null);
-    document.body.style.overflow = "";
-  };
 
   const filtered = products.filter((p) => {
     const matchesCategory = active === "All" || p.category === active;
@@ -436,14 +276,14 @@ export default function ShopPage() {
                     {/* Subtle hover overlay */}
                     <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300" />
                     {/* Quick View */}
-                    <button
-                      onClick={() => openQuickView(product)}
+                    <Link
+                      href={`/shop/${product.id}`}
                       className="absolute inset-x-0 bottom-0 flex justify-center pb-5 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 z-20"
                     >
                       <span className="text-[10px] tracking-[0.25em] uppercase text-(--button-gold) bg-background border border-(--muted-sand) px-5 py-2">
                         Quick View
                       </span>
-                    </button>
+                    </Link>
                   </div>
 
                   {/* Card info */}
@@ -571,161 +411,6 @@ export default function ShopPage() {
           </motion.div>
         </div>
       </section>
-
-      {/* ── Quick View Modal ─────────────────────────────────── */}
-      <AnimatePresence>
-        {quickView && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              key="qv-backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25, ease: EASE }}
-              className="fixed inset-0 bg-black/40 z-50"
-              onClick={closeQuickView}
-            />
-
-            {/* Panel */}
-            <motion.div
-              key="qv-panel"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 24 }}
-              transition={{ duration: 0.38, ease: EASE }}
-              className="fixed inset-0 z-50 flex items-center justify-center px-4 pointer-events-none"
-            >
-              <div
-                className="bg-background w-full max-w-3xl pointer-events-auto relative overflow-hidden"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Close */}
-                <button
-                  onClick={closeQuickView}
-                  className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors"
-                  aria-label="Close quick view"
-                >
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path
-                      d="M1 1l10 10M11 1L1 11"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </button>
-
-                <div className="grid grid-cols-1 md:grid-cols-2">
-                  {/* Left — visual */}
-                  <div className="relative h-72 md:h-auto min-h-75 bg-(--bridal-white) border-b md:border-b-0 md:border-r border-(--muted-sand) flex flex-col items-center justify-center gap-5">
-                    {quickView.bestseller && (
-                      <span className="absolute top-4 left-4 text-[10px] tracking-[0.18em] uppercase text-(--button-gold) bg-background border border-(--muted-sand) px-2.5 py-1">
-                        Bestseller
-                      </span>
-                    )}
-                    <div className="text-(--muted-sand) scale-150">
-                      <BottleIcon />
-                    </div>
-                    <span className="text-[10px] tracking-[0.3em] uppercase text-(--warm-taupe)">
-                      {quickView.category}
-                    </span>
-                  </div>
-
-                  {/* Right — details */}
-                  <div className="px-8 py-10 flex flex-col justify-between gap-6">
-                    <div className="space-y-4">
-                      {/* Name + notes */}
-                      <div>
-                        <p className="text-[10px] tracking-[0.25em] uppercase text-(--button-gold) mb-2">
-                          {quickView.notes}
-                        </p>
-                        <h2 className="font-heading text-2xl md:text-3xl font-semibold text-text-primary leading-tight">
-                          {quickView.name}
-                        </h2>
-                      </div>
-
-                      {/* Divider */}
-                      <div className="w-8 h-px bg-(--muted-sand)" />
-
-                      {/* Description */}
-                      <p className="text-text-secondary text-sm leading-relaxed">
-                        {quickView.description}
-                      </p>
-
-                      {/* Scent profile pills */}
-                      <div className="flex flex-wrap gap-2 pt-1">
-                        {quickView.notes.split(" · ").map((note) => (
-                          <span
-                            key={note}
-                            className="text-[10px] tracking-[0.12em] uppercase text-(--warm-taupe) border border-(--muted-sand) px-2.5 py-1"
-                          >
-                            {note}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Price + size */}
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-heading text-2xl font-semibold text-text-primary">
-                        ${quickView.price}
-                      </span>
-                      <span className="text-[12px] text-text-secondary">
-                        / {quickView.size}
-                      </span>
-                    </div>
-
-                    {/* Qty + Add to Bag */}
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center border border-(--muted-sand)">
-                          <button
-                            onClick={() => setQty((q) => Math.max(1, q - 1))}
-                            className="w-9 h-9 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors text-lg leading-none"
-                            aria-label="Decrease quantity"
-                          >
-                            −
-                          </button>
-                          <span className="w-8 text-center text-[13px] text-text-primary font-medium">
-                            {qty}
-                          </span>
-                          <button
-                            onClick={() => setQty((q) => q + 1)}
-                            className="w-9 h-9 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors text-lg leading-none"
-                            aria-label="Increase quantity"
-                          >
-                            +
-                          </button>
-                        </div>
-                        <button
-                          onClick={() => {
-                            for (let i = 0; i < qty; i++) {
-                              addToCart({
-                                id: quickView.id,
-                                name: quickView.name,
-                                price: quickView.price,
-                                size: quickView.size,
-                              });
-                            }
-                            closeQuickView();
-                          }}
-                          className="flex-1 text-[11px] tracking-[0.2em] uppercase text-(--bridal-white) bg-(--button-gold) py-3 hover:bg-(--button-gold-hover) transition-colors duration-300"
-                        >
-                          Add to Bag
-                        </button>
-                      </div>
-                      <p className="text-[11px] text-text-secondary text-center">
-                        Free shipping on orders over $150
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

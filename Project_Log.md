@@ -191,3 +191,40 @@ src/app/
 - [ ] Contact/enquiry form → backend → CRM sync
 - [ ] CRM: Customers and Analytics pages
 - [ ] Auth upgrade (JWT / NextAuth) for production admin
+
+---
+
+## March 16, 2026 — Update 2
+
+### Product Quick View Modal (`/shop`)
+
+**What was built**
+
+- "Quick View" button on each product card (appears on hover, slides up)
+- Clicking opens a centered modal — replaces the previous link to a non-existent `/shop/:id` page
+
+**Modal layout (2-column on desktop, stacked on mobile)**
+
+- **Left panel:** Bottle illustration (scaled up), category label, bestseller badge if applicable
+- **Right panel:**
+  - Scent notes in gold (`#c9a96e`)
+  - Product name (Playfair Display heading)
+  - Description paragraph
+  - Individual scent note pills (split on `·` delimiter)
+  - Price and size
+  - Quantity selector (+/− buttons, min 1)
+  - **Add to Bag** — adds selected quantity to cart then closes modal
+  - "Free shipping on orders over $150" note
+
+**Behaviour**
+
+- Backdrop click or ✕ button closes the modal
+- Body scroll locked while modal is open (restored on close)
+- AnimatePresence: backdrop fades in/out, panel slides up/down
+- `openQuickView()` resets quantity to 1 each time
+
+**Files changed**
+
+- `src/app/(site)/shop/page.tsx` — added `Product` type alias, `quickView` + `qty` state, `openQuickView` / `closeQuickView` handlers, swapped Quick View `<Link>` to `<button>`, added modal JSX at bottom of component
+
+**Commit:** `cf9b8e7` — `feat: add product quick view modal with qty selector and add to bag`
