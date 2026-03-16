@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "@/context/CartContext";
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
@@ -193,6 +194,7 @@ const BottleIcon = () => (
 export default function ShopPage() {
   const [active, setActive] = useState<Category>("All");
   const [query, setQuery] = useState("");
+  const { addToCart } = useCart();
 
   const filtered = products.filter((p) => {
     const matchesCategory = active === "All" || p.category === active;
@@ -280,8 +282,19 @@ export default function ShopPage() {
                 viewBox="0 0 16 16"
                 fill="none"
               >
-                <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" strokeWidth="1.4" />
-                <path d="M10.5 10.5l3.5 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                <circle
+                  cx="6.5"
+                  cy="6.5"
+                  r="5"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                />
+                <path
+                  d="M10.5 10.5l3.5 3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                />
               </svg>
               <input
                 type="search"
@@ -297,7 +310,12 @@ export default function ShopPage() {
                   aria-label="Clear search"
                 >
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                    <path d="M1 1l8 8M9 1L1 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                    <path
+                      d="M1 1l8 8M9 1L1 9"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                      strokeLinecap="round"
+                    />
                   </svg>
                 </button>
               )}
@@ -319,16 +337,43 @@ export default function ShopPage() {
                 transition={{ duration: 0.35, ease: EASE }}
                 className="flex flex-col items-center justify-center py-28 text-center gap-4"
               >
-                <svg className="text-(--muted-sand) mb-2" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <circle cx="18" cy="18" r="13" stroke="currentColor" strokeWidth="1.5" />
-                  <path d="M28 28l8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  <path d="M13 18h10M18 13v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <svg
+                  className="text-(--muted-sand) mb-2"
+                  width="40"
+                  height="40"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                >
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="13"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M28 28l8 8"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M13 18h10M18 13v10"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
                 </svg>
-                <p className="font-heading text-xl text-text-primary">No fragrances found</p>
+                <p className="font-heading text-xl text-text-primary">
+                  No fragrances found
+                </p>
                 <p className="text-text-secondary text-sm">
                   Try a different search term or{" "}
                   <button
-                    onClick={() => { setQuery(""); setActive("All"); }}
+                    onClick={() => {
+                      setQuery("");
+                      setActive("All");
+                    }}
                     className="text-(--button-gold) hover:underline"
                   >
                     clear filters
@@ -407,7 +452,17 @@ export default function ShopPage() {
                           / {product.size}
                         </span>
                       </div>
-                      <button className="text-[11px] tracking-[0.18em] uppercase text-(--bridal-white) bg-(--button-gold) px-4 py-2.5 hover:bg-(--button-gold-hover) transition-colors duration-300">
+                      <button
+                        onClick={() =>
+                          addToCart({
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            size: product.size,
+                          })
+                        }
+                        className="text-[11px] tracking-[0.18em] uppercase text-(--bridal-white) bg-(--button-gold) px-4 py-2.5 hover:bg-(--button-gold-hover) transition-colors duration-300"
+                      >
                         Add to Bag
                       </button>
                     </div>

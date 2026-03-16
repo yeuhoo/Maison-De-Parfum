@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
+import CartDrawer from "@/components/CartDrawer";
+import { CartProvider } from "@/context/CartContext";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -31,11 +33,14 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${montserrat.variable} antialiased`}
       >
-        <Header />
-        <main className="pt-20">
-          <PageTransition>{children}</PageTransition>
-        </main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <CartDrawer />
+          <main className="pt-20">
+            <PageTransition>{children}</PageTransition>
+          </main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useCart } from "@/context/CartContext";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -15,6 +16,7 @@ const navLinks = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { count, openDrawer } = useCart();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -77,9 +79,9 @@ export default function Header() {
                 <path d="m21 21-4.3-4.3" />
               </svg>
             </button>
-            <Link
-              href="/cart"
-              aria-label="Cart"
+            <button
+              onClick={openDrawer}
+              aria-label="Open cart"
               className="relative text-text-primary hover:text-(--button-gold) transition-colors duration-300"
             >
               <svg
@@ -97,10 +99,12 @@ export default function Header() {
                 <line x1="3" x2="21" y1="6" y2="6" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
-              <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-(--button-gold) text-white text-[9px] flex items-center justify-center font-medium leading-none">
-                0
-              </span>
-            </Link>
+              {count > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-(--button-gold) text-white text-[9px] flex items-center justify-center font-medium leading-none">
+                  {count > 9 ? "9+" : count}
+                </span>
+              )}
+            </button>
           </div>
 
           {/* Mobile Hamburger */}
@@ -134,7 +138,7 @@ export default function Header() {
             className="fixed top-20 left-0 right-0 z-40 md:hidden bg-(--bridal-white) border-b border-(--muted-sand) shadow-md"
           >
             <nav className="flex flex-col px-6 py-5">
-              {[...navLinks, { href: "/cart", label: "Cart (0)" }].map(
+              {[...navLinks, { href: "#", label: `Bag${count > 0 ? ` (${count})` : ""}` }].map(
                 ({ href, label }, i) => (
                   <motion.div
                     key={href}
@@ -146,13 +150,22 @@ export default function Header() {
                       ease: [0.25, 0.1, 0.25, 1],
                     }}
                   >
-                    <Link
-                      href={href}
-                      onClick={() => setMenuOpen(false)}
-                      className="flex items-center py-3 text-[13px] tracking-[0.12em] uppercase font-medium text-text-primary hover:text-(--button-gold) transition-colors duration-300 border-b border-(--muted-sand) last:border-0"
-                    >
-                      {label}
-                    </Link>
+                    {href === "#" ? (
+                      <button
+                        onClick={() => { setMenuOpen(false); openDrawer(); }}
+                        className="flex items-center w-full py-3 text-[13px] tracking-[0.12em] uppercase font-medium text-text-primary hover:text-(--button-gold) transition-colors duration-300 border-b border-(--muted-sand) last:border-0"
+                      >
+                        {label}
+                      </button>
+                    ) : (
+                      <Link
+                        href={href}
+                        onClick={() => setMenuOpen(false)}
+                        className="flex items-center py-3 text-[13px] tracking-[0.12em] uppercase font-medium text-text-primary hover:text-(--button-gold) transition-colors duration-300 border-b border-(--muted-sand) last:border-0"
+                      >
+                        {label}
+                      </Link>
+                    )}
                   </motion.div>
                 ),
               )}
