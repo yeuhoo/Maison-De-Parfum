@@ -259,9 +259,6 @@ export default function ShopPage() {
                 )}
               </button>
             ))}
-            <div className="ml-auto pl-6 text-[11px] tracking-widest uppercase text-text-secondary whitespace-nowrap py-5">
-              {filtered.length} {filtered.length === 1 ? "piece" : "pieces"}
-            </div>
           </div>
         </div>
       </div>
