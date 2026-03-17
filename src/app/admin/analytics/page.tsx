@@ -1,73 +1,67 @@
 "use client";
 
-// ─── Sample data ──────────────────────────────────────────────────────────────
+// ─── Data (empty — connect backend to populate) ──────────────────────────────
 const MONTHLY_REVENUE = [
-  { month: "Apr", value: 3200 },
-  { month: "May", value: 4750 },
-  { month: "Jun", value: 5100 },
-  { month: "Jul", value: 4400 },
-  { month: "Aug", value: 6200 },
-  { month: "Sep", value: 7850 },
-  { month: "Oct", value: 6900 },
-  { month: "Nov", value: 9400 },
-  { month: "Dec", value: 11200 },
-  { month: "Jan", value: 8600 },
-  { month: "Feb", value: 9800 },
-  { month: "Mar", value: 10450 },
+  { month: "Apr", value: 0 },
+  { month: "May", value: 0 },
+  { month: "Jun", value: 0 },
+  { month: "Jul", value: 0 },
+  { month: "Aug", value: 0 },
+  { month: "Sep", value: 0 },
+  { month: "Oct", value: 0 },
+  { month: "Nov", value: 0 },
+  { month: "Dec", value: 0 },
+  { month: "Jan", value: 0 },
+  { month: "Feb", value: 0 },
+  { month: "Mar", value: 0 },
 ];
 
-const TOP_PRODUCTS = [
-  { name: "Rose Éternelle", category: "Floral", units: 84, revenue: 12600 },
-  { name: "Oud Majesty", category: "Oriental", units: 71, revenue: 13490 },
-  { name: "Cedarwood Noir", category: "Woody", units: 68, revenue: 10200 },
-  { name: "Neroli Blanche", category: "Floral", units: 55, revenue: 8250 },
-  { name: "Amber Soleil", category: "Oriental", units: 49, revenue: 9310 },
-];
+const TOP_PRODUCTS: {
+  name: string;
+  category: string;
+  units: number;
+  revenue: number;
+}[] = [];
 
-const CATEGORY_SALES = [
-  { category: "Floral", units: 186, color: "#c9a96e" },
-  { category: "Oriental", units: 154, color: "#9b8ea0" },
-  { category: "Woody", units: 132, color: "#7e9a8a" },
-  { category: "Fresh", units: 98, color: "#7e99b0" },
-];
+const CATEGORY_SALES: { category: string; units: number; color: string }[] = [];
 
 const ORDER_STATUS = [
-  { label: "Delivered", count: 312, color: "#7e9a8a" },
-  { label: "Shipped", count: 48, color: "#c9a96e" },
-  { label: "Processing", count: 22, color: "#7e99b0" },
-  { label: "Pending", count: 14, color: "#9b8ea0" },
-  { label: "Cancelled", count: 9, color: "#b06060" },
+  { label: "Delivered", count: 0, color: "#7e9a8a" },
+  { label: "Shipped", count: 0, color: "#c9a96e" },
+  { label: "Processing", count: 0, color: "#7e99b0" },
+  { label: "Pending", count: 0, color: "#9b8ea0" },
+  { label: "Cancelled", count: 0, color: "#b06060" },
 ];
 
 const KPI = [
   {
     label: "Total Revenue",
-    value: "$97,450",
-    delta: "+18.4%",
+    value: "—",
+    delta: "—",
     up: true,
     sub: "vs prior 12 months",
     accent: "#c9a96e",
   },
   {
     label: "Orders Placed",
-    value: "405",
-    delta: "+12.1%",
+    value: "—",
+    delta: "—",
     up: true,
     sub: "last 12 months",
     accent: "#7e99b0",
   },
   {
     label: "Avg. Order Value",
-    value: "$240.62",
-    delta: "+5.7%",
+    value: "—",
+    delta: "—",
     up: true,
     sub: "vs prior period",
     accent: "#9b8ea0",
   },
   {
     label: "Units Sold",
-    value: "570",
-    delta: "+9.3%",
+    value: "—",
+    delta: "—",
     up: true,
     sub: "across all products",
     accent: "#7e9a8a",
@@ -75,9 +69,13 @@ const KPI = [
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-const maxRevenue = Math.max(...MONTHLY_REVENUE.map((m) => m.value));
-const maxCatUnits = Math.max(...CATEGORY_SALES.map((c) => c.units));
-const totalOrderStatus = ORDER_STATUS.reduce((s, o) => s + o.count, 0);
+const maxRevenue = Math.max(1, ...MONTHLY_REVENUE.map((m) => m.value));
+const maxCatUnits = Math.max(1, ...CATEGORY_SALES.map((c) => c.units));
+const totalOrderStatus = Math.max(
+  1,
+  ORDER_STATUS.reduce((s, o) => s + o.count, 0),
+);
+const rawOrderTotal = ORDER_STATUS.reduce((s, o) => s + o.count, 0);
 
 function fmt(n: number) {
   return n >= 1000 ? `$${(n / 1000).toFixed(1)}k` : `$${n}`;
@@ -97,7 +95,7 @@ export default function AnalyticsPage() {
             Analytics
           </h1>
           <p className="text-[11px] text-black/30 mt-0.5 tracking-[0.02em]">
-            12-month overview · Sample data
+            12-month overview · Awaiting data
           </p>
         </div>
         <span className="text-[10px] text-black/25 tracking-[0.18em] uppercase border border-black/10 px-3 py-1.5">
@@ -123,12 +121,14 @@ export default function AnalyticsPage() {
                 {k.value}
               </p>
               <div className="flex items-center gap-1.5">
-                <span
-                  className="text-[11px] font-medium"
-                  style={{ color: k.up ? "#7e9a8a" : "#b06060" }}
-                >
-                  {k.up ? "▲" : "▼"} {k.delta}
-                </span>
+                {k.delta !== "—" && (
+                  <span
+                    className="text-[11px] font-medium"
+                    style={{ color: k.up ? "#7e9a8a" : "#b06060" }}
+                  >
+                    {k.up ? "▲" : "▼"} {k.delta}
+                  </span>
+                )}
                 <span className="text-[10px] text-black/25">{k.sub}</span>
               </div>
             </div>
@@ -151,7 +151,7 @@ export default function AnalyticsPage() {
                     className="flex-1 flex flex-col items-center gap-1.5 group"
                   >
                     <span className="text-[9px] text-black/0 group-hover:text-black/35 transition-colors duration-150 leading-none">
-                      {fmt(m.value)}
+                      {m.value > 0 ? fmt(m.value) : ""}
                     </span>
                     <div
                       className="w-full relative flex flex-col justify-end"
@@ -221,7 +221,7 @@ export default function AnalyticsPage() {
                 Total Orders
               </span>
               <span className="text-[13px] font-semibold text-black/60">
-                {totalOrderStatus}
+                {rawOrderTotal}
               </span>
             </div>
           </div>
@@ -326,6 +326,11 @@ export default function AnalyticsPage() {
                   </div>
                 );
               })}
+              {CATEGORY_SALES.length === 0 && (
+                <p className="text-[12px] text-black/25 text-center py-8">
+                  No data yet.
+                </p>
+              )}
             </div>
 
             {/* Total */}

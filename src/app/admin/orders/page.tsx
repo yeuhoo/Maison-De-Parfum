@@ -21,80 +21,7 @@ interface Order {
 }
 
 // ─── Placeholder orders ───────────────────────────────────────────────────────
-const SAMPLE_ORDERS: Order[] = [
-  {
-    id: "ORD-0012",
-    customer: "Sophia Lau",
-    email: "sophia@example.com",
-    date: "2025-01-15",
-    items: "Elegant Rose × 1",
-    total: "$89.00",
-    status: "delivered",
-  },
-  {
-    id: "ORD-0011",
-    customer: "James Montfort",
-    email: "james@example.com",
-    date: "2025-01-14",
-    items: "Cedar & Oud × 2",
-    total: "$250.00",
-    status: "shipped",
-  },
-  {
-    id: "ORD-0010",
-    customer: "Isabelle Chen",
-    email: "isabelle@example.com",
-    date: "2025-01-13",
-    items: "Amber Mystique × 1",
-    total: "$140.00",
-    status: "processing",
-  },
-  {
-    id: "ORD-0009",
-    customer: "Marcus Dubois",
-    email: "marcus@example.com",
-    date: "2025-01-12",
-    items: "Midnight Oud × 1",
-    total: "$175.00",
-    status: "pending",
-  },
-  {
-    id: "ORD-0008",
-    customer: "Aria Fontaine",
-    email: "aria@example.com",
-    date: "2025-01-11",
-    items: "White Gardenia × 1",
-    total: "$110.00",
-    status: "delivered",
-  },
-  {
-    id: "ORD-0007",
-    customer: "Leon Nakashima",
-    email: "leon@example.com",
-    date: "2025-01-10",
-    items: "Saffron Noir × 1",
-    total: "$155.00",
-    status: "cancelled",
-  },
-  {
-    id: "ORD-0006",
-    customer: "Clara Whitfield",
-    email: "clara@example.com",
-    date: "2025-01-09",
-    items: "Blush Peony × 2",
-    total: "$190.00",
-    status: "delivered",
-  },
-  {
-    id: "ORD-0005",
-    customer: "Ethan Moreau",
-    email: "ethan@example.com",
-    date: "2025-01-08",
-    items: "Dark Sandalwood × 1",
-    total: "$135.00",
-    status: "delivered",
-  },
-];
+const SAMPLE_ORDERS: Order[] = [];
 
 const STATUS_CONFIG: Record<OrderStatus, { label: string; classes: string }> = {
   pending: {
@@ -200,8 +127,7 @@ export default function OrdersPage() {
 
       {/* ── Note ── */}
       <div className="mb-4 px-4 py-2.5 bg-[#c9a96e]/[0.06] border border-[#c9a96e]/15 text-[11.5px] text-[#9a7a50]">
-        Sample data shown below. Real orders will appear here once the backend
-        is integrated.
+        Real orders will appear here once the backend is integrated.
       </div>
 
       {/* ── Table ── */}

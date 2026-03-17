@@ -6,10 +6,10 @@ import Link from "next/link";
 const STATS = [
   {
     label: "Total Products",
-    value: "12",
-    sub: "4 categories active",
+    value: "—",
+    sub: "Connect backend to view",
     accent: "#c9a96e",
-    live: true,
+    live: false,
   },
   {
     label: "Orders This Month",
@@ -35,29 +35,13 @@ const STATS = [
 ];
 
 // ─── Recent orders placeholder ────────────────────────────────────────────────
-const RECENT_ORDERS = [
-  {
-    id: "ORD-0012",
-    customer: "Sophia Lau",
-    date: "—",
-    total: "—",
-    status: "pending",
-  },
-  {
-    id: "ORD-0011",
-    customer: "James Montfort",
-    date: "—",
-    total: "—",
-    status: "pending",
-  },
-  {
-    id: "ORD-0010",
-    customer: "Isabelle Chen",
-    date: "—",
-    total: "—",
-    status: "pending",
-  },
-];
+const RECENT_ORDERS: Array<{
+  id: string;
+  customer: string;
+  date: string;
+  total: string;
+  status: string;
+}> = [];
 
 const STATUS_STYLES: Record<string, string> = {
   pending: "bg-amber-50   text-amber-600   border border-amber-200",
