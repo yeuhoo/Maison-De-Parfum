@@ -126,7 +126,7 @@ export default function AdminLayout({
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setBusy(true);
-    const expected = process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? "admin2024";
+    const expected = process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? "admin123";
     setTimeout(() => {
       if (pw === expected) {
         sessionStorage.setItem("admin_auth", "true");
@@ -203,7 +203,7 @@ export default function AdminLayout({
           </form>
 
           <p className="text-center text-white/15 text-[10px] mt-8 leading-relaxed">
-            Default: <span className="text-white/30 font-mono">admin2024</span>
+            Default: <span className="text-white/30 font-mono">admin123</span>
             <br />
             Set{" "}
             <span className="text-white/25 font-mono text-[9px]">
