@@ -36,6 +36,22 @@ const BoxIcon = () => (
     <line x1="9" y1="9" x2="9" y2="17" />
   </svg>
 );
+const BarChartIcon = () => (
+  <svg
+    className="w-4.25 h-4.25"
+    viewBox="0 0 18 18"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <line x1="1.5" y1="16.5" x2="16.5" y2="16.5" />
+    <rect x="2.5" y="9" width="3" height="7.5" rx="0.5" />
+    <rect x="7.5" y="5" width="3" height="11.5" rx="0.5" />
+    <rect x="12.5" y="2" width="3" height="14.5" rx="0.5" />
+  </svg>
+);
 const ReceiptIcon = () => (
   <svg
     className="w-[17px] h-[17px]"
@@ -88,8 +104,8 @@ const NAV_ITEMS = [
   { label: "Products", href: "/admin/products", icon: <BoxIcon /> },
   { label: "Orders", href: "/admin/orders", icon: <ReceiptIcon /> },
   { label: "Enquiries", href: "/admin/enquiries", icon: <MailIcon /> },
+  { label: "Analytics", href: "/admin/analytics", icon: <BarChartIcon /> },
 ];
-const COMING_SOON = ["Customers", "Analytics", "Settings"];
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function AdminLayout({
@@ -245,22 +261,6 @@ export default function AdminLayout({
               </Link>
             );
           })}
-
-          {/* Coming soon divider */}
-          <div className="pt-5 pb-2 px-3">
-            <p className="text-white/14 text-[9px] tracking-[0.25em] uppercase">
-              Coming Soon
-            </p>
-          </div>
-          {COMING_SOON.map((label) => (
-            <div
-              key={label}
-              className="flex items-center gap-2.5 px-3 py-[9px] text-[12.5px] text-white/14 cursor-not-allowed select-none"
-            >
-              <span className="w-[17px] h-[17px] rounded-full border border-white/[0.07] flex-shrink-0" />
-              {label}
-            </div>
-          ))}
         </nav>
 
         {/* Logout */}

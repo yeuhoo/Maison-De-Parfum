@@ -228,3 +228,50 @@ src/app/
 - `src/app/(site)/shop/page.tsx` — added `Product` type alias, `quickView` + `qty` state, `openQuickView` / `closeQuickView` handlers, swapped Quick View `<Link>` to `<button>`, added modal JSX at bottom of component
 
 **Commit:** `cf9b8e7` — `feat: add product quick view modal with qty selector and add to bag`
+
+---
+
+## March 16, 2026 — Update 3
+
+### SEO Refactor: Product Detail Pages at `/shop/[id]`
+
+**Motivation**
+
+The quick view modal was replaced with real per-product pages so that every product is individually indexable by search engines.
+
+**What was built**
+
+- **`src/lib/products.ts`** — Single source of truth for all product data. Exports `Product` type, `products[]` array (12 products), and `CATEGORIES[]`. Both the shop listing and product detail pages import from here.
+
+- **`src/app/(site)/shop/[id]/page.tsx`** — Server component with:
+  - `generateStaticParams()` — pre-renders all 12 product pages at build time (SSG)
+  - `generateMetadata()` — per-product `<title>`, `<meta description>`, and Open Graph tags
+  - Passes product + related products (same category, up to 3) to the client component
+  - Returns `notFound()` for unknown IDs
+
+- **`src/app/(site)/shop/[id]/ProductDetailClient.tsx`** — "use client" product detail UI:
+  - Breadcrumb: Home / Shop / {product name}
+  - Left column: bottle illustration (2.4× scale), mood/accent tags, decorative circles
+  - Right column: category + size label, `<h1>` product name, description, scent note pills, price, quantity selector, Add to Bag button (shows "Added to Bag ✓" for 2.2s)
+  - Product details table: Category, Size, Concentration, Origin
+  - Related products section (links to their own `/shop/[id]`)
+  - Back to Shop link
+
+**Shop page cleanup**
+
+- Quick View button restored to `<Link href="/shop/${product.id}">` (SEO-friendly)
+- Modal JSX, `quickView` state, `qty` state, `openQuickView`/`closeQuickView` handlers all removed
+- Inline product data and type definitions removed — now imported from `@/lib/products`
+
+**Build output**
+
+All 28 pages compiled cleanly. All 12 `/shop/[id]` pages statically generated (`● SSG`).
+
+**Files changed**
+
+- `src/lib/products.ts` — new shared data module
+- `src/app/(site)/shop/[id]/page.tsx` — new SSG server component
+- `src/app/(site)/shop/[id]/ProductDetailClient.tsx` — new product detail UI
+- `src/app/(site)/shop/page.tsx` — cleaned up (removed modal, imports from shared lib)
+
+**Commit:** `1bf01d5` — `feat: product detail pages at /shop/[id] for SEO, extract products to shared lib`
