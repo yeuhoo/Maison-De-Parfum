@@ -1,16 +1,5 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-
-const DATA_FILE = path.join(process.cwd(), "src/data/products.json");
-
-function readProducts(): Array<Record<string, unknown>> {
-  return JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
-}
-
-function writeProducts(data: Array<Record<string, unknown>>): void {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-}
+import { sql } from "@/lib/db";
 
 export async function PUT(
   request: Request,
@@ -18,15 +7,41 @@ export async function PUT(
 ) {
   const { id } = await params;
   const body = await request.json();
-  const products = readProducts();
-  const idx = products.findIndex((p) => p.id === Number(id));
-  if (idx === -1) {
+  const {
+    name,
+    category,
+    notes,
+    price,
+    size,
+    bestseller,
+    description,
+    ingredients,
+    warning,
+    manufacturedFor,
+  } = body;
+
+  const rows = await sql`
+    UPDATE products SET
+      name             = COALESCE(${name ?? null}, name),
+      category         = COALESCE(${category ?? null}, category),
+      notes            = COALESCE(${notes ?? null}, notes),
+      price            = COALESCE(${price ?? null}, price),
+      size             = COALESCE(${size ?? null}, size),
+      bestseller       = COALESCE(${bestseller ?? null}, bestseller),
+      description      = COALESCE(${description ?? null}, description),
+      ingredients      = COALESCE(${ingredients ?? null}, ingredients),
+      warning          = COALESCE(${warning ?? null}, warning),
+      manufactured_for = COALESCE(${manufacturedFor ?? null}, manufactured_for)
+    WHERE id = ${Number(id)}
+    RETURNING id, name, category, notes, price, size, bestseller,
+              description, ingredients, warning,
+              manufactured_for AS "manufacturedFor"
+  `;
+
+  if (rows.length === 0) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
-  // Merge so fields not sent by the admin form (e.g. description) are preserved
-  products[idx] = { ...products[idx], ...body, id: Number(id) };
-  writeProducts(products);
-  return NextResponse.json(products[idx]);
+  return NextResponse.json(rows[0]);
 }
 
 export async function DELETE(
@@ -34,11 +49,11 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
-  const products = readProducts();
-  const filtered = products.filter((p) => p.id !== Number(id));
-  if (filtered.length === products.length) {
+  const rows = await sql`
+    DELETE FROM products WHERE id = ${Number(id)} RETURNING id
+  `;
+  if (rows.length === 0) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
-  writeProducts(filtered);
   return NextResponse.json({ success: true });
 }

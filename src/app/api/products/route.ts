@@ -1,31 +1,40 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-
-const DATA_FILE = path.join(process.cwd(), "src/data/products.json");
-
-function readProducts(): Array<Record<string, unknown>> {
-  return JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
-}
-
-function writeProducts(data: Array<Record<string, unknown>>): void {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-}
+import { sql } from "@/lib/db";
 
 export async function GET() {
-  const products = readProducts();
-  return NextResponse.json(products);
+  const rows = await sql`
+    SELECT id, name, category, notes, price, size, bestseller,
+           description, ingredients, warning,
+           manufactured_for AS "manufacturedFor"
+    FROM products
+    ORDER BY id
+  `;
+  return NextResponse.json(rows);
 }
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const products = readProducts();
-  const nextId =
-    products.length > 0
-      ? Math.max(...products.map((p) => Number(p.id))) + 1
-      : 1;
-  const newProduct = { description: "", ...body, id: nextId };
-  products.push(newProduct);
-  writeProducts(products);
-  return NextResponse.json(newProduct, { status: 201 });
+  const {
+    name,
+    category,
+    notes,
+    price,
+    size = "50ml",
+    bestseller = false,
+    description = "",
+    ingredients = "",
+    warning = "",
+    manufacturedFor = "",
+  } = body;
+
+  const rows = await sql`
+    INSERT INTO products
+      (name, category, notes, price, size, bestseller, description, ingredients, warning, manufactured_for)
+    VALUES
+      (${name}, ${category}, ${notes}, ${price}, ${size}, ${bestseller}, ${description}, ${ingredients}, ${warning}, ${manufacturedFor})
+    RETURNING id, name, category, notes, price, size, bestseller,
+              description, ingredients, warning,
+              manufactured_for AS "manufacturedFor"
+  `;
+  return NextResponse.json(rows[0], { status: 201 });
 }

@@ -1,16 +1,20 @@
-import fs from "fs";
-import path from "path";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import type { Product } from "@/lib/products";
+import { sql } from "@/lib/db";
 import ProductDetailClient from "./ProductDetailClient";
 
-// Dynamic — reads from products.json on every request so CRM changes are live
 export const dynamic = "force-dynamic";
 
-function getProducts(): Product[] {
-  const filePath = path.join(process.cwd(), "src/data/products.json");
-  return JSON.parse(fs.readFileSync(filePath, "utf-8")) as Product[];
+async function getProducts(): Promise<Product[]> {
+  const rows = await sql`
+    SELECT id, name, category, notes, price, size, bestseller,
+           description, ingredients, warning,
+           manufactured_for AS "manufacturedFor"
+    FROM products
+    ORDER BY id
+  `;
+  return rows as Product[];
 }
 
 // ── Per-product SEO metadata ──────────────────────────────────────────────────
@@ -20,7 +24,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const products = getProducts();
+  const products = await getProducts();
   const product = products.find((p) => p.id === Number(id));
   if (!product) return {};
   return {
@@ -41,7 +45,7 @@ export default async function ProductPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const products = getProducts();
+  const products = await getProducts();
   const product = products.find((p) => p.id === Number(id));
   if (!product) notFound();
 
