@@ -120,15 +120,26 @@ export default function ProductDetailClient({
                   Bestseller
                 </span>
               )}
-              <div
-                className="text-(--muted-sand)"
-                style={{ transform: "scale(2.4)" }}
-              >
-                <BottleIcon size={56} />
-              </div>
-              <span className="text-[10px] tracking-[0.3em] uppercase text-(--warm-taupe) mt-4">
-                {product.category}
-              </span>
+              {product.imageUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              ) : (
+                <>
+                  <div
+                    className="text-(--muted-sand)"
+                    style={{ transform: "scale(2.4)" }}
+                  >
+                    <BottleIcon size={56} />
+                  </div>
+                  <span className="text-[10px] tracking-[0.3em] uppercase text-(--warm-taupe) mt-4">
+                    {product.category}
+                  </span>
+                </>
+              )}
               {/* Decorative circles */}
               <div className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full border border-(--muted-sand) opacity-20 pointer-events-none" />
               <div className="absolute -top-12 -left-12 w-36 h-36 rounded-full border border-(--muted-sand) opacity-15 pointer-events-none" />
@@ -391,9 +402,18 @@ export default function ProductDetailClient({
                 >
                   <Link href={`/shop/${rel.id}`} className="group block">
                     <div className="relative h-52 bg-background border border-(--muted-sand) flex items-center justify-center mb-4 overflow-hidden">
-                      <div className="text-(--muted-sand) transition-transform duration-500 group-hover:scale-110">
-                        <BottleIcon size={44} />
-                      </div>
+                      {rel.imageUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={rel.imageUrl}
+                          alt={rel.name}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                      ) : (
+                        <div className="text-(--muted-sand) transition-transform duration-500 group-hover:scale-110">
+                          <BottleIcon size={44} />
+                        </div>
+                      )}
                       <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300" />
                     </div>
                     <p className="text-[10px] tracking-[0.2em] uppercase text-(--warm-taupe) mb-1">

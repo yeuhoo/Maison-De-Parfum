@@ -273,13 +273,21 @@ export default function ShopPage() {
                         Bestseller
                       </span>
                     )}
-                    {/* Bottle illustration */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-(--muted-sand) transition-transform duration-700 group-hover:scale-105">
-                      <BottleIcon />
-                      <span className="text-[10px] tracking-[0.25em] uppercase opacity-60">
-                        {product.category}
-                      </span>
-                    </div>
+                    {product.imageUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={product.imageUrl}
+                        alt={product.name}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-(--muted-sand) transition-transform duration-700 group-hover:scale-105">
+                        <BottleIcon />
+                        <span className="text-[10px] tracking-[0.25em] uppercase opacity-60">
+                          {product.category}
+                        </span>
+                      </div>
+                    )}
                     {/* Subtle hover overlay */}
                     <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300" />
                     {/* Quick View */}

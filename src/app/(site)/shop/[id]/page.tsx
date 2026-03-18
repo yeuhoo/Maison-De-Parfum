@@ -11,7 +11,8 @@ async function getProducts(): Promise<Product[]> {
     SELECT id, name, category, notes,
            price_50ml AS "price50ml", price_30ml AS "price30ml",
            bestseller, description, ingredients, warning,
-           manufactured_for AS "manufacturedFor"
+           manufactured_for AS "manufacturedFor",
+           image_url AS "imageUrl"
     FROM products
     ORDER BY id
   `;

@@ -16,6 +16,7 @@ interface Product {
   ingredients: string;
   warning: string;
   manufacturedFor: string;
+  imageUrl: string;
 }
 
 // ─── Products are managed via /api/products ───────────────────────────────────
@@ -41,6 +42,7 @@ const EMPTY_FORM: Omit<Product, "id"> = {
     "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
   manufacturedFor:
     "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia.",
+  imageUrl: "",
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -52,6 +54,7 @@ export default function ProductsPage() {
   const [form, setForm] = useState<Omit<Product, "id">>(EMPTY_FORM);
   const [editId, setEditId] = useState<number | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
+  const [uploading, setUploading] = useState(false);
 
   // ── Load products from API ──
   const loadProducts = () => {
@@ -92,6 +95,18 @@ export default function ProductsPage() {
     setModal(null);
     setEditId(null);
     setForm(EMPTY_FORM);
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    const fd = new FormData();
+    fd.append("file", file);
+    const res = await fetch("/api/upload", { method: "POST", body: fd });
+    const data = await res.json();
+    if (data.url) setForm((f) => ({ ...f, imageUrl: data.url }));
+    setUploading(false);
   };
 
   const handleSave = () => {
@@ -300,6 +315,67 @@ export default function ProductsPage() {
             </div>
 
             <div className="px-6 py-5 space-y-4">
+              {/* ── Photo upload ── */}
+              <div>
+                <label className="field-label">Product Photo</label>
+                <div className="flex items-center gap-3">
+                  <div className="w-20 h-20 border border-[#e5e5e5] bg-[#fafafa] flex items-center justify-center overflow-hidden shrink-0">
+                    {form.imageUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={form.imageUrl}
+                        alt="Product"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <svg
+                        className="w-7 h-7 text-[#ddd]"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.4"
+                      >
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <path d="M21 15l-5-5L5 21" />
+                      </svg>
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="cursor-pointer">
+                      <span
+                        className={`inline-block px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase border border-[#e5e5e5] transition-colors ${uploading ? "text-[#bbb] cursor-not-allowed" : "text-[#666] hover:border-[#c9a96e] hover:text-[#c9a96e]"}`}
+                      >
+                        {uploading
+                          ? "Uploading…"
+                          : form.imageUrl
+                            ? "Replace Photo"
+                            : "Upload Photo"}
+                      </span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        disabled={uploading}
+                        onChange={handleImageUpload}
+                      />
+                    </label>
+                    {form.imageUrl && (
+                      <button
+                        type="button"
+                        onClick={() => setForm((f) => ({ ...f, imageUrl: "" }))}
+                        className="text-[11px] text-[#bbb] hover:text-red-400 transition-colors text-left"
+                      >
+                        Remove
+                      </button>
+                    )}
+                    <p className="text-[10px] text-[#bbb]">
+                      JPG, PNG, WEBP · max 5 MB
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <div>
                 <label className="field-label">Name</label>
                 <input

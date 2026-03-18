@@ -18,6 +18,7 @@ export async function PUT(
     ingredients,
     warning,
     manufacturedFor,
+    imageUrl,
   } = body;
 
   const rows = await sql`
@@ -31,12 +32,14 @@ export async function PUT(
       description      = COALESCE(${description ?? null}, description),
       ingredients      = COALESCE(${ingredients ?? null}, ingredients),
       warning          = COALESCE(${warning ?? null}, warning),
-      manufactured_for = COALESCE(${manufacturedFor ?? null}, manufactured_for)
+      manufactured_for = COALESCE(${manufacturedFor ?? null}, manufactured_for),
+      image_url        = COALESCE(${imageUrl ?? null}, image_url)
     WHERE id = ${Number(id)}
     RETURNING id, name, category, notes,
               price_50ml AS "price50ml", price_30ml AS "price30ml",
               bestseller, description, ingredients, warning,
-              manufactured_for AS "manufacturedFor"
+              manufactured_for AS "manufacturedFor",
+              image_url AS "imageUrl"
   `;
 
   if (rows.length === 0) {

@@ -6,7 +6,8 @@ export async function GET() {
     SELECT id, name, category, notes,
            price_50ml AS "price50ml", price_30ml AS "price30ml",
            bestseller, description, ingredients, warning,
-           manufactured_for AS "manufacturedFor"
+           manufactured_for AS "manufacturedFor",
+           image_url AS "imageUrl"
     FROM products
     ORDER BY id
   `;
@@ -26,17 +27,19 @@ export async function POST(request: Request) {
     ingredients = "",
     warning = "",
     manufacturedFor = "",
+    imageUrl = "",
   } = body;
 
   const rows = await sql`
     INSERT INTO products
-      (name, category, notes, price_50ml, price_30ml, bestseller, description, ingredients, warning, manufactured_for)
+      (name, category, notes, price_50ml, price_30ml, bestseller, description, ingredients, warning, manufactured_for, image_url)
     VALUES
-      (${name}, ${category}, ${notes}, ${price50ml}, ${price30ml}, ${bestseller}, ${description}, ${ingredients}, ${warning}, ${manufacturedFor})
+      (${name}, ${category}, ${notes}, ${price50ml}, ${price30ml}, ${bestseller}, ${description}, ${ingredients}, ${warning}, ${manufacturedFor}, ${imageUrl})
     RETURNING id, name, category, notes,
               price_50ml AS "price50ml", price_30ml AS "price30ml",
               bestseller, description, ingredients, warning,
-              manufactured_for AS "manufacturedFor"
+              manufactured_for AS "manufacturedFor",
+              image_url AS "imageUrl"
   `;
   return NextResponse.json(rows[0], { status: 201 });
 }
