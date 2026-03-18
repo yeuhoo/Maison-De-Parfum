@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
-import { products, CATEGORIES } from "@/lib/products";
-import type { Category } from "@/lib/products";
+import { CATEGORIES } from "@/lib/products";
+import type { Category, Product } from "@/lib/products";
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
@@ -48,7 +48,14 @@ const BottleIcon = () => (
 export default function ShopPage() {
   const [active, setActive] = useState<Category>("All");
   const [query, setQuery] = useState("");
+  const [products, setProducts] = useState<Product[]>([]);
   const { addToCart } = useCart();
+
+  useEffect(() => {
+    fetch("/api/products")
+      .then((res) => res.json())
+      .then((data: Product[]) => setProducts(data));
+  }, []);
 
   const filtered = products.filter((p) => {
     const matchesCategory = active === "All" || p.category === active;

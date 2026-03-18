@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Category = "Floral" | "Woody" | "Oriental" | "Fresh";
@@ -15,21 +15,7 @@ interface Product {
   bestseller: boolean;
 }
 
-// ─── Initial product catalogue (mirrors shop page) ────────────────────────────
-const INITIAL_PRODUCTS: Product[] = [
-  { id: 1,  name: "Midnight Muse",       category: "Woody",    notes: "Jasmine · Dark Musk · Sandalwood",     price: 149, size: "50ml", bestseller: true  },
-  { id: 2,  name: "Blue Aura",           category: "Fresh",    notes: "Ocean Breeze · Bergamot · White Musk", price: 139, size: "50ml", bestseller: false },
-  { id: 3,  name: "Crimson Rouge No. 5", category: "Oriental", notes: "Rose · Warm Spice · Amber",           price: 159, size: "50ml", bestseller: false },
-  { id: 4,  name: "Maison No. 2",        category: "Fresh",    notes: "Neroli · Soft Musk · Cedar",          price: 145, size: "50ml", bestseller: false },
-  { id: 5,  name: "Azure",               category: "Fresh",    notes: "Sea Salt · Aquatic · Iris",           price: 135, size: "50ml", bestseller: false },
-  { id: 6,  name: "Pear and Blossom",    category: "Floral",   notes: "Pear · Rose · White Blossom",         price: 149, size: "50ml", bestseller: true  },
-  { id: 7,  name: "Mysterious",          category: "Oriental", notes: "Oud · Incense · Vanilla",             price: 155, size: "50ml", bestseller: false },
-  { id: 8,  name: "Velvet Cherry",       category: "Oriental", notes: "Black Cherry · Rose · Warm Vanilla",  price: 159, size: "50ml", bestseller: true  },
-  { id: 9,  name: "Aqua Mist",           category: "Fresh",    notes: "Citrus · Fresh Water · Green Tea",    price: 129, size: "50ml", bestseller: false },
-  { id: 10, name: "Duchess",             category: "Floral",   notes: "Peony · Rose · Soft Amber",          price: 149, size: "50ml", bestseller: false },
-  { id: 11, name: "Soft Petal",          category: "Floral",   notes: "White Rose · Jasmine · Peach",       price: 139, size: "50ml", bestseller: false },
-  { id: 12, name: "Vanilla Bloom",       category: "Oriental", notes: "Vanilla · Tonka Bean · White Flowers",price: 145, size: "50ml", bestseller: false },
-];
+// ─── Products are managed via /api/products ───────────────────────────────
 
 const CATEGORIES: Category[] = ["Floral", "Woody", "Oriental", "Fresh"];
 
@@ -51,13 +37,24 @@ const EMPTY_FORM: Omit<Product, "id"> = {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function ProductsPage() {
-  const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
+  const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<Category | "All">("All");
   const [modal, setModal] = useState<"add" | "edit" | null>(null);
   const [form, setForm] = useState<Omit<Product, "id">>(EMPTY_FORM);
   const [editId, setEditId] = useState<number | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
+
+  // ── Load products from API ──
+  const loadProducts = () => {
+    fetch("/api/products")
+      .then((res) => res.json())
+      .then((data: Product[]) => setProducts(data));
+  };
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
 
   // ── Filtered list ──
   const visible = products.filter((p) => {
@@ -92,20 +89,29 @@ export default function ProductsPage() {
   const handleSave = () => {
     if (!form.name.trim() || !form.notes.trim() || form.price <= 0) return;
     if (modal === "add") {
-      const nextId = Math.max(0, ...products.map((p) => p.id)) + 1;
-      setProducts((prev) => [...prev, { ...form, id: nextId }]);
+      fetch("/api/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      }).then(() => loadProducts());
     } else if (modal === "edit" && editId !== null) {
-      setProducts((prev) =>
-        prev.map((p) => (p.id === editId ? { ...form, id: p.id } : p)),
-      );
+      const id = editId;
+      fetch(`/api/products/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      }).then(() => loadProducts());
     }
     closeModal();
   };
 
   const handleDelete = () => {
     if (deleteId !== null) {
-      setProducts((prev) => prev.filter((p) => p.id !== deleteId));
+      const id = deleteId;
       setDeleteId(null);
+      fetch(`/api/products/${id}`, { method: "DELETE" }).then(() =>
+        loadProducts(),
+      );
     }
   };
 
