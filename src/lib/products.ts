@@ -9,6 +9,9 @@ export type Product = {
   size: string;
   bestseller: boolean;
   description: string;
+  ingredients: string;
+  warning: string;
+  manufacturedFor: string;
 };
 
 // Product data is persisted in src/data/products.json and served via /api/products

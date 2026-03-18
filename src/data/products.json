@@ -7,7 +7,10 @@
     "price": 149,
     "size": "50ml",
     "bestseller": true,
-    "description": "A hypnotic blend that awakens the senses. Dark jasmine meets warm sandalwood and lingering musk in an evening fragrance made for the bold."
+    "description": "A hypnotic blend that awakens the senses. Dark jasmine meets warm sandalwood and lingering musk in an evening fragrance made for the bold.",
+    "ingredients": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Linalool, Geraniol, Coumarin, Citral, Limonene.",
+    "warning": "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+    "manufacturedFor": "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia."
   },
   {
     "id": 2,
@@ -17,7 +20,10 @@
     "price": 139,
     "size": "50ml",
     "bestseller": false,
-    "description": "Clean, bright, and effortlessly fresh. An airy composition of ocean breeze and bergamot lifted by a soft white musk base."
+    "description": "Clean, bright, and effortlessly fresh. An airy composition of ocean breeze and bergamot lifted by a soft white musk base.",
+    "ingredients": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Linalool, Limonene, Coumarin, Citral, Geraniol.",
+    "warning": "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+    "manufacturedFor": "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia."
   },
   {
     "id": 3,
@@ -27,7 +33,10 @@
     "price": 159,
     "size": "50ml",
     "bestseller": false,
-    "description": "Opulent and daring. A rich heart of rose and spice unfolds over warm amber — a fragrance that commands attention."
+    "description": "Opulent and daring. A rich heart of rose and spice unfolds over warm amber — a fragrance that commands attention.",
+    "ingredients": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Coumarin, Citral, Eugenol, Limonene, Linalool.",
+    "warning": "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+    "manufacturedFor": "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia."
   },
   {
     "id": 4,
@@ -37,7 +46,10 @@
     "price": 145,
     "size": "50ml",
     "bestseller": false,
-    "description": "Refined simplicity at its finest. Neroli and soft cedar form an elegant signature suited for every occasion."
+    "description": "Refined simplicity at its finest. Neroli and soft cedar form an elegant signature suited for every occasion.",
+    "ingredients": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Limonene, Coumarin, Linalool, Citral.",
+    "warning": "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+    "manufacturedFor": "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia."
   },
   {
     "id": 5,
@@ -47,7 +59,10 @@
     "price": 135,
     "size": "50ml",
     "bestseller": false,
-    "description": "Pure aquatic clarity. A cool, shimmering blend of sea salt and iris that evokes clear skies and open water."
+    "description": "Pure aquatic clarity. A cool, shimmering blend of sea salt and iris that evokes clear skies and open water.",
+    "ingredients": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Limonene, Linalool, Coumarin, Citral, Geraniol.",
+    "warning": "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+    "manufacturedFor": "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia."
   },
   {
     "id": 6,
@@ -57,7 +72,10 @@
     "price": 149,
     "size": "50ml",
     "bestseller": true,
-    "description": "A delicate dance of ripe pear and cherry blossom over a gentle musk base. Light, playful, and effortlessly chic."
+    "description": "A delicate dance of ripe pear and cherry blossom over a gentle musk base. Light, playful, and effortlessly chic.",
+    "ingredients": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Linalool, Limonene, Citral, Geraniol, Citronellol.",
+    "warning": "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+    "manufacturedFor": "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia."
   },
   {
     "id": 7,
@@ -67,7 +85,10 @@
     "price": 155,
     "size": "50ml",
     "bestseller": false,
-    "description": "Deep and enveloping. Oud and incense weave through a warm vanilla base, creating a fragrance of rare, brooding allure."
+    "description": "Deep and enveloping. Oud and incense weave through a warm vanilla base, creating a fragrance of rare, brooding allure.",
+    "ingredients": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Linalool, Limonene, Coumarin, Citral, Geraniol.",
+    "warning": "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+    "manufacturedFor": "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia."
   },
   {
     "id": 8,
@@ -77,7 +98,10 @@
     "price": 159,
     "size": "50ml",
     "bestseller": true,
-    "description": "Luscious and indulgent. Black cherry and rose entwined with warm vanilla — rich, sensual, and utterly unforgettable."
+    "description": "Luscious and indulgent. Black cherry and rose entwined with warm vanilla — rich, sensual, and utterly unforgettable.",
+    "ingredients": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Benzyl Alcohol, Linalool, Geraniol, Citronellol, Citral, Limonene, Coumarin.",
+    "warning": "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+    "manufacturedFor": "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia."
   },
   {
     "id": 9,
@@ -87,7 +111,10 @@
     "price": 129,
     "size": "50ml",
     "bestseller": false,
-    "description": "A breath of clarity. Light citrus and fresh water notes layer over green tea in a fragrance as refreshing as morning air."
+    "description": "A breath of clarity. Light citrus and fresh water notes layer over green tea in a fragrance as refreshing as morning air.",
+    "ingredients": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Limonene, Linalool, Citral.",
+    "warning": "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+    "manufacturedFor": "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia."
   },
   {
     "id": 10,
@@ -97,7 +124,10 @@
     "price": 149,
     "size": "50ml",
     "bestseller": false,
-    "description": "Poised and timeless. Peony and rose bloom softly over a delicate amber base in this quietly elegant signature scent."
+    "description": "Poised and timeless. Peony and rose bloom softly over a delicate amber base in this quietly elegant signature scent.",
+    "ingredients": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Linalool, Geraniol, Coumarin, Citral, Limonene.",
+    "warning": "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+    "manufacturedFor": "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia."
   },
   {
     "id": 11,
@@ -107,7 +137,10 @@
     "price": 139,
     "size": "50ml",
     "bestseller": false,
-    "description": "Tender and feminine. White rose and jasmine rest on a blush of peach in a fragrance as delicate as its name."
+    "description": "Tender and feminine. White rose and jasmine rest on a blush of peach in a fragrance as delicate as its name.",
+    "ingredients": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Limonene, Linalool, Coumarin, Citral, Geraniol.",
+    "warning": "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+    "manufacturedFor": "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia."
   },
   {
     "id": 12,
@@ -117,6 +150,9 @@
     "price": 145,
     "size": "50ml",
     "bestseller": false,
-    "description": "Warmth and softness in every spray. Vanilla and tonka bean mingled with white blossoms create an inviting, comforting fragrance."
+    "description": "Warmth and softness in every spray. Vanilla and tonka bean mingled with white blossoms create an inviting, comforting fragrance.",
+    "ingredients": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Coumarin, Citral, Eugenol, Limonene, Linalool.",
+    "warning": "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+    "manufacturedFor": "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia."
   }
 ]

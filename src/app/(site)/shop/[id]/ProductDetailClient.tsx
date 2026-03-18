@@ -244,7 +244,7 @@ export default function ProductDetailClient({
               </p>
             </motion.div>
 
-            {/* Details accordion-style facts */}
+            {/* Product details */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -256,7 +256,6 @@ export default function ProductDetailClient({
                 ["Category", product.category],
                 ["Size", product.size],
                 ["Concentration", "Eau de Parfum"],
-                ["Origin", "Crafted in Singapore"],
               ].map(([label, value]) => (
                 <div
                   key={label}
@@ -268,6 +267,54 @@ export default function ProductDetailClient({
                   <span className="text-text-primary">{value}</span>
                 </div>
               ))}
+            </motion.div>
+
+            {/* Ingredients */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={4}
+              className="border-t border-(--muted-sand) pt-6 space-y-2"
+            >
+              <p className="text-[10px] tracking-[0.22em] uppercase text-text-secondary mb-2">
+                Ingredients
+              </p>
+              <p className="text-[12px] text-text-secondary leading-relaxed">
+                {product.ingredients}
+              </p>
+            </motion.div>
+
+            {/* Warning */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={5}
+              className="border-t border-(--muted-sand) pt-6 space-y-2"
+            >
+              <p className="text-[10px] tracking-[0.22em] uppercase text-text-secondary mb-2">
+                Warning
+              </p>
+              <p className="text-[12px] text-text-secondary leading-relaxed">
+                {product.warning}
+              </p>
+            </motion.div>
+
+            {/* Manufactured For */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={6}
+              className="border-t border-(--muted-sand) pt-6 space-y-2"
+            >
+              <p className="text-[10px] tracking-[0.22em] uppercase text-text-secondary mb-2">
+                Manufactured For
+              </p>
+              <p className="text-[12px] text-text-secondary leading-relaxed">
+                {product.manufacturedFor}
+              </p>
             </motion.div>
           </div>
         </div>

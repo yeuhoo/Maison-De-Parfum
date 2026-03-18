@@ -13,6 +13,9 @@ interface Product {
   price: number;
   size: string;
   bestseller: boolean;
+  ingredients: string;
+  warning: string;
+  manufacturedFor: string;
 }
 
 // ─── Products are managed via /api/products ───────────────────────────────────
@@ -33,6 +36,11 @@ const EMPTY_FORM: Omit<Product, "id"> = {
   price: 0,
   size: "50ml",
   bestseller: false,
+  ingredients: "",
+  warning:
+    "Keep out of reach of children. Flammable — keep away from fire or flame. Avoid contact with eyes. If irritation occurs, discontinue use. For external use only.",
+  manufacturedFor:
+    "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia.",
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -364,6 +372,41 @@ export default function ProductsPage() {
                 >
                   Mark as bestseller
                 </label>
+              </div>
+              <div>
+                <label className="field-label">Ingredients</label>
+                <textarea
+                  value={form.ingredients}
+                  onChange={(e) =>
+                    setForm({ ...form, ingredients: e.target.value })
+                  }
+                  className="field-input resize-none"
+                  rows={2}
+                  placeholder="Alcohol Denat., Parfum (Fragrance), Aqua (Water), …"
+                />
+              </div>
+              <div>
+                <label className="field-label">Warning</label>
+                <textarea
+                  value={form.warning}
+                  onChange={(e) =>
+                    setForm({ ...form, warning: e.target.value })
+                  }
+                  className="field-input resize-none"
+                  rows={2}
+                  placeholder="Keep out of reach of children…"
+                />
+              </div>
+              <div>
+                <label className="field-label">Manufactured For</label>
+                <input
+                  value={form.manufacturedFor}
+                  onChange={(e) =>
+                    setForm({ ...form, manufacturedFor: e.target.value })
+                  }
+                  className="field-input"
+                  placeholder="Maison De Parfum, Brisbane QLD 4000, Australia."
+                />
               </div>
             </div>
 
