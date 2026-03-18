@@ -18,8 +18,8 @@ type CartContextType = {
   openDrawer: () => void;
   closeDrawer: () => void;
   addToCart: (item: Omit<CartItem, "quantity">) => void;
-  removeFromCart: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
+  removeFromCart: (id: number, size: string) => void;
+  updateQuantity: (id: number, size: string, quantity: number) => void;
   clearCart: () => void;
 };
 
@@ -37,10 +37,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const addToCart = useCallback((item: Omit<CartItem, "quantity">) => {
     setItems((prev) => {
-      const existing = prev.find((i) => i.id === item.id);
+      const existing = prev.find(
+        (i) => i.id === item.id && i.size === item.size,
+      );
       if (existing) {
         return prev.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i,
+          i.id === item.id && i.size === item.size
+            ? { ...i, quantity: i.quantity + 1 }
+            : i,
         );
       }
       return [...prev, { ...item, quantity: 1 }];
@@ -48,14 +52,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setDrawerOpen(true);
   }, []);
 
-  const removeFromCart = useCallback((id: number) => {
-    setItems((prev) => prev.filter((i) => i.id !== id));
+  const removeFromCart = useCallback((id: number, size: string) => {
+    setItems((prev) => prev.filter((i) => !(i.id === id && i.size === size)));
   }, []);
 
-  const updateQuantity = useCallback((id: number, quantity: number) => {
-    if (quantity < 1) return;
-    setItems((prev) => prev.map((i) => (i.id === id ? { ...i, quantity } : i)));
-  }, []);
+  const updateQuantity = useCallback(
+    (id: number, size: string, quantity: number) => {
+      if (quantity < 1) return;
+      setItems((prev) =>
+        prev.map((i) =>
+          i.id === id && i.size === size ? { ...i, quantity } : i,
+        ),
+      );
+    },
+    [],
+  );
 
   const clearCart = useCallback(() => setItems([]), []);
 

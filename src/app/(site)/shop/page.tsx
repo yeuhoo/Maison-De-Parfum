@@ -307,10 +307,10 @@ export default function ShopPage() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-baseline gap-1.5">
                         <span className="font-heading text-lg font-semibold text-text-primary">
-                          ${product.price}
+                          ${product.price50ml}
                         </span>
                         <span className="text-[11px] text-text-secondary">
-                          / {product.size}
+                          / 50ml
                         </span>
                       </div>
                       <button
@@ -318,8 +318,8 @@ export default function ShopPage() {
                           addToCart({
                             id: product.id,
                             name: product.name,
-                            price: product.price,
-                            size: product.size,
+                            price: product.price50ml,
+                            size: "50ml",
                           })
                         }
                         className="text-[11px] tracking-[0.18em] uppercase text-(--bridal-white) bg-(--button-gold) px-4 py-2.5 hover:bg-(--button-gold-hover) transition-colors duration-300"

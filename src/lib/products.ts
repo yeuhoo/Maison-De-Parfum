@@ -5,8 +5,8 @@ export type Product = {
   name: string;
   category: Exclude<Category, "All">;
   notes: string;
-  price: number;
-  size: string;
+  price50ml: number;
+  price30ml: number;
   bestseller: boolean;
   description: string;
   ingredients: string;

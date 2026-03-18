@@ -10,8 +10,8 @@ interface Product {
   name: string;
   category: Category;
   notes: string;
-  price: number;
-  size: string;
+  price50ml: number;
+  price30ml: number;
   bestseller: boolean;
   ingredients: string;
   warning: string;
@@ -33,8 +33,8 @@ const EMPTY_FORM: Omit<Product, "id"> = {
   name: "",
   category: "Floral",
   notes: "",
-  price: 0,
-  size: "50ml",
+  price50ml: 0,
+  price30ml: 0,
   bestseller: false,
   ingredients: "",
   warning:
@@ -95,7 +95,7 @@ export default function ProductsPage() {
   };
 
   const handleSave = () => {
-    if (!form.name.trim() || !form.notes.trim() || form.price <= 0) return;
+    if (!form.name.trim() || !form.notes.trim() || form.price50ml <= 0) return;
     if (modal === "add") {
       fetch("/api/products", {
         method: "POST",
@@ -204,9 +204,6 @@ export default function ProductsPage() {
               <th className="text-left px-5 py-3 text-[10px] tracking-[0.12em] uppercase text-[#bbb] font-normal">
                 Price
               </th>
-              <th className="text-left px-5 py-3 text-[10px] tracking-[0.12em] uppercase text-[#bbb] font-normal hidden xl:table-cell">
-                Size
-              </th>
               <th className="text-left px-5 py-3 text-[10px] tracking-[0.12em] uppercase text-[#bbb] font-normal">
                 Best
               </th>
@@ -236,10 +233,13 @@ export default function ProductsPage() {
                   {p.notes}
                 </td>
                 <td className="px-5 py-3.5 text-[#333] font-medium">
-                  ${p.price}
-                </td>
-                <td className="px-5 py-3.5 text-[#999] hidden xl:table-cell">
-                  {p.size}
+                  <span>${p.price50ml}</span>
+                  {p.price30ml > 0 && (
+                    <span className="text-[#bbb] font-normal">
+                      {" "}
+                      · ${p.price30ml}
+                    </span>
+                  )}
                 </td>
                 <td className="px-5 py-3.5">
                   {p.bestseller ? (
@@ -325,13 +325,24 @@ export default function ProductsPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="field-label">Size</label>
-                  <input
-                    value={form.size}
-                    onChange={(e) => setForm({ ...form, size: e.target.value })}
-                    className="field-input"
-                    placeholder="50ml"
-                  />
+                  <label className="field-label">Bestseller</label>
+                  <div className="flex items-center gap-2.5 h-[37px]">
+                    <input
+                      id="bestseller"
+                      type="checkbox"
+                      checked={form.bestseller}
+                      onChange={(e) =>
+                        setForm({ ...form, bestseller: e.target.checked })
+                      }
+                      className="w-4 h-4 accent-[#c9a96e]"
+                    />
+                    <label
+                      htmlFor="bestseller"
+                      className="text-[12.5px] text-[#555]"
+                    >
+                      Mark as bestseller
+                    </label>
+                  </div>
                 </div>
               </div>
               <div>
@@ -343,35 +354,33 @@ export default function ProductsPage() {
                   placeholder="Rose · Jasmine · White Musk"
                 />
               </div>
-              <div>
-                <label className="field-label">Price (USD)</label>
-                <input
-                  type="number"
-                  min={0}
-                  value={form.price || ""}
-                  onChange={(e) =>
-                    setForm({ ...form, price: Number(e.target.value) })
-                  }
-                  className="field-input"
-                  placeholder="89"
-                />
-              </div>
-              <div className="flex items-center gap-2.5">
-                <input
-                  id="bestseller"
-                  type="checkbox"
-                  checked={form.bestseller}
-                  onChange={(e) =>
-                    setForm({ ...form, bestseller: e.target.checked })
-                  }
-                  className="w-4 h-4 accent-[#c9a96e]"
-                />
-                <label
-                  htmlFor="bestseller"
-                  className="text-[12.5px] text-[#555]"
-                >
-                  Mark as bestseller
-                </label>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="field-label">Price — 50ml (AUD)</label>
+                  <input
+                    type="number"
+                    min={0}
+                    value={form.price50ml || ""}
+                    onChange={(e) =>
+                      setForm({ ...form, price50ml: Number(e.target.value) })
+                    }
+                    className="field-input"
+                    placeholder="149"
+                  />
+                </div>
+                <div>
+                  <label className="field-label">Price — 30ml (AUD)</label>
+                  <input
+                    type="number"
+                    min={0}
+                    value={form.price30ml || ""}
+                    onChange={(e) =>
+                      setForm({ ...form, price30ml: Number(e.target.value) })
+                    }
+                    className="field-input"
+                    placeholder="99"
+                  />
+                </div>
               </div>
               <div>
                 <label className="field-label">Ingredients</label>
@@ -420,7 +429,7 @@ export default function ProductsPage() {
               <button
                 onClick={handleSave}
                 disabled={
-                  !form.name.trim() || !form.notes.trim() || form.price <= 0
+                  !form.name.trim() || !form.notes.trim() || form.price50ml <= 0
                 }
                 className="px-5 py-2 text-[11.5px] tracking-[0.1em] uppercase bg-[#111111] text-white hover:bg-[#333] disabled:opacity-40 transition-colors"
               >

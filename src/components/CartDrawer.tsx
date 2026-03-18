@@ -127,7 +127,7 @@ export default function CartDrawer() {
                 ) : (
                   items.map((item) => (
                     <motion.div
-                      key={item.id}
+                      key={`${item.id}-${item.size}`}
                       layout
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -185,7 +185,11 @@ export default function CartDrawer() {
                           <div className="flex items-center border border-(--muted-sand) rounded">
                             <button
                               onClick={() =>
-                                updateQuantity(item.id, item.quantity - 1)
+                                updateQuantity(
+                                  item.id,
+                                  item.size,
+                                  item.quantity - 1,
+                                )
                               }
                               disabled={item.quantity <= 1}
                               className="w-7 h-7 flex items-center justify-center text-text-secondary hover:text-(--button-gold) transition-colors disabled:opacity-30"
@@ -210,7 +214,11 @@ export default function CartDrawer() {
                             </span>
                             <button
                               onClick={() =>
-                                updateQuantity(item.id, item.quantity + 1)
+                                updateQuantity(
+                                  item.id,
+                                  item.size,
+                                  item.quantity + 1,
+                                )
                               }
                               className="w-7 h-7 flex items-center justify-center text-text-secondary hover:text-(--button-gold) transition-colors"
                               aria-label="Increase quantity"
@@ -231,7 +239,7 @@ export default function CartDrawer() {
                             </button>
                           </div>
                           <button
-                            onClick={() => removeFromCart(item.id)}
+                            onClick={() => removeFromCart(item.id, item.size)}
                             className="text-[11px] tracking-wide text-text-secondary hover:text-red-400 transition-colors duration-200"
                             aria-label="Remove item"
                           >
