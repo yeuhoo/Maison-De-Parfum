@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { upload } from "@vercel/blob/client";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Category = "Floral" | "Woody" | "Oriental" | "Fresh";
@@ -103,11 +102,11 @@ export default function ProductsPage() {
     if (!file) return;
     setUploading(true);
     try {
-      const blob = await upload(`products/${Date.now()}-${file.name}`, file, {
-        access: "public",
-        handleUploadUrl: "/api/upload",
-      });
-      setForm((f) => ({ ...f, imageUrl: blob.url }));
+      const fd = new FormData();
+      fd.append("file", file);
+      const res = await fetch("/api/upload", { method: "POST", body: fd });
+      const data = await res.json();
+      if (data.url) setForm((f) => ({ ...f, imageUrl: data.url }));
     } finally {
       setUploading(false);
     }
