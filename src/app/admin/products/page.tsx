@@ -55,6 +55,7 @@ export default function ProductsPage() {
   const [editId, setEditId] = useState<number | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
 
   // ── Load products from API ──
   const loadProducts = () => {
@@ -95,18 +96,26 @@ export default function ProductsPage() {
     setModal(null);
     setEditId(null);
     setForm(EMPTY_FORM);
+    setUploadError("");
   };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
+    setUploadError("");
     try {
       const fd = new FormData();
       fd.append("file", file);
       const res = await fetch("/api/upload", { method: "POST", body: fd });
       const data = await res.json();
-      if (data.url) setForm((f) => ({ ...f, imageUrl: data.url }));
+      if (data.url) {
+        setForm((f) => ({ ...f, imageUrl: data.url }));
+      } else {
+        setUploadError(data.error || "Upload failed — no URL returned");
+      }
+    } catch (err) {
+      setUploadError(err instanceof Error ? err.message : "Upload failed");
     } finally {
       setUploading(false);
     }
@@ -371,6 +380,9 @@ export default function ProductsPage() {
                       >
                         Remove
                       </button>
+                    )}
+                    {uploadError && (
+                      <p className="text-[10px] text-red-500">{uploadError}</p>
                     )}
                     <p className="text-[10px] text-[#bbb]">
                       JPG, PNG, WEBP · max 5 MB

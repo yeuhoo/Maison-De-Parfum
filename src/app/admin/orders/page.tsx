@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type OrderStatus =
@@ -10,18 +10,32 @@ type OrderStatus =
   | "delivered"
   | "cancelled";
 
-interface Order {
-  id: string;
-  customer: string;
-  email: string;
-  date: string;
-  items: string;
-  total: string;
-  status: OrderStatus;
+interface OrderItem {
+  id: number;
+  name: string;
+  size: string;
+  price: number;
+  quantity: number;
 }
 
-// ─── Placeholder orders ───────────────────────────────────────────────────────
-const SAMPLE_ORDERS: Order[] = [];
+interface Order {
+  id: string;
+  customerName: string;
+  email: string;
+  addressLine1: string;
+  addressLine2: string;
+  city: string;
+  state: string;
+  postcode: string;
+  country: string;
+  deliveryMethod: string;
+  items: OrderItem[];
+  subtotal: number;
+  shippingCost: number;
+  total: number;
+  status: OrderStatus;
+  createdAt: string;
+}
 
 const STATUS_CONFIG: Record<OrderStatus, { label: string; classes: string }> = {
   pending: {
@@ -57,15 +71,31 @@ const ALL_STATUSES: (OrderStatus | "All")[] = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function OrdersPage() {
-  const [orders, setOrders] = useState<Order[]>(SAMPLE_ORDERS);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<OrderStatus | "All">("All");
   const [expanded, setExpanded] = useState<string | null>(null);
 
+  const loadOrders = () => {
+    setLoading(true);
+    fetch("/api/orders")
+      .then((r) => r.json())
+      .then((data: Order[]) => {
+        setOrders(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    loadOrders();
+  }, []);
+
   const visible = orders.filter((o) => {
     const matchSearch =
       !search ||
-      o.customer.toLowerCase().includes(search.toLowerCase()) ||
+      o.customerName.toLowerCase().includes(search.toLowerCase()) ||
       o.id.toLowerCase().includes(search.toLowerCase()) ||
       o.email.toLowerCase().includes(search.toLowerCase());
     const matchFilter = filter === "All" || o.status === filter;
@@ -73,7 +103,15 @@ export default function OrdersPage() {
   });
 
   const updateStatus = (id: string, status: OrderStatus) => {
-    setOrders((prev) => prev.map((o) => (o.id === id ? { ...o, status } : o)));
+    fetch(`/api/orders/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    }).then(() =>
+      setOrders((prev) =>
+        prev.map((o) => (o.id === id ? { ...o, status } : o)),
+      ),
+    );
   };
 
   const counts = ALL_STATUSES.reduce<Record<string, number>>((acc, s) => {
@@ -81,6 +119,16 @@ export default function OrdersPage() {
       s === "All" ? orders.length : orders.filter((o) => o.status === s).length;
     return acc;
   }, {});
+
+  const formatDate = (iso: string) =>
+    new Date(iso).toLocaleDateString("en-AU", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+
+  const formatItems = (items: OrderItem[]) =>
+    items.map((i) => `${i.name} (${i.size} ×${i.quantity})`).join(", ");
 
   return (
     <div className="px-8 py-8 max-w-[1200px]">
@@ -127,7 +175,7 @@ export default function OrdersPage() {
 
       {/* ── Note ── */}
       <div className="mb-4 px-4 py-2.5 bg-[#c9a96e]/[0.06] border border-[#c9a96e]/15 text-[11.5px] text-[#9a7a50]">
-        Real orders will appear here once the backend is integrated.
+        Orders placed via checkout appear here in real time.
       </div>
 
       {/* ── Table ── */}
@@ -159,93 +207,118 @@ export default function OrdersPage() {
             </tr>
           </thead>
           <tbody>
-            {visible.map((order) => {
-              const cfg = STATUS_CONFIG[order.status];
-              const isExpanded = expanded === order.id;
-              return (
-                <>
-                  <tr
-                    key={order.id}
-                    className="border-b border-[#f8f8f8] hover:bg-[#fafafa] transition-colors cursor-pointer"
-                    onClick={() => setExpanded(isExpanded ? null : order.id)}
-                  >
-                    <td className="px-5 py-3.5 text-[#555] font-mono text-[12px]">
-                      {order.id}
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <div className="text-[#222] font-medium">
-                        {order.customer}
-                      </div>
-                      <div className="text-[11px] text-[#aaa] hidden sm:block">
-                        {order.email}
-                      </div>
-                    </td>
-                    <td className="px-5 py-3.5 text-[#888] hidden md:table-cell">
-                      {order.date}
-                    </td>
-                    <td className="px-5 py-3.5 text-[#888] hidden lg:table-cell">
-                      {order.items}
-                    </td>
-                    <td className="px-5 py-3.5 text-[#333] font-medium">
-                      {order.total}
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <span
-                        className={`inline-flex px-2 py-0.5 rounded text-[10px] capitalize tracking-wide ${cfg.classes}`}
-                      >
-                        {cfg.label}
-                      </span>
-                    </td>
-                    <td
-                      className="px-5 py-3.5 text-right"
-                      onClick={(e) => e.stopPropagation()}
+            {loading ? (
+              <tr>
+                <td
+                  colSpan={7}
+                  className="px-5 py-12 text-center text-[#ccc] text-[13px]"
+                >
+                  Loading orders…
+                </td>
+              </tr>
+            ) : visible.length === 0 ? null : (
+              visible.map((order) => {
+                const cfg = STATUS_CONFIG[order.status];
+                const isExpanded = expanded === order.id;
+                return (
+                  <>
+                    <tr
+                      key={order.id}
+                      className="border-b border-[#f8f8f8] hover:bg-[#fafafa] transition-colors cursor-pointer"
+                      onClick={() => setExpanded(isExpanded ? null : order.id)}
                     >
-                      <select
-                        value={order.status}
-                        onChange={(e) =>
-                          updateStatus(order.id, e.target.value as OrderStatus)
-                        }
-                        className="text-[11px] text-[#555] bg-white border border-[#e5e5e5] px-2 py-1 outline-none focus:border-[#c9a96e] transition-colors cursor-pointer"
-                      >
-                        {(
-                          [
-                            "pending",
-                            "processing",
-                            "shipped",
-                            "delivered",
-                            "cancelled",
-                          ] as OrderStatus[]
-                        ).map((s) => (
-                          <option key={s} value={s}>
-                            {STATUS_CONFIG[s].label}
-                          </option>
-                        ))}
-                      </select>
-                    </td>
-                  </tr>
-                  {isExpanded && (
-                    <tr className="bg-[#fafafa] border-b border-[#f0f0f0]">
+                      <td className="px-5 py-3.5 text-[#555] font-mono text-[12px]">
+                        {order.id}
+                      </td>
+                      <td className="px-5 py-3.5">
+                        <div className="text-[#222] font-medium">
+                          {order.customerName}
+                        </div>
+                        <div className="text-[11px] text-[#aaa] hidden sm:block">
+                          {order.email}
+                        </div>
+                      </td>
+                      <td className="px-5 py-3.5 text-[#888] hidden md:table-cell">
+                        {formatDate(order.createdAt)}
+                      </td>
+                      <td className="px-5 py-3.5 text-[#888] hidden lg:table-cell max-w-[200px] truncate">
+                        {formatItems(order.items)}
+                      </td>
+                      <td className="px-5 py-3.5 text-[#333] font-medium">
+                        ${(order.total / 100).toFixed(2)}
+                      </td>
+                      <td className="px-5 py-3.5">
+                        <span
+                          className={`inline-flex px-2 py-0.5 rounded text-[10px] capitalize tracking-wide ${cfg.classes}`}
+                        >
+                          {cfg.label}
+                        </span>
+                      </td>
                       <td
-                        colSpan={7}
-                        className="px-5 py-3 text-[12px] text-[#777]"
+                        className="px-5 py-3.5 text-right"
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        <strong className="text-[#555]">Email:</strong>{" "}
-                        {order.email}
-                        {"  ·  "}
-                        <strong className="text-[#555]">Items:</strong>{" "}
-                        {order.items}
-                        {"  ·  "}
-                        <strong className="text-[#555]">Date:</strong>{" "}
-                        {order.date}
+                        <select
+                          value={order.status}
+                          onChange={(e) =>
+                            updateStatus(
+                              order.id,
+                              e.target.value as OrderStatus,
+                            )
+                          }
+                          className="text-[11px] text-[#555] bg-white border border-[#e5e5e5] px-2 py-1 outline-none focus:border-[#c9a96e] transition-colors cursor-pointer"
+                        >
+                          {(
+                            [
+                              "pending",
+                              "processing",
+                              "shipped",
+                              "delivered",
+                              "cancelled",
+                            ] as OrderStatus[]
+                          ).map((s) => (
+                            <option key={s} value={s}>
+                              {STATUS_CONFIG[s].label}
+                            </option>
+                          ))}
+                        </select>
                       </td>
                     </tr>
-                  )}
-                </>
-              );
-            })}
+                    {isExpanded && (
+                      <tr className="bg-[#fafafa] border-b border-[#f0f0f0]">
+                        <td
+                          colSpan={7}
+                          className="px-5 py-3 text-[12px] text-[#777] space-y-1"
+                        >
+                          <div>
+                            <strong className="text-[#555]">Address:</strong>{" "}
+                            {order.addressLine1}
+                            {order.addressLine2
+                              ? `, ${order.addressLine2}`
+                              : ""}
+                            , {order.city} {order.state} {order.postcode},{" "}
+                            {order.country}
+                          </div>
+                          <div>
+                            <strong className="text-[#555]">Delivery:</strong>{" "}
+                            {order.deliveryMethod} ·{" "}
+                            <strong className="text-[#555]">Shipping:</strong> $
+                            {(order.shippingCost / 100).toFixed(2)}
+                          </div>
+                          <div>
+                            <strong className="text-[#555]">Items:</strong>{" "}
+                            {formatItems(order.items)}
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </>
+                );
+              })
+            )}
           </tbody>
         </table>
-        {visible.length === 0 && (
+        {visible.length === 0 && !loading && (
           <div className="px-5 py-12 text-center text-[#ccc] text-[13px]">
             No orders match your filters.
           </div>
