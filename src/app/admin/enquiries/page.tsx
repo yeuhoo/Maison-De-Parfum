@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type EnquiryStatus = "new" | "reviewed" | "replied" | "archived";
@@ -9,18 +9,13 @@ interface Enquiry {
   id: string;
   name: string;
   email: string;
-  phone?: string;
-  eventType: string;
-  eventDate: string;
-  guestCount: string;
-  venue?: string;
+  subject: string;
   message: string;
-  receivedAt: string;
   status: EnquiryStatus;
+  reply: string | null;
+  repliedAt: string | null;
+  createdAt: string;
 }
-
-// ─── Sample enquiries (Perfume Bar) ──────────────────────────────────────────
-const SAMPLE_ENQUIRIES: Enquiry[] = [];
 
 const STATUS_CONFIG: Record<EnquiryStatus, { label: string; classes: string }> =
   {
@@ -52,28 +47,74 @@ const ALL_STATUSES: (EnquiryStatus | "All")[] = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function EnquiriesPage() {
-  const [enquiries, setEnquiries] = useState<Enquiry[]>(SAMPLE_ENQUIRIES);
+  const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<EnquiryStatus | "All">("All");
   const [detail, setDetail] = useState<Enquiry | null>(null);
+  const [replyText, setReplyText] = useState("");
+  const [replying, setReplying] = useState(false);
+  const [replyError, setReplyError] = useState("");
+
+  useEffect(() => {
+    fetch("/api/inquiries")
+      .then((r) => r.json())
+      .then((data) => setEnquiries(data))
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
 
   const visible = enquiries.filter((e) => {
     const matchSearch =
       !search ||
       e.name.toLowerCase().includes(search.toLowerCase()) ||
       e.email.toLowerCase().includes(search.toLowerCase()) ||
-      e.eventType.toLowerCase().includes(search.toLowerCase()) ||
+      e.subject.toLowerCase().includes(search.toLowerCase()) ||
       e.id.toLowerCase().includes(search.toLowerCase());
     const matchFilter = filter === "All" || e.status === filter;
     return matchSearch && matchFilter;
   });
 
-  const updateStatus = (id: string, status: EnquiryStatus) => {
+  const updateStatus = async (id: string, status: EnquiryStatus) => {
     setEnquiries((prev) =>
       prev.map((e) => (e.id === id ? { ...e, status } : e)),
     );
     if (detail?.id === id)
       setDetail((prev) => (prev ? { ...prev, status } : null));
+    await fetch(`/api/inquiries/${id}/status`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    });
+  };
+
+  const openDetail = (enq: Enquiry) => {
+    setDetail(enq);
+    setReplyText(enq.reply ?? "");
+    setReplyError("");
+  };
+
+  const sendReply = async () => {
+    if (!detail || !replyText.trim()) return;
+    setReplying(true);
+    setReplyError("");
+    try {
+      const res = await fetch(`/api/inquiries/${detail.id}/reply`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reply: replyText }),
+      });
+      if (!res.ok) throw new Error("Failed to send reply");
+      const updated: Enquiry = await res.json();
+      setEnquiries((prev) =>
+        prev.map((e) => (e.id === updated.id ? updated : e)),
+      );
+      setDetail(updated);
+    } catch {
+      setReplyError("Failed to send reply. Please try again.");
+    } finally {
+      setReplying(false);
+    }
   };
 
   const counts = ALL_STATUSES.reduce<Record<string, number>>((acc, s) => {
@@ -89,7 +130,7 @@ export default function EnquiriesPage() {
       {/* ── Header ── */}
       <div className="mb-6">
         <p className="text-[10px] tracking-[0.25em] uppercase text-[#9a8a7a] mb-1">
-          Perfume Bar
+          Customer Relations
         </p>
         <h1
           className="text-[22px] font-light text-[#1a1a1a] tracking-wide"
@@ -122,15 +163,9 @@ export default function EnquiriesPage() {
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search name, email or event…"
+          placeholder="Search name, email or subject…"
           className="ml-auto bg-white border border-[#e5e5e5] text-[12.5px] px-4 py-1.5 outline-none focus:border-[#c9a96e] transition-colors w-64 text-[#333] placeholder-[#bbb]"
         />
-      </div>
-
-      {/* ── Note ── */}
-      <div className="mb-4 px-4 py-2.5 bg-[#c9a96e]/[0.06] border border-[#c9a96e]/15 text-[11.5px] text-[#9a7a50]">
-        Sample data shown. Live enquiries will appear here once the contact form
-        is connected to the backend.
       </div>
 
       {/* ── Table ── */}
@@ -145,13 +180,7 @@ export default function EnquiriesPage() {
                 Contact
               </th>
               <th className="text-left px-5 py-3 text-[10px] tracking-[0.12em] uppercase text-[#bbb] font-normal hidden sm:table-cell">
-                Event Type
-              </th>
-              <th className="text-left px-5 py-3 text-[10px] tracking-[0.12em] uppercase text-[#bbb] font-normal hidden md:table-cell">
-                Event Date
-              </th>
-              <th className="text-left px-5 py-3 text-[10px] tracking-[0.12em] uppercase text-[#bbb] font-normal hidden lg:table-cell">
-                Guests
+                Subject
               </th>
               <th className="text-left px-5 py-3 text-[10px] tracking-[0.12em] uppercase text-[#bbb] font-normal hidden xl:table-cell">
                 Received
@@ -165,71 +194,80 @@ export default function EnquiriesPage() {
             </tr>
           </thead>
           <tbody>
-            {visible.map((enq) => {
-              const cfg = STATUS_CONFIG[enq.status];
-              return (
-                <tr
-                  key={enq.id}
-                  className="border-b border-[#f8f8f8] hover:bg-[#fafafa] transition-colors cursor-pointer"
-                  onClick={() => setDetail(enq)}
+            {loading ? (
+              <tr>
+                <td
+                  colSpan={6}
+                  className="px-5 py-12 text-center text-[#ccc] text-[13px]"
                 >
-                  <td className="px-5 py-3.5 text-[#bbb] font-mono text-[11px]">
-                    {enq.id}
-                  </td>
-                  <td className="px-5 py-3.5">
-                    <div className="text-[#222] font-medium">{enq.name}</div>
-                    <div className="text-[11px] text-[#aaa]">{enq.email}</div>
-                  </td>
-                  <td className="px-5 py-3.5 text-[#555] hidden sm:table-cell">
-                    {enq.eventType}
-                  </td>
-                  <td className="px-5 py-3.5 text-[#888] hidden md:table-cell">
-                    {enq.eventDate}
-                  </td>
-                  <td className="px-5 py-3.5 text-[#888] hidden lg:table-cell">
-                    {enq.guestCount}
-                  </td>
-                  <td className="px-5 py-3.5 text-[#aaa] text-[11px] hidden xl:table-cell">
-                    {enq.receivedAt}
-                  </td>
-                  <td className="px-5 py-3.5">
-                    <span
-                      className={`inline-flex px-2 py-0.5 rounded text-[10px] capitalize tracking-wide ${cfg.classes}`}
-                    >
-                      {cfg.label}
-                    </span>
-                  </td>
-                  <td
-                    className="px-5 py-3.5 text-right"
-                    onClick={(e) => e.stopPropagation()}
+                  Loading enquiries…
+                </td>
+              </tr>
+            ) : (
+              visible.map((enq) => {
+                const cfg = STATUS_CONFIG[enq.status];
+                return (
+                  <tr
+                    key={enq.id}
+                    className="border-b border-[#f8f8f8] hover:bg-[#fafafa] transition-colors cursor-pointer"
+                    onClick={() => openDetail(enq)}
                   >
-                    <select
-                      value={enq.status}
-                      onChange={(e) =>
-                        updateStatus(enq.id, e.target.value as EnquiryStatus)
-                      }
-                      className="text-[11px] text-[#555] bg-white border border-[#e5e5e5] px-2 py-1 outline-none focus:border-[#c9a96e] transition-colors cursor-pointer"
+                    <td className="px-5 py-3.5 text-[#bbb] font-mono text-[11px]">
+                      {enq.id}
+                    </td>
+                    <td className="px-5 py-3.5">
+                      <div className="text-[#222] font-medium">{enq.name}</div>
+                      <div className="text-[11px] text-[#aaa]">{enq.email}</div>
+                    </td>
+                    <td className="px-5 py-3.5 text-[#555] hidden sm:table-cell">
+                      {enq.subject}
+                    </td>
+                    <td className="px-5 py-3.5 text-[#aaa] text-[11px] hidden xl:table-cell">
+                      {new Date(enq.createdAt).toLocaleDateString("en-AU", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </td>
+                    <td className="px-5 py-3.5">
+                      <span
+                        className={`inline-flex px-2 py-0.5 rounded text-[10px] capitalize tracking-wide ${cfg.classes}`}
+                      >
+                        {cfg.label}
+                      </span>
+                    </td>
+                    <td
+                      className="px-5 py-3.5 text-right"
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      {(
-                        [
-                          "new",
-                          "reviewed",
-                          "replied",
-                          "archived",
-                        ] as EnquiryStatus[]
-                      ).map((s) => (
-                        <option key={s} value={s}>
-                          {STATUS_CONFIG[s].label}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                </tr>
-              );
-            })}
+                      <select
+                        value={enq.status}
+                        onChange={(e) =>
+                          updateStatus(enq.id, e.target.value as EnquiryStatus)
+                        }
+                        className="text-[11px] text-[#555] bg-white border border-[#e5e5e5] px-2 py-1 outline-none focus:border-[#c9a96e] transition-colors cursor-pointer"
+                      >
+                        {(
+                          [
+                            "new",
+                            "reviewed",
+                            "replied",
+                            "archived",
+                          ] as EnquiryStatus[]
+                        ).map((s) => (
+                          <option key={s} value={s}>
+                            {STATUS_CONFIG[s].label}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                  </tr>
+                );
+              })
+            )}
           </tbody>
         </table>
-        {visible.length === 0 && (
+        {!loading && visible.length === 0 && (
           <div className="px-5 py-12 text-center text-[#ccc] text-[13px]">
             No enquiries match your filters.
           </div>
@@ -243,7 +281,7 @@ export default function EnquiriesPage() {
           onClick={() => setDetail(null)}
         >
           <div
-            className="bg-white w-full max-w-[420px] h-full overflow-y-auto shadow-2xl"
+            className="bg-white w-full max-w-[460px] h-full overflow-y-auto shadow-2xl"
             style={{ fontFamily: "var(--font-montserrat)" }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -316,29 +354,70 @@ export default function EnquiriesPage() {
                     </a>
                   }
                 />
-                {detail.phone && <InfoRow label="Phone" value={detail.phone} />}
-                <InfoRow label="Received" value={detail.receivedAt} />
+                <InfoRow
+                  label="Received"
+                  value={new Date(detail.createdAt).toLocaleDateString(
+                    "en-AU",
+                    {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    },
+                  )}
+                />
               </div>
 
-              {/* Event info */}
+              {/* Inquiry details */}
               <div className="space-y-2 border-b border-[#f5f5f5] pb-5">
                 <h3 className="text-[10px] tracking-[0.2em] uppercase text-[#bbb] mb-3">
-                  Event Details
+                  Enquiry
                 </h3>
-                <InfoRow label="Type" value={detail.eventType} />
-                <InfoRow label="Date" value={detail.eventDate} />
-                <InfoRow label="Guests" value={detail.guestCount} />
-                {detail.venue && <InfoRow label="Venue" value={detail.venue} />}
+                <InfoRow label="Subject" value={detail.subject} />
+                <div className="mt-2">
+                  <p className="text-[12px] text-[#555] leading-relaxed bg-[#fafafa] border border-[#f0f0f0] rounded px-4 py-3 whitespace-pre-wrap">
+                    {detail.message}
+                  </p>
+                </div>
               </div>
 
-              {/* Message */}
+              {/* Reply section */}
               <div>
                 <h3 className="text-[10px] tracking-[0.2em] uppercase text-[#bbb] mb-3">
-                  Message
+                  {detail.reply ? "Reply Sent" : "Send Reply"}
                 </h3>
-                <p className="text-[13px] text-[#555] leading-relaxed bg-[#fafafa] border border-[#f0f0f0] rounded px-4 py-3">
-                  {detail.message}
-                </p>
+                {detail.repliedAt && (
+                  <p className="text-[11px] text-[#aaa] mb-2">
+                    Replied{" "}
+                    {new Date(detail.repliedAt).toLocaleDateString("en-AU", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </p>
+                )}
+                <textarea
+                  value={replyText}
+                  onChange={(e) => setReplyText(e.target.value)}
+                  rows={5}
+                  placeholder="Type your reply…"
+                  className="w-full bg-[#fafafa] border border-[#e5e5e5] text-[12.5px] text-[#444] px-4 py-3 outline-none focus:border-[#c9a96e] transition-colors resize-none leading-relaxed placeholder-[#ccc]"
+                />
+                {replyError && (
+                  <p className="text-red-600 text-[11px] mt-1">{replyError}</p>
+                )}
+                <button
+                  onClick={sendReply}
+                  disabled={replying || !replyText.trim()}
+                  className="mt-3 w-full bg-[#c9a96e] text-white text-[11px] tracking-[0.15em] uppercase py-2.5 hover:bg-[#b8934d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {replying
+                    ? "Sending…"
+                    : detail.reply
+                      ? "Update Reply"
+                      : "Send Reply"}
+                </button>
               </div>
             </div>
           </div>
@@ -357,3 +436,4 @@ function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
     </div>
   );
 }
+

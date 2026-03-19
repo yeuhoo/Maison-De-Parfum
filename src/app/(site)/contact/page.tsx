@@ -17,6 +17,8 @@ const fadeUp = {
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -32,10 +34,24 @@ export default function ContactPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // TODO: wire up to backend / SendGrid
-    setSubmitted(true);
+    setSubmitting(true);
+    setError("");
+    try {
+      const id = "ENQ-" + Date.now().toString(36).toUpperCase();
+      const res = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, ...form }),
+      });
+      if (!res.ok) throw new Error("Failed to send");
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -293,11 +309,16 @@ export default function ContactPage() {
                     />
                   </div>
 
+                  {error && (
+                    <p className="text-red-600 text-sm text-center">{error}</p>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full h-13 bg-(--button-gold) text-(--bridal-white) text-[12px] tracking-widest uppercase font-medium hover:bg-(--button-gold-hover) transition-colors duration-300"
+                    disabled={submitting}
+                    className="w-full h-13 bg-(--button-gold) text-(--bridal-white) text-[12px] tracking-widest uppercase font-medium hover:bg-(--button-gold-hover) transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {submitting ? "Sending…" : "Send Message"}
                   </button>
                 </form>
               )}
