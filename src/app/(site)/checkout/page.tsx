@@ -182,6 +182,11 @@ export default function CheckoutPage() {
     snap.current = { form, items, subtotalCents, shippingCost, totalCents };
   });
 
+  // If Square script was already loaded by a prior navigation, trigger init immediately
+  useEffect(() => {
+    if (window.Square) setSqLoaded(true);
+  }, []);
+
   const set = (field: string, value: string) => {
     setForm((f) => ({ ...f, [field]: value }));
     setErrors((e) => ({ ...e, [field]: "" }));
@@ -262,6 +267,8 @@ export default function CheckoutPage() {
 
   // ── Initialise Square card form ───────────────────────────────────────────────
   useEffect(() => {
+    // Script may already be available if navigated via client-side Link
+    if (!sqLoaded && window.Square) setSqLoaded(true);
     if (!sqLoaded || !window.Square) return;
     let card: SqCard | null = null;
     (async () => {
