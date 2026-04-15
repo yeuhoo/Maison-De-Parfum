@@ -189,11 +189,13 @@ export default function PerfumeBarPage() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
-              className="h-80 md:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center"
+              className="h-80 md:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center overflow-hidden"
             >
-              <p className="text-text-secondary text-sm tracking-widest uppercase">
-                [ Event Photo ]
-              </p>
+              <img
+                src="/0D0A4312-2.jpg"
+                alt="Bespoke experience event"
+                className="w-full h-full object-cover"
+              />
             </motion.div>
           </div>
         </div>
@@ -209,11 +211,13 @@ export default function PerfumeBarPage() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={0}
-              className="h-80 md:h-96 bg-(--bridal-white) rounded-lg border border-(--muted-sand) flex items-center justify-center order-last md:order-first"
+              className="h-80 md:h-96 bg-(--bridal-white) rounded-lg border border-(--muted-sand) flex items-center justify-center order-last md:order-first overflow-hidden"
             >
-              <p className="text-text-secondary text-sm tracking-widest uppercase">
-                [ Perfume Bar Photo ]
-              </p>
+              <img
+                src="/0D0A4844-2.jpg"
+                alt="Interactive perfume bar entertainment"
+                className="w-full h-full object-cover"
+              />
             </motion.div>
             <motion.div
               variants={fadeUp}
@@ -287,11 +291,13 @@ export default function PerfumeBarPage() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
-              className="h-80 md:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center"
+              className="h-80 md:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center overflow-hidden"
             >
-              <p className="text-text-secondary text-sm tracking-widest uppercase">
-                [ Personalised Bottles Photo ]
-              </p>
+              <img
+                src="/0D0A4272.jpg"
+                alt="Luxury personalised perfume bar presentation"
+                className="w-full h-full object-cover"
+              />
             </motion.div>
           </div>
         </div>
