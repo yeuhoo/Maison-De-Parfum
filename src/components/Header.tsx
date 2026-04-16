@@ -27,11 +27,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 ease-in-out
-          ${scrolled
-            ? "bg-(--bridal-white) border-b border-(--muted-sand) shadow-sm"
-            : "bg-transparent border-b border-transparent"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 h-20 shadow-sm transition-all duration-300 ease-in-out ${scrolled ? "bg-(--bridal-white) border-b border-(--muted-sand)" : "bg-transparent border-b border-transparent"}`}
       >
         <div className="max-w-330 mx-auto px-8 lg:px-12 h-full flex items-center justify-between relative">
           {/* Logo */}
