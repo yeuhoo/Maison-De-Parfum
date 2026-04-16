@@ -1,3 +1,5 @@
+import { Leaf, Sparkles, Package } from "lucide-react";
+
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -104,33 +106,36 @@ export default function Home() {
       <section className="py-16 bg-(--bridal-white)">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold mb-8 font-heading">
+            <h2 className="text-3xl font-bold mb-16 font-heading">
               Why Choose Maison de Parfum?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div>
+              <div className="text-center">
+                <Leaf className="mx-auto mb-5 h-12 w-12 text-(--button-gold)" />
                 <h3 className="text-xl font-semibold mb-4 font-heading">
                   Premium Ingredients
                 </h3>
-                <p className="text-(--text-secondary)">
+                <p className="text-(--text-secondary) mb-4">
                   We source only the finest essential oils and fragrances from
                   around the world.
                 </p>
               </div>
-              <div>
+              <div className="text-center">
+                <Sparkles className="mx-auto mb-5 h-12 w-12 text-(--button-gold)" />
                 <h3 className="text-xl font-semibold mb-4 font-heading">
                   Artisan Crafted
                 </h3>
-                <p className="text-(--text-secondary)">
+                <p className="text-(--text-secondary) mb-4">
                   Each perfume is carefully crafted by master perfumers with
                   years of experience.
                 </p>
               </div>
-              <div>
+              <div className="text-center">
+                <Package className="mx-auto mb-5 h-12 w-12 text-(--button-gold)" />
                 <h3 className="text-xl font-semibold mb-4 font-heading">
                   Sustainable Packaging
                 </h3>
-                <p className="text-(--text-secondary)">
+                <p className="text-(--text-secondary) mb-4">
                   Our eco-friendly packaging ensures your perfume arrives
                   beautifully and responsibly.
                 </p>
