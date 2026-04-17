@@ -67,7 +67,8 @@ export default function ContactPage() {
             initial="hidden"
             animate="visible"
             custom={0}
-            className="text-[11px] tracking-[0.3em] uppercase text-(--button-gold) mb-6"
+            className="text-[11px] tracking-[0.3em] uppercase font-heading mb-6"
+            style={{ color: "#B28E3B", fontFamily: "var(--font-playfair)" }}
           >
             Maison de Parfum · Contact
           </motion.p>
@@ -80,14 +81,17 @@ export default function ContactPage() {
           >
             We&apos;d love to
             <br className="hidden md:block" />
-            <span className="text-(--button-gold)"> hear from you.</span>
+            <span style={{ color: "#B28E3B", fontFamily: "var(--font-playfair)" }}>
+              hear from you.
+            </span>
           </motion.h1>
           <motion.p
             variants={fadeUp}
             initial="hidden"
             animate="visible"
             custom={2}
-            className="text-lg md:text-xl text-text-secondary max-w-xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl max-w-xl mx-auto leading-relaxed"
+            style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}
           >
             Whether it&apos;s a product question, a Perfume Bar enquiry, or
             simply a hello — our team is here.
@@ -109,53 +113,65 @@ export default function ContactPage() {
             >
               {/* General */}
               <div>
-                <p className="text-[11px] tracking-[0.3em] uppercase text-(--button-gold) mb-4">
+                <p className="text-[11px] tracking-[0.3em] uppercase font-heading mb-4"
+                  style={{ color: "#B28E3B", fontFamily: "var(--font-playfair)" }}
+                >
                   General Enquiries
                 </p>
                 <div className="space-y-2 text-text-secondary text-sm leading-relaxed">
                   <p>
-                    Email:{" "}
-                    <span className="text-text-primary">
+                    <span style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>
+                      Email:
+                    </span>{" "}
+                    <span className="text-text-primary" style={{ fontFamily: "var(--font-montserrat)" }}>
                       [hello@maisondeparfum.com.au]
                     </span>
                   </p>
                   <p>
-                    Phone:{" "}
-                    <span className="text-text-primary">[+61 XXX XXX XXX]</span>
+                    <span style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>
+                      Phone:
+                    </span>{" "}
+                    <span className="text-text-primary" style={{ fontFamily: "var(--font-montserrat)" }}>[+61 XXX XXX XXX]</span>
                   </p>
-                  <p>Response time: within 1–2 business days</p>
+                  <p style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>
+                    Response time: within 1–2 business days
+                  </p>
                 </div>
               </div>
 
               {/* Location */}
               <div>
-                <p className="text-[11px] tracking-[0.3em] uppercase text-(--button-gold) mb-4">
+                <p className="text-[11px] tracking-[0.3em] uppercase font-heading mb-4"
+                  style={{ color: "#B28E3B", fontFamily: "var(--font-playfair)" }}
+                >
                   Location
                 </p>
                 <div className="space-y-1 text-text-secondary text-sm leading-relaxed">
-                  <p className="text-text-primary">
+                  <p className="text-text-primary" style={{ fontFamily: "var(--font-montserrat)" }}>
                     [Studio / Showroom Address]
                   </p>
-                  <p>[Suburb, State, Postcode]</p>
-                  <p>Australia</p>
+                  <p style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>[Suburb, State, Postcode]</p>
+                  <p style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>Australia</p>
                 </div>
               </div>
 
               {/* Hours */}
               <div>
-                <p className="text-[11px] tracking-[0.3em] uppercase text-(--button-gold) mb-4">
+                <p className="text-[11px] tracking-[0.3em] uppercase font-heading mb-4"
+                  style={{ color: "#B28E3B", fontFamily: "var(--font-playfair)" }}
+                >
                   Business Hours
                 </p>
                 <div className="space-y-1 text-text-secondary text-sm">
-                  <p>
+                  <p style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>
                     Monday – Friday:{" "}
                     <span className="text-text-primary">[9am – 5pm AEST]</span>
                   </p>
-                  <p>
+                  <p style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>
                     Saturday:{" "}
                     <span className="text-text-primary">[By appointment]</span>
                   </p>
-                  <p>
+                  <p style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>
                     Sunday: <span className="text-text-primary">Closed</span>
                   </p>
                 </div>
@@ -163,16 +179,19 @@ export default function ContactPage() {
 
               {/* Perfume Bar shortcut */}
               <div className="border-t border-(--muted-sand) pt-8">
-                <p className="text-[11px] tracking-[0.3em] uppercase text-(--button-gold) mb-3">
+                <p className="text-[11px] tracking-[0.3em] uppercase font-heading mb-3"
+                  style={{ color: "#B28E3B", fontFamily: "var(--font-playfair)" }}
+                >
                   Perfume Bar Enquiries
                 </p>
-                <p className="text-text-secondary text-sm leading-relaxed mb-4">
+                <p className="text-text-secondary text-sm leading-relaxed mb-4" style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>
                   Planning a wedding or event? Use our dedicated enquiry form
                   for a faster response.
                 </p>
                 <Link
                   href="/perfume-bar#enquire"
-                  className="inline-flex items-center gap-2 text-[11px] tracking-widest uppercase text-(--button-gold) border border-(--button-gold) px-5 py-2.5 hover:bg-(--button-gold) hover:text-(--bridal-white) transition-colors duration-300"
+                  className="inline-flex items-center gap-2 text-[11px] tracking-widest uppercase border border-(--button-gold) px-5 py-2.5 hover:bg-(--button-gold) hover:text-(--bridal-white) transition-colors duration-300"
+                  style={{ color: "#B28E3B", fontFamily: "var(--font-montserrat)" }}
                 >
                   Perfume Bar Enquiry
                   <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
@@ -241,7 +260,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-2">
-                      <label className="text-[11px] tracking-[0.2em] uppercase text-text-secondary">
+                      <label className="text-[11px] tracking-[0.2em] uppercase text-text-secondary" style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>
                         Full Name{" "}
                         <span className="text-(--button-gold)">*</span>
                       </label>
@@ -256,7 +275,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-[11px] tracking-[0.2em] uppercase text-text-secondary">
+                      <label className="text-[11px] tracking-[0.2em] uppercase text-text-secondary" style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>
                         Email Address{" "}
                         <span className="text-(--button-gold)">*</span>
                       </label>
@@ -273,7 +292,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="text-[11px] tracking-[0.2em] uppercase text-text-secondary">
+                    <label className="text-[11px] tracking-[0.2em] uppercase text-text-secondary" style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>
                       Subject <span className="text-(--button-gold)">*</span>
                     </label>
                     <select
@@ -295,7 +314,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="text-[11px] tracking-[0.2em] uppercase text-text-secondary">
+                    <label className="text-[11px] tracking-[0.2em] uppercase text-text-secondary" style={{ color: "#7C6D5A", fontFamily: "var(--font-montserrat)" }}>
                       Message <span className="text-(--button-gold)">*</span>
                     </label>
                     <textarea
@@ -316,9 +335,10 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full h-13 bg-(--button-gold) text-(--bridal-white) text-[12px] tracking-widest uppercase font-medium hover:bg-(--button-gold-hover) transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full h-13 bg-(--button-gold) text-[12px] tracking-widest uppercase font-bold hover:bg-(--button-gold-hover) transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                    style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}
                   >
-                    {submitting ? "Sending…" : "Send Message"}
+                    {submitting ? "Sending…" : "SEND MESSAGE"}
                   </button>
                 </form>
               )}

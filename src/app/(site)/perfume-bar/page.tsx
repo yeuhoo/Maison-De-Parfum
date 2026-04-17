@@ -410,8 +410,8 @@ export default function PerfumeBarPage() {
               </Link>
               <Link
                 href="/shop"
-                className="inline-flex items-center justify-center gap-2 border border-(--button-gold) text-(--button-gold) px-8 py-4 rounded text-sm font-medium uppercase tracking-widest hover:bg-(--button-gold) hover:text-(--bridal-white) transition-colors duration-300"
-                style={{ borderColor: "#B28E3B", color: "#B28E3B", fontFamily: "var(--font-montserrat)" }}
+                className="inline-flex items-center justify-center gap-2 border border-[#B28E3B] text-[#B28E3B] px-8 py-4 rounded text-sm font-medium uppercase tracking-widest hover:bg-(--button-gold) hover:text-(--bridal-white) transition-colors duration-300"
+                style={{ fontFamily: "var(--font-montserrat)" }}
               >
                 See Our Fragrances
               </Link>
