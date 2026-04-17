@@ -179,7 +179,9 @@ export default function ProductDetailClient({
               <div className="w-10 h-px bg-(--muted-sand)" />
 
               {/* Description */}
-              <p className="text-text-secondary leading-relaxed text-base md:text-lg">
+              <p className="leading-relaxed text-base md:text-lg"
+                style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}
+              >
                 {product.description}
               </p>
 
@@ -192,7 +194,8 @@ export default function ProductDetailClient({
                   {product.notes.split(" · ").map((note) => (
                     <span
                       key={note}
-                      className="text-[11px] tracking-[0.12em] uppercase text-text-primary border border-(--muted-sand) px-3 py-1.5"
+                      className="text-[11px] tracking-[0.12em] uppercase border border-(--muted-sand) px-3 py-1.5"
+                      style={{ color: "#7C6D5A" }}
                     >
                       {note}
                     </span>
@@ -217,22 +220,20 @@ export default function ProductDetailClient({
                 <div className="flex gap-3">
                   <button
                     onClick={() => setSelectedSize("50ml")}
-                    className={`px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${
-                      selectedSize === "50ml"
+                    className={`px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${selectedSize === "50ml"
                         ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
                         : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
-                    }`}
+                      }`}
                   >
                     50ml &middot; ${product.price50ml}
                   </button>
                   {product.price30ml > 0 && (
                     <button
                       onClick={() => setSelectedSize("30ml")}
-                      className={`px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${
-                        selectedSize === "30ml"
+                      className={`px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${selectedSize === "30ml"
                           ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
                           : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
-                      }`}
+                        }`}
                     >
                       30ml &middot; ${product.price30ml}
                     </button>
@@ -282,7 +283,8 @@ export default function ProductDetailClient({
               {/* CTA */}
               <button
                 onClick={handleAddToBag}
-                className="w-full text-[12px] tracking-widest uppercase py-4 transition-colors duration-300 bg-(--button-gold) text-(--bridal-white) hover:bg-(--button-gold-hover)"
+                className="w-full text-[12px] tracking-widest uppercase py-4 font-bold transition-colors duration-300 bg-(--button-gold) hover:bg-(--button-gold-hover)"
+                style={{ color: "#FAF8F5" }}
               >
                 {added ? "Added to Bag ✓" : "Add to Bag"}
               </button>
