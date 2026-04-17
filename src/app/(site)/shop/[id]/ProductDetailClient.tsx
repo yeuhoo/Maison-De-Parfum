@@ -221,8 +221,8 @@ export default function ProductDetailClient({
                   <button
                     onClick={() => setSelectedSize("50ml")}
                     className={`px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${selectedSize === "50ml"
-                        ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
-                        : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
+                      ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
+                      : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
                       }`}
                   >
                     50ml &middot; ${product.price50ml}
@@ -231,8 +231,8 @@ export default function ProductDetailClient({
                     <button
                       onClick={() => setSelectedSize("30ml")}
                       className={`px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${selectedSize === "30ml"
-                          ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
-                          : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
+                        ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
+                        : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
                         }`}
                     >
                       30ml &middot; ${product.price30ml}
@@ -284,7 +284,7 @@ export default function ProductDetailClient({
               <button
                 onClick={handleAddToBag}
                 className="w-full text-[12px] tracking-widest uppercase py-4 font-bold transition-colors duration-300 bg-(--button-gold) hover:bg-(--button-gold-hover)"
-                style={{ color: "#FAF8F5" }}
+                style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}
               >
                 {added ? "Added to Bag ✓" : "Add to Bag"}
               </button>
