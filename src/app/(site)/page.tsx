@@ -1,3 +1,5 @@
+import { Leaf, Sparkles, Package } from "lucide-react";
+
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -11,13 +13,14 @@ export default function Home() {
             >
               Discover Your Signature Scent
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-(--text-secondary)">
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" style={{ fontFamily: "var(--font-montserrat)", color: "var(--text-primary)" }}>
               Explore our curated collection of luxury perfumes, crafted with
               the finest ingredients for an unforgettable experience.
             </p>
             <a
               href="/shop"
               className="inline-block bg-(--button-gold) text-(--bridal-white) px-8 py-3 rounded font-medium hover:bg-(--button-gold-hover) transition-colors uppercase text-sm"
+              style={{ fontFamily: "var(--font-montserrat)" }}
             >
               Shop Now
             </a>
@@ -104,33 +107,36 @@ export default function Home() {
       <section className="py-16 bg-(--bridal-white)">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold mb-8 font-heading">
+            <h2 className="text-3xl font-bold mb-16 font-heading">
               Why Choose Maison de Parfum?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div>
+              <div className="text-center">
+                <Leaf className="mx-auto mb-5 h-12 w-12 text-(--button-gold)" />
                 <h3 className="text-xl font-semibold mb-4 font-heading">
                   Premium Ingredients
                 </h3>
-                <p className="text-(--text-secondary)">
+                <p className="mb-4" style={{ fontFamily: "var(--font-montserrat)", color: "var(--text-primary)" }}>
                   We source only the finest essential oils and fragrances from
                   around the world.
                 </p>
               </div>
-              <div>
+              <div className="text-center">
+                <Sparkles className="mx-auto mb-5 h-12 w-12 text-(--button-gold)" />
                 <h3 className="text-xl font-semibold mb-4 font-heading">
                   Artisan Crafted
                 </h3>
-                <p className="text-(--text-secondary)">
+                <p className="mb-4" style={{ fontFamily: "var(--font-montserrat)", color: "var(--text-primary)" }}>
                   Each perfume is carefully crafted by master perfumers with
                   years of experience.
                 </p>
               </div>
-              <div>
+              <div className="text-center">
+                <Package className="mx-auto mb-5 h-12 w-12 text-(--button-gold)" />
                 <h3 className="text-xl font-semibold mb-4 font-heading">
                   Sustainable Packaging
                 </h3>
-                <p className="text-(--text-secondary)">
+                <p className="mb-4" style={{ fontFamily: "var(--font-montserrat)", color: "var(--text-primary)" }}>
                   Our eco-friendly packaging ensures your perfume arrives
                   beautifully and responsibly.
                 </p>
