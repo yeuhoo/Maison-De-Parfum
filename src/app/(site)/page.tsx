@@ -9,18 +9,18 @@ export default function Home() {
           <div className="text-center">
             <h1
               className="text-5xl md:text-7xl font-bold mb-6 font-heading leading-tight"
-              style={{ color: "var(--text-primary)" }}
+              style={{ color: "#3C2218" }}
             >
               Discover Your Signature Scent
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" style={{ fontFamily: "var(--font-montserrat)", color: "var(--text-primary)" }}>
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}>
               Explore our curated collection of luxury perfumes, crafted with
               the finest ingredients for an unforgettable experience.
             </p>
             <a
               href="/shop"
-              className="inline-block bg-(--button-gold) text-(--bridal-white) px-8 py-3 rounded font-medium hover:bg-(--button-gold-hover) transition-colors uppercase text-sm"
-              style={{ fontFamily: "var(--font-montserrat)" }}
+              className="inline-block bg-(--button-gold) text-(--bridal-white) px-8 py-3 rounded font-bold hover:bg-(--button-gold-hover) transition-colors uppercase text-sm"
+              style={{ fontFamily: "var(--font-montserrat)", color: "#FAF8F5" }}
             >
               Shop Now
             </a>
@@ -44,14 +44,14 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 font-heading">
                   Elegant Rose
                 </h3>
-                <p className="text-(--text-secondary) mb-4">
+                <p className="mb-4" style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}>
                   A floral masterpiece with notes of rose and jasmine.
                 </p>
                 <div className="flex justify-between items-center">
                   <span className="text-2xl font-bold text-(--text-primary)">
                     $89.99
                   </span>
-                  <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 rounded hover:bg-(--button-gold-hover) transition-colors uppercase text-sm font-medium">
+                  <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 rounded hover:bg-(--button-gold-hover) transition-colors uppercase text-sm font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}>
                     Add to Cart
                   </button>
                 </div>
@@ -65,14 +65,14 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 font-heading">
                   Midnight Amber
                 </h3>
-                <p className="text-(--text-secondary) mb-4">
+                <p className="mb-4" style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}>
                   Warm and mysterious with amber and vanilla notes.
                 </p>
                 <div className="flex justify-between items-center">
                   <span className="text-2xl font-bold text-(--text-primary)">
                     $79.99
                   </span>
-                  <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 rounded hover:bg-(--button-gold-hover) transition-colors uppercase text-sm font-medium">
+                  <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 rounded hover:bg-(--button-gold-hover) transition-colors uppercase text-sm font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}>
                     Add to Cart
                   </button>
                 </div>
@@ -86,14 +86,14 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-2 font-heading">
                   Citrus Breeze
                 </h3>
-                <p className="text-(--text-secondary) mb-4">
+                <p className="mb-4" style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}>
                   Fresh and invigorating with citrus and marine notes.
                 </p>
                 <div className="flex justify-between items-center">
                   <span className="text-2xl font-bold text-(--text-primary)">
                     $69.99
                   </span>
-                  <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 rounded hover:bg-(--button-gold-hover) transition-colors uppercase text-sm font-medium">
+                  <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 rounded hover:bg-(--button-gold-hover) transition-colors uppercase text-sm font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}>
                     Add to Cart
                   </button>
                 </div>
