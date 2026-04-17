@@ -13,13 +13,14 @@ export default function Home() {
             >
               Discover Your Signature Scent
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-(--text-secondary)">
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" style={{ fontFamily: "var(--font-montserrat)", color: "var(--text-primary)" }}>
               Explore our curated collection of luxury perfumes, crafted with
               the finest ingredients for an unforgettable experience.
             </p>
             <a
               href="/shop"
               className="inline-block bg-(--button-gold) text-(--bridal-white) px-8 py-3 rounded font-medium hover:bg-(--button-gold-hover) transition-colors uppercase text-sm"
+              style={{ fontFamily: "var(--font-montserrat)" }}
             >
               Shop Now
             </a>
@@ -115,7 +116,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-4 font-heading">
                   Premium Ingredients
                 </h3>
-                <p className="text-(--text-secondary) mb-4">
+                <p className="mb-4" style={{ fontFamily: "var(--font-montserrat)", color: "var(--text-primary)" }}>
                   We source only the finest essential oils and fragrances from
                   around the world.
                 </p>
@@ -125,7 +126,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-4 font-heading">
                   Artisan Crafted
                 </h3>
-                <p className="text-(--text-secondary) mb-4">
+                <p className="mb-4" style={{ fontFamily: "var(--font-montserrat)", color: "var(--text-primary)" }}>
                   Each perfume is carefully crafted by master perfumers with
                   years of experience.
                 </p>
@@ -135,7 +136,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-4 font-heading">
                   Sustainable Packaging
                 </h3>
-                <p className="text-(--text-secondary) mb-4">
+                <p className="mb-4" style={{ fontFamily: "var(--font-montserrat)", color: "var(--text-primary)" }}>
                   Our eco-friendly packaging ensures your perfume arrives
                   beautifully and responsibly.
                 </p>
