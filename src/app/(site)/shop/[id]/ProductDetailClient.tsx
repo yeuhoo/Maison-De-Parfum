@@ -147,10 +147,10 @@ export default function ProductDetailClient({
 
             {/* Mood tag below image */}
             <div className="mt-4 flex items-center justify-between px-1">
-              <p className="text-[11px] tracking-[0.18em] uppercase text-(--warm-taupe)">
+              <p className="text-[11px] tracking-[0.18em] uppercase" style={{ color: "#7C6D5A" }}>
                 {detail?.accent}
               </p>
-              <p className="text-[11px] tracking-[0.12em] text-text-secondary">
+              <p className="text-[11px] tracking-[0.12em]" style={{ color: "#7C6D5A" }}>
                 {detail?.mood}
               </p>
             </div>
@@ -170,7 +170,7 @@ export default function ProductDetailClient({
                 <p className="text-[10px] tracking-[0.3em] uppercase text-(--button-gold) mb-3">
                   {product.category}
                 </p>
-                <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary leading-tight">
+                <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight" style={{ color: "#3C2218" }}>
                   {product.name}
                 </h1>
               </div>
@@ -214,7 +214,7 @@ export default function ProductDetailClient({
             >
               {/* Size selector */}
               <div className="space-y-2">
-                <p className="text-[11px] tracking-[0.18em] uppercase text-text-secondary">
+                <p className="text-[12px] tracking-[0.18em] uppercase font-bold" style={{ fontFamily: "var(--font-montserrat)", color: "#3C2218" }}>
                   Size
                 </p>
                 <div className="flex gap-3">
@@ -256,7 +256,7 @@ export default function ProductDetailClient({
 
               {/* Qty */}
               <div className="flex items-center gap-5">
-                <p className="text-[11px] tracking-[0.18em] uppercase text-text-secondary">
+                <p className="text-[12px] tracking-[0.18em] uppercase font-bold" style={{ fontFamily: "var(--font-montserrat)", color: "#3C2218" }}>
                   Qty
                 </p>
                 <div className="flex items-center border border-(--muted-sand)">
