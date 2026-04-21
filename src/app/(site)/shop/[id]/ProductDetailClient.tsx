@@ -187,7 +187,7 @@ export default function ProductDetailClient({
 
               {/* Scent profile */}
               <div>
-                <p className="text-[10px] tracking-[0.22em] uppercase text-text-secondary mb-3">
+                <p className="text-[10px] tracking-[0.22em] uppercase mb-3" style={{ color: "#7C6D5A" }}>
                   Scent Profile
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -249,7 +249,7 @@ export default function ProductDetailClient({
                     ? product.price50ml
                     : product.price30ml}
                 </span>
-                <span className="text-sm text-text-secondary">
+                <span className="text-sm" style={{ color: "#7C6D5A" }}>
                   / {selectedSize}
                 </span>
               </div>
@@ -330,7 +330,7 @@ export default function ProductDetailClient({
               custom={4}
               className="border-t border-(--muted-sand) pt-6 space-y-2"
             >
-              <p className="text-[10px] tracking-[0.22em] uppercase text-text-secondary mb-2">
+              <p className="text-[10px] tracking-[0.22em] uppercase mb-2" style={{ color: "#B28E3B" }}>
                 Ingredients
               </p>
               <p className="text-[12px] text-text-secondary leading-relaxed">
@@ -346,7 +346,7 @@ export default function ProductDetailClient({
               custom={5}
               className="border-t border-(--muted-sand) pt-6 space-y-2"
             >
-              <p className="text-[10px] tracking-[0.22em] uppercase text-text-secondary mb-2">
+              <p className="text-[10px] tracking-[0.22em] uppercase mb-2" style={{ color: "#B28E3B" }}>
                 Warning
               </p>
               <p className="text-[12px] text-text-secondary leading-relaxed">
@@ -362,7 +362,7 @@ export default function ProductDetailClient({
               custom={6}
               className="border-t border-(--muted-sand) pt-6 space-y-2"
             >
-              <p className="text-[10px] tracking-[0.22em] uppercase text-text-secondary mb-2">
+              <p className="text-[10px] tracking-[0.22em] uppercase mb-2" style={{ color: "#B28E3B" }}>
                 Manufactured For
               </p>
               <p className="text-[12px] text-text-secondary leading-relaxed">
