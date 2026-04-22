@@ -346,49 +346,6 @@ export default function ShopPage() {
         </div>
       </section>
 
-      {/* ── Editorial Strip ───────────────────────────────────── */}
-      <section className="py-24 bg-(--bridal-white) border-t border-(--muted-sand)">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center"
-          >
-            {[
-              {
-                label: "Premium Ingredients",
-                body: "We source only the finest essential oils and raw materials — from Bulgarian rose to aged Indonesian oud.",
-              },
-              {
-                label: "Artisan Crafted",
-                body: "Every fragrance is created by master perfumers blending art and science in equal, unhurried measure.",
-              },
-              {
-                label: "Sustainable Packaging",
-                body: "Our packaging is as considered as the scent it holds — beautifully designed, responsibly sourced.",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={item.label}
-                variants={fadeUp}
-                custom={i}
-                className="space-y-4"
-              >
-                <div className="w-px h-10 bg-(--muted-sand) mx-auto" />
-                <h3 className="font-heading text-xl font-semibold text-text-primary">
-                  {item.label}
-                </h3>
-                <p className="text-text-secondary text-sm leading-relaxed">
-                  {item.body}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
       {/* ── CTA Banner ───────────────────────────────────────── */}
       <section className="py-20 bg-background border-t border-(--muted-sand)">
         <div className="max-w-2xl mx-auto px-6 lg:px-8 text-center">
