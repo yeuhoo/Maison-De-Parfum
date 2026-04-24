@@ -61,7 +61,13 @@ export default function ProductDetailClient({
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
   const [selectedSize, setSelectedSize] = useState<"50ml" | "30ml">("50ml");
+  const [selectedImage, setSelectedImage] = useState(0);
   const { addToCart } = useCart();
+
+  // Combine main image with additional images
+  const allImages = product.imageUrl
+    ? [product.imageUrl, ...(product.imageUrls || [])]
+    : product.imageUrls || [];
 
   const detail = CATEGORY_DETAILS[product.category];
 
@@ -120,10 +126,10 @@ export default function ProductDetailClient({
                   Bestseller
                 </span>
               )}
-              {product.imageUrl ? (
+              {allImages.length > 0 ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={product.imageUrl}
+                  src={allImages[selectedImage]}
                   alt={product.name}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
@@ -144,6 +150,30 @@ export default function ProductDetailClient({
               <div className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full border border-(--muted-sand) opacity-20 pointer-events-none" />
               <div className="absolute -top-12 -left-12 w-36 h-36 rounded-full border border-(--muted-sand) opacity-15 pointer-events-none" />
             </div>
+
+            {/* Thumbnail gallery */}
+            {allImages.length > 1 && (
+              <div className="flex gap-2 mt-4 justify-center">
+                {allImages.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setSelectedImage(idx)}
+                    className={`w-14 h-14 border overflow-hidden transition-colors ${
+                      selectedImage === idx
+                        ? "border-(--button-gold)"
+                        : "border-transparent hover:border-(--muted-sand)"
+                    }`}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={img}
+                      alt={`${product.name} ${idx + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
 
             {/* Mood tag below image */}
             <div className="mt-4 flex items-center justify-between px-1">

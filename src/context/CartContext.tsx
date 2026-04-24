@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 
 export type CartItem = {
   id: number;
@@ -27,6 +33,23 @@ const CartContext = createContext<CartContextType | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("cart-items");
+      if (stored) {
+        setItems(JSON.parse(stored));
+      }
+    } catch {}
+  }, []);
+
+  // Save cart to localStorage whenever items change
+  useEffect(() => {
+    try {
+      localStorage.setItem("cart-items", JSON.stringify(items));
+    } catch {}
+  }, [items]);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const count = items.reduce((sum, i) => sum + i.quantity, 0);

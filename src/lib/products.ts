@@ -13,6 +13,7 @@ export type Product = {
   warning: string;
   manufacturedFor: string;
   imageUrl: string;
+  imageUrls: string[];
 };
 
 // Product data is persisted in src/data/products.json and served via /api/products

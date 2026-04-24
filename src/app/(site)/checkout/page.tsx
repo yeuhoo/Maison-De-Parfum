@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Script from "next/script";
 import { useCart } from "@/context/CartContext";
 
 // ── Square Web Payments SDK types ──────────────────────────────────────────────
@@ -36,9 +35,6 @@ declare global {
 
 const SQ_APP_ID = process.env.NEXT_PUBLIC_SQUARE_APPLICATION_ID!;
 const SQ_LOC_ID = process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID!;
-const SQ_SCRIPT = SQ_APP_ID?.startsWith("sandbox-")
-  ? "https://sandbox.web.squarecdn.com/v1/square.js"
-  : "https://web.squarecdn.com/v1/square.js";
 
 type Field = {
   name: string;
@@ -280,7 +276,7 @@ export default function CheckoutPage() {
           ".input-container": { borderColor: "#e5e5e5", borderRadius: "0px" },
           ".input-container.is-focus": { borderColor: "#c9a96e" },
           ".input-container.is-error": { borderColor: "#ef4444" },
-          ".message-text": { color: "#555", fontSize: "11px" },
+          ".message-text": { color: "#555" },
         },
       });
       await card.attach("#sq-card");
@@ -387,11 +383,6 @@ export default function CheckoutPage() {
 
   return (
     <>
-      <Script
-        src={SQ_SCRIPT}
-        strategy="afterInteractive"
-        onLoad={() => setSqLoaded(true)}
-      />
       <div className="min-h-screen bg-background">
         <div className="max-w-6xl mx-auto px-6 lg:px-8 py-16">
           {/* Header */}
@@ -506,53 +497,101 @@ export default function CheckoutPage() {
 
               {/* Payment */}
               <section>
-                <h2 className="text-[10px] tracking-[0.2em] uppercase text-[#aaa] mb-5">
+                <h2 className="text-xs font-semibold tracking-widest uppercase text-[#b8935a] mb-4">
                   Payment
                 </h2>
-
-                {/* Apple Pay button (auto-hides if not supported) */}
-                <div
-                  id="sq-apple-pay"
-                  className={applePayReady ? "mb-4" : "hidden"}
-                />
-
-                {applePayReady && (
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="flex-1 h-px bg-[#e5e5e5]" />
-                    <span className="text-[10px] uppercase tracking-[0.15em] text-[#bbb]">
-                      or pay by card
-                    </span>
-                    <div className="flex-1 h-px bg-[#e5e5e5]" />
+                <div className="rounded-2xl shadow-xl border border-[#f0e8d9] bg-white/80 p-7 max-w-xl mx-auto flex flex-col gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Only Name, Address, City Inputs */}
+                    <div className="flex flex-col gap-3">
+                      {[
+                        {
+                          name: "customerName",
+                          label: "Full Name",
+                          autoComplete: "name",
+                          placeholder: "Jane Smith",
+                        },
+                        {
+                          name: "addressLine1",
+                          label: "Street Address",
+                          autoComplete: "address-line1",
+                          placeholder: "123 Example St",
+                        },
+                        {
+                          name: "addressLine2",
+                          label: "Apartment / Suite (optional)",
+                          autoComplete: "address-line2",
+                          placeholder: "Apt 4B",
+                        },
+                        {
+                          name: "city",
+                          label: "City",
+                          autoComplete: "address-level2",
+                          placeholder: "Brisbane",
+                        },
+                        {
+                          name: "postcode",
+                          label: "Postal Code",
+                          autoComplete: "postal-code",
+                          placeholder: "4000",
+                        },
+                      ].map((f) => (
+                        <div key={f.name}>
+                          <label className="block text-[11px] tracking-[0.12em] uppercase text-[#888] mb-1.5">
+                            {f.label}
+                          </label>
+                          <input
+                            type="text"
+                            value={form[f.name as keyof typeof form]}
+                            onChange={(e) => set(f.name, e.target.value)}
+                            placeholder={f.placeholder}
+                            autoComplete={f.autoComplete}
+                            className={`w-full border px-4 py-3 text-sm text-text-primary bg-white outline-none transition-colors placeholder:text-[#ccc] ${errors[f.name] ? "border-red-400 focus:border-red-400" : "border-[#e5e5e5] focus:border-[#c9a96e]"}`}
+                          />
+                          {errors[f.name] && (
+                            <p className="text-[11px] text-red-500 mt-1">
+                              {errors[f.name]}
+                            </p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    {/* Credit Card */}
+                    <div className="flex flex-col justify-start self-start h-full">
+                      <div
+                        id="sq-card"
+                        className={cardMounted ? "" : "hidden"}
+                      />
+                      {!cardMounted && (
+                        <div className="border border-[#e5e5e5] h-24 flex items-center justify-center bg-[#fafafa] rounded-lg">
+                          <span className="text-[12px] text-[#bbb]">
+                            Loading secure payment form…
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                )}
-
-                {/* Square card form */}
-                <div id="sq-card" className={cardMounted ? "" : "hidden"} />
-                {!cardMounted && (
-                  <div className="border border-[#e5e5e5] h-[90px] flex items-center justify-center bg-[#fafafa]">
-                    <span className="text-[12px] text-[#bbb]">
-                      Loading secure payment form…
-                    </span>
+                  {paymentError && (
+                    <div className="mb-3">
+                      <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded px-3 py-2">
+                        {paymentError}
+                      </p>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-2 text-[11px] text-[#bbb] mb-2">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <rect x="3" y="11" width="18" height="11" rx="2" />
+                      <path d="M7 11V7a5 5 0 0110 0v4" />
+                    </svg>
+                    <span>PCI DSS compliant</span>
                   </div>
-                )}
-
-                {paymentError && (
-                  <p className="text-sm text-red-500 mt-3">{paymentError}</p>
-                )}
-
-                <div className="mt-3 flex items-center gap-1.5 text-[10px] text-[#bbb]">
-                  <svg
-                    width="11"
-                    height="11"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <rect x="3" y="11" width="18" height="11" rx="2" />
-                    <path d="M7 11V7a5 5 0 0110 0v4" />
-                  </svg>
-                  <span>Secured by Square · PCI DSS compliant</span>
                 </div>
               </section>
 

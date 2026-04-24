@@ -17,6 +17,7 @@ interface Product {
   warning: string;
   manufacturedFor: string;
   imageUrl: string;
+  imageUrls: string[];
 }
 
 // ─── Products are managed via /api/products ───────────────────────────────────
@@ -43,6 +44,7 @@ const EMPTY_FORM: Omit<Product, "id"> = {
   manufacturedFor:
     "Maison De Parfum, Brisbane QLD 4000, Australia. Compounded in Australia.",
   imageUrl: "",
+  imageUrls: [],
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -119,6 +121,37 @@ export default function ProductsPage() {
     } finally {
       setUploading(false);
     }
+  };
+
+  const handleAdditionalImageUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    setUploadError("");
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const res = await fetch("/api/upload", { method: "POST", body: fd });
+      const data = await res.json();
+      if (data.url) {
+        setForm((f) => ({ ...f, imageUrls: [...f.imageUrls, data.url] }));
+      } else {
+        setUploadError(data.error || "Upload failed — no URL returned");
+      }
+    } catch (err) {
+      setUploadError(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const removeAdditionalImage = (index: number) => {
+    setForm((f) => ({
+      ...f,
+      imageUrls: f.imageUrls.filter((_, i) => i !== index),
+    }));
   };
 
   const handleSave = () => {
@@ -389,6 +422,48 @@ export default function ProductsPage() {
                     </p>
                   </div>
                 </div>
+              </div>
+
+              {/* ── Additional Images ── */}
+              <div>
+                <label className="field-label">Additional Photos</label>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {form.imageUrls.map((url, idx) => (
+                    <div
+                      key={idx}
+                      className="relative w-16 h-16 border border-[#e5e5e5] bg-[#fafafa] overflow-hidden group"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={url}
+                        alt={`Additional ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeAdditionalImage(idx)}
+                        className="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-[10px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <label className="cursor-pointer">
+                  <span className="inline-block px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase border border-[#e5e5e5] transition-colors text-[#666] hover:border-[#c9a96e] hover:text-[#c9a96e]">
+                    {uploading ? "Uploading…" : "+ Add More Photos"}
+                  </span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    disabled={uploading}
+                    onChange={handleAdditionalImageUpload}
+                  />
+                </label>
+                <p className="text-[10px] text-[#bbb] mt-1">
+                  Add up to 10 photos · First photo is the main product image
+                </p>
               </div>
 
               <div>
