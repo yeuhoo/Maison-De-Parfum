@@ -286,14 +286,14 @@ export default function CartDrawer() {
                 >
                   {/* Subtotal */}
                   <div className="flex justify-between items-center">
-                    <span className="text-[11px] tracking-[0.2em] uppercase text-[#7C6D5A]">
+                    <span className="text-[11px] tracking-[0.2em] uppercase text-[#7C6D5A] font-sans">
                       Subtotal
                     </span>
                     <span className="font-heading text-xl font-semibold text-text-primary">
                       ${total}
                     </span>
                   </div>
-                  <p className="text-[11px] text-text-secondary">
+                  <p className="text-[11px] text-text-secondary font-sans">
                     Shipping & taxes calculated at checkout.
                   </p>
 
@@ -301,7 +301,7 @@ export default function CartDrawer() {
                   <Link
                     href="/checkout"
                     onClick={closeDrawer}
-                    className="flex items-center justify-center gap-2.5 w-full py-4 bg-(--button-gold) text-[#FAF8F5] text-[12px] tracking-widest uppercase font-bold hover:bg-(--button-gold-hover) transition-colors duration-300"
+                    className="flex items-center justify-center gap-2.5 w-full py-4 bg-(--button-gold) text-[#FAF8F5] text-[12px] tracking-widest uppercase font-bold font-sans hover:bg-(--button-gold-hover) transition-colors duration-300"
                   >
                     Proceed to Checkout
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -318,7 +318,7 @@ export default function CartDrawer() {
                   {/* Continue shopping */}
                   <button
                     onClick={closeDrawer}
-                    className="w-full text-center text-[11px] tracking-widest uppercase text-[#7C6D5A] hover:text-(--button-gold) transition-colors duration-200 py-1"
+                    className="w-full text-center text-[11px] tracking-widest uppercase text-[#7C6D5A] font-sans hover:text-(--button-gold) transition-colors duration-200 py-1"
                   >
                     Continue Shopping
                   </button>
