@@ -425,7 +425,7 @@ export default function CheckoutPage() {
                         onChange={(e) => set(f.name, e.target.value)}
                         placeholder={f.placeholder}
                         autoComplete={f.autoComplete}
-                        className={`w-full border px-4 py-3 text-sm text-text-primary bg-white outline-none transition-colors placeholder:text-[#666]
+                        className={`w-full border px-4 py-3 text-sm text-text-primary bg-white outline-none transition-colors placeholder:text-[#848484] placeholder:font-sans
                         ${errors[f.name]
                             ? "border-red-400 focus:border-red-400"
                             : "border-[#e5e5e5] focus:border-[#c9a96e]"
@@ -476,7 +476,7 @@ export default function CheckoutPage() {
                             <p className="text-sm font-medium text-text-primary">
                               {opt.label}
                             </p>
-                            <p className="text-[11px] text-[#aaa]">
+                            <p className="text-[11px] text-[#848484] font-sans">
                               {opt.detail}
                             </p>
                           </div>
@@ -564,7 +564,7 @@ export default function CheckoutPage() {
             {/* ── Right: Order Summary ─────────────────────────────── */}
             <div>
               <div className="sticky top-28">
-                <h2 className="text-[10px] tracking-[0.2em] uppercase text-[#aaa] mb-5">
+                <h2 className="text-[10px] tracking-[0.2em] uppercase text-[#7C6D5A] font-sans mb-5">
                   Order Summary
                 </h2>
                 <div className="border border-[#e5e5e5] divide-y divide-[#f0f0f0]">
