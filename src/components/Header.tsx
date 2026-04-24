@@ -35,7 +35,7 @@ export default function Header() {
             <span className="font-heading text-xl md:text-2xl font-semibold tracking-wide text-text-primary group-hover:text-(--button-gold) transition-colors duration-300">
               Maison de Parfum
             </span>
-            <span className="text-[10px] md:text-[11px] tracking-[0.25em] uppercase text-text-secondary mt-0.5">
+            <span className="text-[10px] md:text-[11px] tracking-[0.25em] uppercase mt-0.5" style={{ color: "#beaf9f" }}>
               Luxury Fragrances
             </span>
           </Link>
