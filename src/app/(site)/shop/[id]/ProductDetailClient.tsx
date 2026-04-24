@@ -287,7 +287,7 @@ export default function ProductDetailClient({
                 className="w-full text-[12px] tracking-widest uppercase py-4 font-bold transition-colors duration-300 bg-(--button-gold) hover:bg-(--button-gold-hover)"
                 style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}
               >
-                {added ? "Added to Bag ✓" : "Add to Bag"}
+                {added ? "Added to Cart ✓" : "Add to Cart"}
               </button>
 
               <p className="text-[11px] text-text-secondary text-center">

@@ -336,7 +336,7 @@ export default function ShopPage() {
                         className="text-[11px] tracking-[0.18em] uppercase font-bold bg-(--button-gold) px-4 py-2.5 hover:bg-(--button-gold-hover) transition-colors duration-300"
                         style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}
                       >
-                        Add to Bag
+                        Add to Cart
                       </button>
                     </div>
                   </div>
