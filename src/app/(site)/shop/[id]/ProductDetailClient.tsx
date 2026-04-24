@@ -74,6 +74,7 @@ export default function ProductDetailClient({
         name: product.name,
         price: selectedPrice,
         size: selectedSize,
+        imageUrl: product.imageUrl,
       });
     }
     setAdded(true);

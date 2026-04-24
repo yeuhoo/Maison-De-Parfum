@@ -330,6 +330,7 @@ export default function ShopPage() {
                             name: product.name,
                             price: product.price50ml,
                             size: "50ml",
+                            imageUrl: product.imageUrl,
                           })
                         }
                         className="text-[11px] tracking-[0.18em] uppercase font-bold bg-(--button-gold) px-4 py-2.5 hover:bg-(--button-gold-hover) transition-colors duration-300"

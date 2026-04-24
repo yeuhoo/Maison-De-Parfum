@@ -68,7 +68,7 @@ export default function CartDrawer() {
                 <h2 className="font-heading text-xl font-semibold text-text-primary">
                   Your Bag
                 </h2>
-                <p className="text-[11px] tracking-[0.15em] uppercase text-text-secondary mt-0.5">
+                <p className="text-[11px] tracking-[0.15em] uppercase text-[#7C6D5A] mt-0.5">
                   {count} {count === 1 ? "item" : "items"}
                 </p>
               </div>
@@ -119,7 +119,7 @@ export default function CartDrawer() {
                     </p>
                     <button
                       onClick={closeDrawer}
-                      className="mt-2 text-[11px] tracking-widest uppercase text-(--button-gold) border border-(--button-gold) px-5 py-2.5 hover:bg-(--button-gold) hover:text-(--bridal-white) transition-colors duration-300"
+                      className="mt-2 text-[11px] tracking-widest uppercase text-[#7C6D5A] border border-[#7C6D5A] px-5 py-2.5 hover:bg-[#7C6D5A] hover:text-(--bridal-white) transition-colors duration-300"
                     >
                       Continue Shopping
                     </button>
@@ -140,35 +140,44 @@ export default function CartDrawer() {
                       className="flex gap-4 py-5 border-b border-(--muted-sand) last:border-0"
                     >
                       {/* Thumbnail */}
-                      <div className="w-16 h-20 shrink-0 bg-(--soft-cream) border border-(--muted-sand) rounded flex items-center justify-center text-(--muted-sand)">
-                        <svg
-                          width="18"
-                          height="28"
-                          viewBox="0 0 36 56"
-                          fill="none"
-                        >
-                          <rect
-                            x="13"
-                            y="0"
-                            width="10"
-                            height="6"
-                            rx="1"
-                            fill="currentColor"
-                            opacity="0.35"
+                      <div className="w-16 h-20 shrink-0 bg-(--soft-cream) border border-(--muted-sand) rounded overflow-hidden flex items-center justify-center">
+                        {item.imageUrl ? (
+                          <img
+                            src={item.imageUrl}
+                            alt={item.name}
+                            className="w-full h-full object-cover"
                           />
-                          <rect
-                            x="15"
-                            y="5"
-                            width="6"
-                            height="4"
-                            fill="currentColor"
-                            opacity="0.5"
-                          />
-                          <path
-                            d="M10 9h16l3 6v32a4 4 0 01-4 4H11a4 4 0 01-4-4V15l3-6z"
-                            fill="currentColor"
-                          />
-                        </svg>
+                        ) : (
+                          <svg
+                            width="18"
+                            height="28"
+                            viewBox="0 0 36 56"
+                            fill="none"
+                            className="text-(--muted-sand)"
+                          >
+                            <rect
+                              x="13"
+                              y="0"
+                              width="10"
+                              height="6"
+                              rx="1"
+                              fill="currentColor"
+                              opacity="0.35"
+                            />
+                            <rect
+                              x="15"
+                              y="5"
+                              width="6"
+                              height="4"
+                              fill="currentColor"
+                              opacity="0.5"
+                            />
+                            <path
+                              d="M10 9h16l3 6v32a4 4 0 01-4 4H11a4 4 0 01-4-4V15l3-6z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        )}
                       </div>
 
                       {/* Info */}
@@ -176,7 +185,7 @@ export default function CartDrawer() {
                         <h3 className="font-heading text-base font-semibold text-text-primary leading-snug">
                           {item.name}
                         </h3>
-                        <p className="text-[11px] tracking-widest uppercase text-text-secondary mt-0.5 mb-3">
+                        <p className="text-[11px] tracking-widest uppercase text-[#7C6D5A] mt-0.5 mb-3">
                           {item.size} · Extrait de Parfum
                         </p>
 
@@ -277,7 +286,7 @@ export default function CartDrawer() {
                 >
                   {/* Subtotal */}
                   <div className="flex justify-between items-center">
-                    <span className="text-[11px] tracking-[0.2em] uppercase text-text-secondary">
+                    <span className="text-[11px] tracking-[0.2em] uppercase text-[#7C6D5A]">
                       Subtotal
                     </span>
                     <span className="font-heading text-xl font-semibold text-text-primary">
@@ -292,7 +301,7 @@ export default function CartDrawer() {
                   <Link
                     href="/checkout"
                     onClick={closeDrawer}
-                    className="flex items-center justify-center gap-2.5 w-full py-4 bg-(--button-gold) text-(--bridal-white) text-[12px] tracking-widest uppercase font-medium hover:bg-(--button-gold-hover) transition-colors duration-300"
+                    className="flex items-center justify-center gap-2.5 w-full py-4 bg-(--button-gold) text-[#FAF8F5] text-[12px] tracking-widest uppercase font-bold hover:bg-(--button-gold-hover) transition-colors duration-300"
                   >
                     Proceed to Checkout
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -309,7 +318,7 @@ export default function CartDrawer() {
                   {/* Continue shopping */}
                   <button
                     onClick={closeDrawer}
-                    className="w-full text-center text-[11px] tracking-widest uppercase text-text-secondary hover:text-(--button-gold) transition-colors duration-200 py-1"
+                    className="w-full text-center text-[11px] tracking-widest uppercase text-[#7C6D5A] hover:text-(--button-gold) transition-colors duration-200 py-1"
                   >
                     Continue Shopping
                   </button>
