@@ -114,12 +114,12 @@ export default function CartDrawer() {
                     <p className="font-heading text-lg text-text-primary">
                       Your bag is empty
                     </p>
-                    <p className="text-text-secondary text-sm">
+                    <p className="text-[#7C6D5A] text-sm">
                       Add a fragrance to get started.
                     </p>
                     <button
                       onClick={closeDrawer}
-                      className="mt-2 text-[11px] tracking-widest uppercase text-[#7C6D5A] border border-[#7C6D5A] px-5 py-2.5 hover:bg-[#7C6D5A] hover:text-(--bridal-white) transition-colors duration-300"
+                      className="mt-2 text-[11px] tracking-widest uppercase text-[#7C6D5A] border border-[#7C6D5A] px-5 py-2.5 hover:bg-[#7C6D5A] hover:text-(--bridal-white) transition-colors duration-300 font-['Montserrat']"
                     >
                       Continue Shopping
                     </button>
@@ -249,7 +249,7 @@ export default function CartDrawer() {
                           </div>
                           <button
                             onClick={() => removeFromCart(item.id, item.size)}
-                            className="text-[11px] tracking-wide text-text-secondary hover:text-red-400 transition-colors duration-200"
+                            className="text-[11px] tracking-wide text-[#7C6D5A] hover:text-red-400 transition-colors duration-200"
                             aria-label="Remove item"
                           >
                             Remove
@@ -293,7 +293,7 @@ export default function CartDrawer() {
                       ${total}
                     </span>
                   </div>
-                  <p className="text-[11px] text-text-secondary font-sans">
+                  <p className="text-[11px] text-[#7C6D5A] font-sans">
                     Shipping & taxes calculated at checkout.
                   </p>
 
@@ -318,7 +318,7 @@ export default function CartDrawer() {
                   {/* Continue shopping */}
                   <button
                     onClick={closeDrawer}
-                    className="w-full text-center text-[11px] tracking-widest uppercase text-[#7C6D5A] font-sans hover:text-(--button-gold) transition-colors duration-200 py-1"
+                    className="w-full text-center text-[11px] tracking-widest uppercase text-[#7C6D5A] font-['Montserrat'] hover:text-(--button-gold) transition-colors duration-200 py-1"
                   >
                     Continue Shopping
                   </button>
