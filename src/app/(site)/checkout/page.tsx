@@ -289,7 +289,7 @@ export default function CheckoutPage() {
       setCardMounted(true);
     })().catch(console.error);
     return () => {
-      card?.destroy().catch(() => {});
+      card?.destroy().catch(() => { });
     };
   }, [sqLoaded]);
 
@@ -298,7 +298,7 @@ export default function CheckoutPage() {
     if (!paymentsReady || !paymentsRef.current) return;
     let ap: SqApplePay | null = null;
     (async () => {
-      await applePayRef.current?.destroy().catch(() => {});
+      await applePayRef.current?.destroy().catch(() => { });
       setApplePayReady(false);
       const request = paymentsRef.current!.paymentRequest({
         countryCode: "AU",
@@ -339,7 +339,7 @@ export default function CheckoutPage() {
       setApplePayReady(true);
     })().catch(() => setApplePayReady(false));
     return () => {
-      ap?.destroy().catch(() => {});
+      ap?.destroy().catch(() => { });
     };
   }, [paymentsReady, totalCents, submitOrder]);
 
@@ -358,7 +358,7 @@ export default function CheckoutPage() {
       if (result.status !== "OK") {
         setPaymentError(
           result.errors?.[0]?.message ??
-            "Card error. Please check your details.",
+          "Card error. Please check your details.",
         );
         setPlacing(false);
         return;
@@ -426,11 +426,10 @@ export default function CheckoutPage() {
                         placeholder={f.placeholder}
                         autoComplete={f.autoComplete}
                         className={`w-full border px-4 py-3 text-sm text-text-primary bg-white outline-none transition-colors placeholder:text-[#666]
-                        ${
-                          errors[f.name]
+                        ${errors[f.name]
                             ? "border-red-400 focus:border-red-400"
                             : "border-[#e5e5e5] focus:border-[#c9a96e]"
-                        }`}
+                          }`}
                       />
                       {errors[f.name] && (
                         <p className="text-[11px] text-red-500 mt-1">
@@ -459,11 +458,10 @@ export default function CheckoutPage() {
                       <label
                         key={opt.value}
                         className={`flex items-center justify-between px-4 py-4 border cursor-pointer transition-colors
-                        ${
-                          form.deliveryMethod === opt.value
+                        ${form.deliveryMethod === opt.value
                             ? "border-[#c9a96e] bg-[#fdf9f4]"
                             : "border-[#e5e5e5] hover:border-[#d4b88a]"
-                        }`}
+                          }`}
                       >
                         <div className="flex items-center gap-3">
                           <span
