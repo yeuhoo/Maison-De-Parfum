@@ -5,7 +5,7 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="text-(--text-primary) py-24" style={{
-        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url(/sample_bg.png)',
+        backgroundImage: 'url(/sample_bg.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>
