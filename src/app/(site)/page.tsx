@@ -4,23 +4,27 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-(--bridal-white) text-(--text-primary) py-24">
+      <section className="text-(--text-primary) py-24" style={{
+        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url(/sample_bg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1
               className="text-5xl md:text-7xl font-bold mb-6 font-heading leading-tight"
-              style={{ color: "#3C2218" }}
+              style={{ color: "#FAF8F5" }}
             >
               Discover Your Signature Scent
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}>
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" style={{ fontFamily: "var(--font-montserrat)", color: "#FAF8F5" }}>
               Explore our curated collection of luxury perfumes, crafted with
               the finest ingredients for an unforgettable experience.
             </p>
             <a
               href="/shop"
-              className="inline-block bg-(--button-gold) text-(--bridal-white) px-8 py-3 rounded font-bold hover:bg-(--button-gold-hover) transition-colors uppercase text-sm"
-              style={{ fontFamily: "var(--font-montserrat)", color: "#FAF8F5" }}
+              className="inline-block px-8 py-3 rounded font-bold transition-colors uppercase text-sm border border-(--bridal-white)"
+              style={{ fontFamily: "var(--font-montserrat)", color: "#FAF8F5", backgroundColor: "transparent" }}
             >
               Shop Now
             </a>
