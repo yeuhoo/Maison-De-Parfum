@@ -81,11 +81,13 @@ export default function PerfumeBarPage() {
     <div className="min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section
-        className="relative text-(--text-primary) py-24"
+        className="text-(--text-primary) py-24"
         style={{
           backgroundImage: 'url(/perfume-bar.png)',
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center',
+          color: '#FAF8F5',
+          textShadow: '3px 3px 6px rgba(0, 0, 0, 0.5)'
         }}
       >
         <div className="px-4 sm:px-6 lg:px-24 py-24">
