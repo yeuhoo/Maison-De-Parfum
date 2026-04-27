@@ -80,69 +80,77 @@ export default function PerfumeBarPage() {
   return (
     <div className="min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative bg-background py-32 md:py-44 overflow-hidden">
-        {/* subtle decorative ring */}
-        <div className="absolute -top-32 -right-32 w-125 h-125 rounded-full border border-(--muted-sand) opacity-30 pointer-events-none" />
-        <div className="absolute -bottom-24 -left-24 w-87.5 h-87.5 rounded-full border border-(--muted-sand) opacity-20 pointer-events-none" />
-
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0}
-            className="font-heading text-[11px] tracking-[0.3em] uppercase mb-6"
-            style={{ fontFamily: "var(--font-playfair)", color: "#B28E3B" }}
-          >
-            Maison de Parfum · Perfume Bar
-          </motion.p>
-          <motion.h1
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={1}
-            className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight text-text-primary mb-6"
-          >
-            More than a wedding favour —<br className="hidden md:block" />
-            <span style={{ color: "#B28E3B" }}>
-              {" "}
-              it&apos;s an experience
-            </span>
-          </motion.h1>
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={2}
-            className="font-sans text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
-            style={{ color: "#7C6D5A" }}
-          >
-            Your scent, your story. A personalised luxury perfume bar for
-            unforgettable events.
-          </motion.p>
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={3}
-          >
-            <Link
-              href="#enquire"
-              className="inline-flex items-center gap-2 bg-(--button-gold) text-(--bridal-white) px-8 py-4 rounded text-sm font-sans font-bold uppercase tracking-widest hover:bg-(--button-gold-hover) transition-colors duration-300"
-              style={{ fontFamily: "var(--font-montserrat)", fontWeight: 700, color: "#FAF8F5" }}
+      <section
+        className="text-(--text-primary) py-24"
+        style={{
+          backgroundImage: 'url(/perfume-bar.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          color: '#FAF8F5',
+          textShadow: '3px 3px 6px rgba(0, 0, 0, 0.5)'
+        }}
+      >
+        <div className="px-4 sm:px-6 lg:px-24 py-24">
+          <div className="text-right max-w-3xl ml-auto">
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={0}
+              className="font-heading text-[11px] tracking-[0.3em] uppercase mb-6"
+              style={{ fontFamily: "var(--font-playfair)", color: "#FAF8F5", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
             >
-              Enquire About Your Perfume Bar
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path
-                  d="M1 7h12M8 2l5 5-5 5"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
-          </motion.div>
+              Maison de Parfum · Perfume Bar
+            </motion.p>
+            <motion.h1
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={1}
+              className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight mb-6"
+              style={{ color: "#FAF8F5", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
+            >
+              More than a wedding favour —<br className="hidden md:block" />
+              <span>
+                {" "}
+                it&apos;s an experience
+              </span>
+            </motion.h1>
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={2}
+              className="font-sans text-lg md:text-xl mb-10 leading-relaxed"
+              style={{ fontFamily: "var(--font-montserrat)", color: "#FAF8F5", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
+            >
+              Your scent, your story. A personalised luxury perfume bar for
+              unforgettable events.
+            </motion.p>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={3}
+            >
+              <Link
+                href="#enquire"
+                className="inline-flex items-center gap-2 px-8 py-3 rounded font-bold transition-colors uppercase text-sm border border-current"
+                style={{ fontFamily: "var(--font-montserrat)", color: "#FAF8F5", backgroundColor: "transparent", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
+              >
+                Enquire About Your Perfume Bar
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M1 7h12M8 2l5 5-5 5"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </section>
 
