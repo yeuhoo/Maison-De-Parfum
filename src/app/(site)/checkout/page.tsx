@@ -273,14 +273,7 @@ export default function CheckoutPage() {
       const payments = await window.Square!.payments(SQ_APP_ID, SQ_LOC_ID);
       paymentsRef.current = payments;
       setPaymentsReady(true);
-      card = await payments.card({
-        style: {
-          ".input-container": { borderColor: "#e5e5e5", borderRadius: "0px" },
-          ".input-container.is-focus": { borderColor: "#c9a96e" },
-          ".input-container.is-error": { borderColor: "#ef4444" },
-          ".message-text": { color: "#555" },
-        },
-      });
+      card = await payments.card();
       await card.attach("#sq-card");
       cardRef.current = card;
       setCardMounted(true);
