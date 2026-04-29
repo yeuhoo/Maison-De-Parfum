@@ -12,7 +12,7 @@
     "@neondatabase/serverless": "^1.0.2",
     "@vercel/blob": "^2.3.1",
     "framer-motion": "^12.35.1",
-    "lucide-react": "^1.8.0",
+    "lucide-react": "^1.14.0",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"
