@@ -92,7 +92,7 @@ export default function Footer() {
                 placeholder="Your email"
                 className="flex-1 px-3 py-2 border border-(--muted-sand) bg-(--bridal-white) text-(--text-primary) placeholder-(--text-secondary) focus:border-(--button-gold) focus:outline-none"
               />
-              <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 hover:bg-(--button-gold-hover) transition-colors">
+              <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 hover:bg-(--button-gold-hover) transition-colors font-bold" style={{ color: "#FAF8F5" }}>
                 Subscribe
               </button>
             </div>

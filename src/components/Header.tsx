@@ -27,26 +27,21 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 ease-in-out
-          ${
-            scrolled
-              ? "bg-(--bridal-white) border-b border-(--muted-sand) shadow-sm"
-              : "bg-transparent border-b border-transparent"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 h-20 shadow-sm transition-all duration-300 ease-in-out ${scrolled ? "bg-(--bridal-white) border-b border-(--muted-sand)" : "bg-transparent border-b border-transparent"}`}
       >
-        <div className="max-w-330 mx-auto px-6 lg:px-8 h-full flex items-center justify-between">
+        <div className="max-w-330 mx-auto px-8 lg:px-12 h-full flex items-center justify-between relative">
           {/* Logo */}
           <Link href="/" className="flex flex-col leading-none group">
-            <span className="font-heading text-xl font-semibold tracking-wide text-text-primary group-hover:text-(--button-gold) transition-colors duration-300">
+            <span className="font-heading text-xl md:text-2xl font-semibold tracking-wide text-text-primary group-hover:text-(--button-gold) transition-colors duration-300">
               Maison de Parfum
             </span>
-            <span className="text-[10px] tracking-[0.25em] uppercase text-text-secondary mt-0.5">
+            <span className="text-[10px] md:text-[11px] tracking-[0.25em] uppercase mt-0.5" style={{ color: "#beaf9f" }}>
               Luxury Fragrances
             </span>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-10">
+          <nav className="hidden md:flex absolute left-[54%] top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-14">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
@@ -59,15 +54,15 @@ export default function Header() {
           </nav>
 
           {/* Right Actions */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-8">
             <button
               aria-label="Search"
               className="text-text-primary hover:text-(--button-gold) transition-colors duration-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
+                width="22"
+                height="22"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -86,8 +81,8 @@ export default function Header() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
+                width="22"
+                height="22"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

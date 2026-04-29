@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Script from "next/script";
+import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 
 // ── Square Web Payments SDK types ──────────────────────────────────────────────
@@ -400,13 +402,13 @@ export default function CheckoutPage() {
             <div className="space-y-10">
               {/* Contact & Shipping */}
               <section>
-                <h2 className="text-[10px] tracking-[0.2em] uppercase text-[#aaa] mb-5">
+                <h2 className="text-[10px] tracking-[0.2em] uppercase text-[#7C6D5A] mb-5">
                   Shipping Information
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {FIELDS.map((f) => (
                     <div key={f.name} className={f.half ? "" : "sm:col-span-2"}>
-                      <label className="block text-[11px] tracking-[0.12em] uppercase text-[#888] mb-1.5">
+                      <label className="block text-[11px] tracking-[0.12em] uppercase text-[#7C6D5A] font-sans mb-1.5">
                         {f.label}
                       </label>
                       <input
@@ -415,7 +417,7 @@ export default function CheckoutPage() {
                         onChange={(e) => set(f.name, e.target.value)}
                         placeholder={f.placeholder}
                         autoComplete={f.autoComplete}
-                        className={`w-full border px-4 py-3 text-sm text-text-primary bg-white outline-none transition-colors placeholder:text-[#ccc]
+                        className={`w-full border px-4 py-3 text-sm text-text-primary bg-white outline-none transition-colors placeholder:text-[#848484] placeholder:font-sans
                         ${
                           errors[f.name]
                             ? "border-red-400 focus:border-red-400"
@@ -434,7 +436,7 @@ export default function CheckoutPage() {
 
               {/* Delivery Method */}
               <section>
-                <h2 className="text-[10px] tracking-[0.2em] uppercase text-[#aaa] mb-5">
+                <h2 className="text-[10px] tracking-[0.2em] uppercase text-[#7C6D5A] mb-5">
                   Delivery Method
                 </h2>
                 <div className="space-y-3">
@@ -468,7 +470,7 @@ export default function CheckoutPage() {
                             <p className="text-sm font-medium text-text-primary">
                               {opt.label}
                             </p>
-                            <p className="text-[11px] text-[#aaa]">
+                            <p className="text-[11px] text-[#848484] font-sans">
                               {opt.detail}
                             </p>
                           </div>
@@ -497,8 +499,8 @@ export default function CheckoutPage() {
 
               {/* Payment */}
               <section>
-                <h2 className="text-xs font-semibold tracking-widest uppercase text-[#b8935a] mb-4">
-                  Payment
+                <h2 className="text-[10px] tracking-[0.2em] uppercase text-[#7C6D5A] mb-5">
+                  PAYMENT
                 </h2>
                 <div className="rounded-2xl shadow-xl border border-[#f0e8d9] bg-white/80 p-7 max-w-xl mx-auto flex flex-col gap-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -604,7 +606,7 @@ export default function CheckoutPage() {
             {/* ── Right: Order Summary ─────────────────────────────── */}
             <div>
               <div className="sticky top-28">
-                <h2 className="text-[10px] tracking-[0.2em] uppercase text-[#aaa] mb-5">
+                <h2 className="text-[10px] tracking-[0.2em] uppercase text-[#7C6D5A] font-sans mb-5">
                   Order Summary
                 </h2>
                 <div className="border border-[#e5e5e5] divide-y divide-[#f0f0f0]">
@@ -615,42 +617,52 @@ export default function CheckoutPage() {
                         key={`${item.id}-${item.size}`}
                         className="flex items-center gap-3"
                       >
-                        <div className="w-12 h-14 bg-[#f7f4ef] border border-[#ede8df] shrink-0 flex items-center justify-center text-[#ccc]">
-                          <svg
-                            width="14"
-                            height="22"
-                            viewBox="0 0 36 56"
-                            fill="none"
-                          >
-                            <rect
-                              x="13"
-                              y="0"
-                              width="10"
-                              height="6"
-                              rx="1"
-                              fill="currentColor"
-                              opacity="0.35"
+                        <div className="w-12 h-14 bg-[#f7f4ef] border border-[#ede8df] shrink-0 flex items-center justify-center relative overflow-hidden">
+                          {item.imageUrl ? (
+                            <Image
+                              src={item.imageUrl}
+                              alt={item.name}
+                              fill
+                              className="object-cover"
                             />
-                            <rect
-                              x="15"
-                              y="5"
-                              width="6"
-                              height="4"
-                              fill="currentColor"
-                              opacity="0.5"
-                            />
-                            <path
-                              d="M10 9h16l3 6v32a4 4 0 01-4 4H11a4 4 0 01-4-4V15l3-6z"
-                              fill="currentColor"
-                              opacity="0.18"
-                            />
-                          </svg>
+                          ) : (
+                            <svg
+                              width="14"
+                              height="22"
+                              viewBox="0 0 36 56"
+                              fill="none"
+                              className="text-[#ccc]"
+                            >
+                              <rect
+                                x="13"
+                                y="0"
+                                width="10"
+                                height="6"
+                                rx="1"
+                                fill="currentColor"
+                                opacity="0.35"
+                              />
+                              <rect
+                                x="15"
+                                y="5"
+                                width="6"
+                                height="4"
+                                fill="currentColor"
+                                opacity="0.5"
+                              />
+                              <path
+                                d="M10 9h16l3 6v32a4 4 0 01-4 4H11a4 4 0 01-4-4V15l3-6z"
+                                fill="currentColor"
+                                opacity="0.18"
+                              />
+                            </svg>
+                          )}
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-text-primary truncate">
                             {item.name}
                           </p>
-                          <p className="text-[11px] text-[#aaa]">
+                          <p className="text-[11px] text-[#7C6D5A] font-sans">
                             {item.size} · qty {item.quantity}
                           </p>
                         </div>
@@ -663,11 +675,11 @@ export default function CheckoutPage() {
 
                   {/* Totals */}
                   <div className="px-5 py-4 space-y-2 text-sm">
-                    <div className="flex justify-between text-[#666]">
+                    <div className="flex justify-between text-[#666] font-sans">
                       <span>Subtotal</span>
                       <span>${total.toFixed(2)}</span>
                     </div>
-                    <div className="flex justify-between text-[#666]">
+                    <div className="flex justify-between text-[#666] font-sans">
                       <span>Shipping</span>
                       <span>
                         {shippingCost === 0
@@ -675,7 +687,7 @@ export default function CheckoutPage() {
                           : `$${(shippingCost / 100).toFixed(2)}`}
                       </span>
                     </div>
-                    <div className="flex justify-between font-semibold text-text-primary pt-2 border-t border-[#f0f0f0]">
+                    <div className="flex justify-between font-semibold text-text-primary pt-2 border-t border-[#f0f0f0] font-sans">
                       <span>Total</span>
                       <span>${(totalCents / 100).toFixed(2)}</span>
                     </div>
@@ -686,13 +698,13 @@ export default function CheckoutPage() {
                     <button
                       onClick={handlePayWithCard}
                       disabled={placing || !cardMounted}
-                      className="w-full py-4 bg-[#c9a96e] text-white text-[12px] tracking-widest uppercase font-medium hover:bg-[#b8935a] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="w-full py-4 bg-[#c9a96e] text-[#FAF8F5] text-[12px] tracking-widest uppercase font-bold font-sans hover:bg-[#b8935a] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       {placing
                         ? "Processing…"
                         : `Pay $${(totalCents / 100).toFixed(2)}`}
                     </button>
-                    <p className="text-[10px] text-[#aaa] text-center mt-3">
+                    <p className="text-[10px] text-[#7C6D5A] font-sans text-center mt-3">
                       By placing your order you agree to our terms & conditions.
                     </p>
                   </div>
@@ -700,7 +712,7 @@ export default function CheckoutPage() {
 
                 <Link
                   href="/shop"
-                  className="flex items-center gap-1.5 mt-4 text-[11px] tracking-wide text-[#aaa] hover:text-[#c9a96e] transition-colors"
+                  className="flex items-center gap-1.5 mt-4 text-[11px] tracking-wide text-[#7C6D5A] font-sans hover:text-[#c9a96e] transition-colors"
                 >
                   <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
                     <path

@@ -100,7 +100,8 @@ export default function ShopPage() {
             initial="hidden"
             animate="visible"
             custom={2}
-            className="text-lg md:text-xl text-text-secondary max-w-xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl max-w-xl mx-auto leading-relaxed"
+            style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}
           >
             Discover our curated collection of luxury fragrances, hand-crafted
             from the world&apos;s finest raw ingredients.
@@ -118,11 +119,8 @@ export default function ShopPage() {
                 <button
                   key={cat}
                   onClick={() => setActive(cat)}
-                  className={`relative px-5 py-5 text-[11px] tracking-[0.2em] uppercase font-medium whitespace-nowrap transition-colors duration-200 ${
-                    active === cat
-                      ? "text-(--button-gold)"
-                      : "text-text-secondary hover:text-text-primary"
-                  }`}
+                  className="relative px-5 py-5 text-[11px] tracking-[0.2em] uppercase font-medium whitespace-nowrap transition-colors duration-200"
+                  style={{ color: "#7C6D5A" }}
                 >
                   {cat}
                   {active === cat && (
@@ -303,13 +301,15 @@ export default function ShopPage() {
 
                   {/* Card info */}
                   <div>
-                    <p className="text-[10px] tracking-[0.22em] uppercase text-(--warm-taupe) mb-1.5">
+                    <p className="text-[10px] tracking-[0.22em] uppercase mb-1.5" style={{ color: "#7C6D5A" }}>
                       {product.notes}
                     </p>
                     <h3 className="font-heading text-xl font-semibold text-text-primary group-hover:text-(--button-gold) transition-colors duration-300 mb-2">
                       {product.name}
                     </h3>
-                    <p className="text-text-secondary text-sm leading-relaxed line-clamp-2 mb-4">
+                    <p className="text-sm leading-relaxed line-clamp-2 mb-4"
+                      style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}
+                    >
                       {product.description}
                     </p>
                     <div className="flex items-center justify-between">
@@ -317,7 +317,9 @@ export default function ShopPage() {
                         <span className="font-heading text-lg font-semibold text-text-primary">
                           ${product.price50ml}
                         </span>
-                        <span className="text-[11px] text-text-secondary">
+                        <span className="text-[11px]"
+                          style={{ color: "#7C6D5A" }}
+                        >
                           / 50ml
                         </span>
                       </div>
@@ -328,60 +330,19 @@ export default function ShopPage() {
                             name: product.name,
                             price: product.price50ml,
                             size: "50ml",
+                            imageUrl: product.imageUrl,
                           })
                         }
-                        className="text-[11px] tracking-[0.18em] uppercase text-(--bridal-white) bg-(--button-gold) px-4 py-2.5 hover:bg-(--button-gold-hover) transition-colors duration-300"
+                        className="text-[11px] tracking-[0.18em] uppercase font-bold bg-(--button-gold) px-4 py-2.5 hover:bg-(--button-gold-hover) transition-colors duration-300"
+                        style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}
                       >
-                        Add to Bag
+                        Add to Cart
                       </button>
                     </div>
                   </div>
                 </motion.article>
               ))}
             </AnimatePresence>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Editorial Strip ───────────────────────────────────── */}
-      <section className="py-24 bg-(--bridal-white) border-t border-(--muted-sand)">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center"
-          >
-            {[
-              {
-                label: "Premium Ingredients",
-                body: "We source only the finest essential oils and raw materials — from Bulgarian rose to aged Indonesian oud.",
-              },
-              {
-                label: "Artisan Crafted",
-                body: "Every fragrance is created by master perfumers blending art and science in equal, unhurried measure.",
-              },
-              {
-                label: "Sustainable Packaging",
-                body: "Our packaging is as considered as the scent it holds — beautifully designed, responsibly sourced.",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={item.label}
-                variants={fadeUp}
-                custom={i}
-                className="space-y-4"
-              >
-                <div className="w-px h-10 bg-(--muted-sand) mx-auto" />
-                <h3 className="font-heading text-xl font-semibold text-text-primary">
-                  {item.label}
-                </h3>
-                <p className="text-text-secondary text-sm leading-relaxed">
-                  {item.body}
-                </p>
-              </motion.div>
-            ))}
           </motion.div>
         </div>
       </section>
@@ -404,13 +365,16 @@ export default function ShopPage() {
               <br />
               or event experience?
             </h2>
-            <p className="text-text-secondary leading-relaxed">
+            <p className="leading-relaxed"
+              style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}
+            >
               Bring luxury fragrance to your celebration with our personalised
               Perfume Bar service.
             </p>
             <Link
               href="/perfume-bar"
-              className="inline-flex items-center gap-2.5 bg-(--button-gold) text-(--bridal-white) px-8 py-4 text-[12px] tracking-widest uppercase hover:bg-(--button-gold-hover) transition-colors duration-300"
+              className="inline-flex items-center gap-2.5 bg-(--button-gold) px-8 py-4 text-[12px] tracking-widest uppercase font-bold hover:bg-(--button-gold-hover) transition-colors duration-300"
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)", fontWeight: 700 }}
             >
               Explore the Perfume Bar
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

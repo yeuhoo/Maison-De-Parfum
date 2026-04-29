@@ -80,66 +80,77 @@ export default function PerfumeBarPage() {
   return (
     <div className="min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative bg-background py-32 md:py-44 overflow-hidden">
-        {/* subtle decorative ring */}
-        <div className="absolute -top-32 -right-32 w-125 h-125 rounded-full border border-(--muted-sand) opacity-30 pointer-events-none" />
-        <div className="absolute -bottom-24 -left-24 w-87.5 h-87.5 rounded-full border border-(--muted-sand) opacity-20 pointer-events-none" />
-
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0}
-            className="text-[11px] tracking-[0.3em] uppercase text-(--button-gold) mb-6"
-          >
-            Maison de Parfum · Perfume Bar
-          </motion.p>
-          <motion.h1
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={1}
-            className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight text-text-primary mb-6"
-          >
-            More than a wedding favour —<br className="hidden md:block" />
-            <span className="text-(--button-gold)">
-              {" "}
-              it&apos;s an experience
-            </span>
-          </motion.h1>
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={2}
-            className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed"
-          >
-            Your scent, your story. A personalised luxury perfume bar for
-            unforgettable events.
-          </motion.p>
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={3}
-          >
-            <Link
-              href="#enquire"
-              className="inline-flex items-center gap-2 bg-(--button-gold) text-(--bridal-white) px-8 py-4 rounded text-sm font-medium uppercase tracking-widest hover:bg-(--button-gold-hover) transition-colors duration-300"
+      <section
+        className="text-(--text-primary) py-24"
+        style={{
+          backgroundImage: 'url(/perfume-bar.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          color: '#FAF8F5',
+          textShadow: '3px 3px 6px rgba(0, 0, 0, 0.5)'
+        }}
+      >
+        <div className="px-4 sm:px-6 lg:px-24 py-24">
+          <div className="text-right max-w-3xl ml-auto">
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={0}
+              className="font-heading text-[11px] tracking-[0.3em] uppercase mb-6"
+              style={{ fontFamily: "var(--font-playfair)", color: "#FAF8F5", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
             >
-              Enquire About Your Perfume Bar
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path
-                  d="M1 7h12M8 2l5 5-5 5"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
-          </motion.div>
+              Maison de Parfum · Perfume Bar
+            </motion.p>
+            <motion.h1
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={1}
+              className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight mb-6"
+              style={{ color: "#FAF8F5", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
+            >
+              More than a wedding favour —<br className="hidden md:block" />
+              <span>
+                {" "}
+                it&apos;s an experience
+              </span>
+            </motion.h1>
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={2}
+              className="font-sans text-lg md:text-xl mb-10 leading-relaxed"
+              style={{ fontFamily: "var(--font-montserrat)", color: "#FAF8F5", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
+            >
+              Your scent, your story. A personalised luxury perfume bar for
+              unforgettable events.
+            </motion.p>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={3}
+            >
+              <Link
+                href="#enquire"
+                className="inline-flex items-center gap-2 px-8 py-3 rounded font-bold transition-colors uppercase text-sm border border-current"
+                style={{ fontFamily: "var(--font-montserrat)", color: "#FAF8F5", backgroundColor: "transparent", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
+              >
+                Enquire About Your Perfume Bar
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M1 7h12M8 2l5 5-5 5"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -154,13 +165,19 @@ export default function PerfumeBarPage() {
               viewport={{ once: true }}
               custom={0}
             >
-              <p className="text-[11px] tracking-[0.3em] uppercase text-(--button-gold) mb-4">
+              <p
+                className="font-heading text-[11px] tracking-[0.3em] uppercase mb-4"
+                style={{ fontFamily: "var(--font-playfair)", color: "#B28E3B" }}
+              >
                 01 · Bespoke Experience
               </p>
               <h2 className="font-heading text-3xl md:text-4xl font-semibold text-text-primary mb-6 leading-snug">
                 Memories deserve a<br /> signature scent.
               </h2>
-              <p className="text-text-secondary text-base leading-relaxed mb-8">
+              <p
+                className="text-base leading-relaxed mb-8"
+                style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}
+              >
                 Transform your celebration into an immersive, sensory journey.
                 Guests explore a curated collection of premium fragrances while
                 enjoying an interactive and elegant experience. Each moment at
@@ -169,7 +186,8 @@ export default function PerfumeBarPage() {
               </p>
               <Link
                 href="#how-it-works"
-                className="inline-flex items-center gap-2 text-(--button-gold) text-sm font-medium uppercase tracking-widest hover:gap-4 transition-all duration-300"
+                className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-widest hover:gap-4 transition-all duration-300"
+                style={{ fontFamily: "var(--font-playfair)", color: "#B28E3B" }}
               >
                 Discover How It Works
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -189,11 +207,13 @@ export default function PerfumeBarPage() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
-              className="h-80 md:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center"
+              className="h-80 md:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center overflow-hidden"
             >
-              <p className="text-text-secondary text-sm tracking-widest uppercase">
-                [ Event Photo ]
-              </p>
+              <img
+                src="/0D0A4312-2.jpg"
+                alt="Bespoke experience event"
+                className="w-full h-full object-cover"
+              />
             </motion.div>
           </div>
         </div>
@@ -209,11 +229,13 @@ export default function PerfumeBarPage() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={0}
-              className="h-80 md:h-96 bg-(--bridal-white) rounded-lg border border-(--muted-sand) flex items-center justify-center order-last md:order-first"
+              className="h-80 md:h-96 bg-(--bridal-white) rounded-lg border border-(--muted-sand) flex items-center justify-center order-last md:order-first overflow-hidden"
             >
-              <p className="text-text-secondary text-sm tracking-widest uppercase">
-                [ Perfume Bar Photo ]
-              </p>
+              <img
+                src="/0D0A4844-2.jpg"
+                alt="Interactive perfume bar entertainment"
+                className="w-full h-full object-cover"
+              />
             </motion.div>
             <motion.div
               variants={fadeUp}
@@ -222,14 +244,23 @@ export default function PerfumeBarPage() {
               viewport={{ once: true }}
               custom={1}
             >
-              <p className="text-[11px] tracking-[0.3em] uppercase text-(--button-gold) mb-4">
+              <p
+                className="font-heading text-[11px] tracking-[0.3em] uppercase mb-4"
+                style={{ fontFamily: "var(--font-playfair)", color: "#B28E3B" }}
+              >
                 02 · Interactive Entertainment
               </p>
-              <h2 className="font-heading text-3xl md:text-4xl font-semibold text-text-primary mb-6 leading-snug">
+              <h2
+                className="font-heading text-3xl md:text-4xl font-semibold mb-6 leading-snug"
+                style={{ color: "#3C2218" }}
+              >
                 A keepsake they
                 <br /> can wear.
               </h2>
-              <p className="text-text-secondary text-base leading-relaxed">
+              <p
+                className="text-base leading-relaxed"
+                style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}
+              >
                 Our perfume bar is more than choosing a fragrance — it&apos;s an
                 activity. Guests engage with scents, learn about notes, and
                 enjoy a visually stunning setup that complements your event
@@ -251,14 +282,23 @@ export default function PerfumeBarPage() {
               viewport={{ once: true }}
               custom={0}
             >
-              <p className="text-[11px] tracking-[0.3em] uppercase text-(--button-gold) mb-4">
+              <p
+                className="font-heading text-[11px] tracking-[0.3em] uppercase mb-4"
+                style={{ fontFamily: "var(--font-playfair)", color: "#B28E3B" }}
+              >
                 03 · Luxury Personalisation
               </p>
-              <h2 className="font-heading text-3xl md:text-4xl font-semibold text-text-primary mb-6 leading-snug">
+              <h2
+                className="font-heading text-3xl md:text-4xl font-semibold mb-6 leading-snug"
+                style={{ color: "#3C2218" }}
+              >
                 Exquisitely crafted,
                 <br /> just for your day.
               </h2>
-              <p className="text-text-secondary text-base leading-relaxed mb-8">
+              <p
+                className="text-base leading-relaxed mb-8"
+                style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}
+              >
                 Every guest receives a beautifully presented perfume bottle,
                 personalised with 3D-printed names or details. From scent
                 selection to presentation, every detail is tailored to your
@@ -267,7 +307,8 @@ export default function PerfumeBarPage() {
               </p>
               <Link
                 href="#enquire"
-                className="inline-flex items-center gap-2 bg-(--button-gold) text-(--bridal-white) px-7 py-3.5 rounded text-sm font-medium uppercase tracking-widest hover:bg-(--button-gold-hover) transition-colors duration-300"
+                className="inline-flex items-center gap-2 bg-(--button-gold) text-(--bridal-white) px-7 py-3.5 rounded text-sm uppercase tracking-widest hover:bg-(--button-gold-hover) transition-colors duration-300 font-bold"
+                style={{ fontFamily: "var(--font-montserrat)", color: "#FAF8F5" }}
               >
                 Book Your Perfume Bar Experience
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -287,11 +328,13 @@ export default function PerfumeBarPage() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
-              className="h-80 md:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center"
+              className="h-80 md:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center overflow-hidden"
             >
-              <p className="text-text-secondary text-sm tracking-widest uppercase">
-                [ Personalised Bottles Photo ]
-              </p>
+              <img
+                src="/0D0A4272.jpg"
+                alt="Luxury personalised perfume bar presentation"
+                className="w-full h-full object-cover"
+              />
             </motion.div>
           </div>
         </div>
@@ -345,14 +388,14 @@ export default function PerfumeBarPage() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <p className="text-[11px] tracking-[0.3em] uppercase text-(--button-gold) mb-6">
+            <p className="text-[11px] tracking-[0.3em] uppercase mb-6" style={{ fontFamily: "var(--font-playfair)", color: "#B28E3B" }}>
               A scent for every memory
             </p>
-            <h2 className="font-heading text-3xl md:text-5xl font-semibold text-text-primary mb-6 leading-snug">
+            <h2 className="font-heading text-3xl md:text-5xl font-semibold text-text-primary mb-6 leading-snug" style={{ fontFamily: "var(--font-playfair)", color: "#3C2218" }}>
               Elevate your event with a perfume bar that is interactive,
               elegant, and truly personalised.
             </h2>
-            <p className="text-text-secondary text-base mb-10 leading-relaxed">
+            <p className="text-text-secondary text-base mb-10 leading-relaxed" style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}>
               Get in touch and let us create an experience your guests will talk
               about long after the celebration ends.
             </p>
@@ -360,6 +403,7 @@ export default function PerfumeBarPage() {
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 bg-(--button-gold) text-(--bridal-white) px-8 py-4 rounded text-sm font-medium uppercase tracking-widest hover:bg-(--button-gold-hover) transition-colors duration-300"
+                style={{ fontFamily: "var(--font-montserrat)", fontWeight: 700, color: "#FAF8F5" }}
               >
                 Enquire Now
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -374,7 +418,8 @@ export default function PerfumeBarPage() {
               </Link>
               <Link
                 href="/shop"
-                className="inline-flex items-center justify-center gap-2 border border-(--button-gold) text-(--button-gold) px-8 py-4 rounded text-sm font-medium uppercase tracking-widest hover:bg-(--button-gold) hover:text-(--bridal-white) transition-colors duration-300"
+                className="inline-flex items-center justify-center gap-2 border border-[#B28E3B] text-[#B28E3B] px-8 py-4 rounded text-sm font-medium uppercase tracking-widest hover:bg-(--button-gold) hover:text-(--bridal-white) transition-colors duration-300"
+                style={{ fontFamily: "var(--font-montserrat)" }}
               >
                 See Our Fragrances
               </Link>
