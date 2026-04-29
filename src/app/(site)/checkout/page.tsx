@@ -264,10 +264,22 @@ export default function CheckoutPage() {
 
   // ── Initialise Square card form ───────────────────────────────────────────────
   useEffect(() => {
+    if (!SQ_APP_ID || !SQ_LOC_ID) {
+      setPaymentError(
+        "Square is not configured. Please set NEXT_PUBLIC_SQUARE_APPLICATION_ID and NEXT_PUBLIC_SQUARE_LOCATION_ID in Vercel environment variables.",
+      );
+      return;
+    }
+
     // Script may already be available if navigated via client-side Link
     if (!sqLoaded && window.Square) setSqLoaded(true);
     if (!sqLoaded || !window.Square) return;
     let card: SqCard | null = null;
+    const timeout = window.setTimeout(() => {
+      setPaymentError(
+        "Payment form is taking too long to load. Please disable ad blockers, refresh the page, or try again shortly.",
+      );
+    }, 12000);
     (async () => {
       const payments = await window.Square!.payments(SQ_APP_ID, SQ_LOC_ID);
       paymentsRef.current = payments;
@@ -286,15 +298,18 @@ export default function CheckoutPage() {
         },
       });
       await card.attach("#sq-card");
+      window.clearTimeout(timeout);
       cardRef.current = card;
       setCardMounted(true);
     })().catch((err) => {
       console.error(err);
+      window.clearTimeout(timeout);
       setPaymentError(
         "Payment form failed to load. Please refresh the page or try again later.",
       );
     });
     return () => {
+      window.clearTimeout(timeout);
       card?.destroy().catch(() => {});
     };
   }, [sqLoaded]);
