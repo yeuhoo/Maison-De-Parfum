@@ -126,24 +126,37 @@ export default function ProductsPage() {
   const handleAdditionalImageUpload = async (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = Array.from(e.target.files ?? []);
+    if (!files.length) return;
     setUploading(true);
     setUploadError("");
     try {
-      const fd = new FormData();
-      fd.append("file", file);
-      const res = await fetch("/api/upload", { method: "POST", body: fd });
-      const data = await res.json();
-      if (data.url) {
-        setForm((f) => ({ ...f, imageUrls: [...f.imageUrls, data.url] }));
-      } else {
-        setUploadError(data.error || "Upload failed — no URL returned");
+      const uploaded: string[] = [];
+
+      for (const file of files) {
+        // Keep the same server-side constraints (image/*, max 5MB).
+        const fd = new FormData();
+        fd.append("file", file);
+        const res = await fetch("/api/upload", { method: "POST", body: fd });
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data?.error || "Upload failed");
+        }
+        if (data.url) uploaded.push(data.url);
+      }
+
+      if (uploaded.length) {
+        setForm((f) => {
+          const next = [...f.imageUrls, ...uploaded];
+          return { ...f, imageUrls: next.slice(0, 10) };
+        });
       }
     } catch (err) {
       setUploadError(err instanceof Error ? err.message : "Upload failed");
     } finally {
       setUploading(false);
+      // Allow re-selecting the same file(s) again.
+      e.target.value = "";
     }
   };
 
@@ -456,6 +469,7 @@ export default function ProductsPage() {
                   <input
                     type="file"
                     accept="image/*"
+                    multiple
                     className="hidden"
                     disabled={uploading}
                     onChange={handleAdditionalImageUpload}
