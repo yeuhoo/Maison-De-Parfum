@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Script from "next/script";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 
@@ -273,11 +272,28 @@ export default function CheckoutPage() {
       const payments = await window.Square!.payments(SQ_APP_ID, SQ_LOC_ID);
       paymentsRef.current = payments;
       setPaymentsReady(true);
-      card = await payments.card();
+      card = await payments.card({
+        style: {
+          input: {
+            // Square enforces max 16px. Keep at 16px to avoid InvalidStylesError.
+            fontSize: "16px",
+            fontFamily: "sans-serif",
+            color: "#3C2218",
+          },
+          "input::placeholder": {
+            color: "#A9A29A",
+          },
+        },
+      });
       await card.attach("#sq-card");
       cardRef.current = card;
       setCardMounted(true);
-    })().catch(console.error);
+    })().catch((err) => {
+      console.error(err);
+      setPaymentError(
+        "Payment form failed to load. Please refresh the page or try again later.",
+      );
+    });
     return () => {
       card?.destroy().catch(() => {});
     };

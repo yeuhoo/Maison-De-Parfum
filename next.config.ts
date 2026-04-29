@@ -9,6 +9,40 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    // Allow Square Web Payments SDK to load in production (Vercel).
+    // If you set a stricter CSP elsewhere (e.g. Vercel dashboard), this ensures
+    // squarecdn scripts/frames/fonts are permitted.
+    const csp = [
+      "default-src 'self'",
+      "base-uri 'self'",
+      "object-src 'none'",
+      "frame-ancestors 'self'",
+      // Next.js uses inline scripts for hydration; keep unsafe-inline unless you
+      // migrate to nonces/hashes across the app.
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://sandbox.web.squarecdn.com https://web.squarecdn.com",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https:",
+      "font-src 'self' data: https://sandbox.web.squarecdn.com https://web.squarecdn.com",
+      "frame-src 'self' https://sandbox.web.squarecdn.com https://web.squarecdn.com",
+      "connect-src 'self' https://sandbox.web.squarecdn.com https://web.squarecdn.com https://*.squareup.com https://*.squarecdn.com https://*.square.com",
+    ].join("; ");
+
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: csp,
+          },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

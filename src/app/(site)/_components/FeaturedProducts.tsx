@@ -142,6 +142,7 @@ export default function FeaturedProducts({ products }: Props) {
                           name: product.name,
                           price: product.price50ml,
                           size: "50ml",
+                          imageUrl: product.imageUrl,
                         })
                       }
                       className="bg-[#c9a96e] text-white text-[10px] tracking-[0.15em] uppercase px-4 py-2.5 hover:bg-[#b8935a] transition-colors"
