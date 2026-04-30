@@ -1,6 +1,30 @@
 import { Leaf, Sparkles, Package } from "lucide-react";
+import FeaturedProducts from "./_components/FeaturedProducts";
+import type { Product } from "@/lib/products";
+import { sql } from "@/lib/db";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+async function getFeaturedProducts(): Promise<Product[]> {
+  const rows = await sql`
+    SELECT id, name, category, notes,
+           price_50ml AS "price50ml", price_30ml AS "price30ml",
+           bestseller, description, ingredients, warning,
+           manufactured_for AS "manufacturedFor",
+           image_url AS "imageUrl",
+           image_urls AS "imageUrls"
+    FROM products
+    WHERE bestseller = true
+    ORDER BY id DESC
+    LIMIT 6
+  `;
+
+  return rows as Product[];
+}
+
+export default async function Home() {
+  const featuredProducts = await getFeaturedProducts();
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -33,79 +57,7 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <section className="py-16 bg-(--soft-cream)">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 font-heading">
-            Featured Fragrances
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Placeholder products */}
-            <div className="card-hover bg-(--bridal-white) rounded-lg shadow-sm overflow-hidden border border-(--muted-sand)">
-              <div className="h-64 bg-(--soft-cream) flex items-center justify-center">
-                <span className="text-(--warm-taupe)">Perfume Image</span>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 font-heading">
-                  Elegant Rose
-                </h3>
-                <p className="mb-4" style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}>
-                  A floral masterpiece with notes of rose and jasmine.
-                </p>
-                <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-(--text-primary)">
-                    $89.99
-                  </span>
-                  <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 rounded hover:bg-(--button-gold-hover) transition-colors uppercase text-sm font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}>
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="card-hover bg-(--bridal-white) rounded-lg shadow-sm overflow-hidden border border-(--muted-sand)">
-              <div className="h-64 bg-(--soft-cream) flex items-center justify-center">
-                <span className="text-(--warm-taupe)">Perfume Image</span>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 font-heading">
-                  Midnight Amber
-                </h3>
-                <p className="mb-4" style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}>
-                  Warm and mysterious with amber and vanilla notes.
-                </p>
-                <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-(--text-primary)">
-                    $79.99
-                  </span>
-                  <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 rounded hover:bg-(--button-gold-hover) transition-colors uppercase text-sm font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}>
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="card-hover bg-(--bridal-white) rounded-lg shadow-sm overflow-hidden border border-(--muted-sand)">
-              <div className="h-64 bg-(--soft-cream) flex items-center justify-center">
-                <span className="text-(--warm-taupe)">Perfume Image</span>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 font-heading">
-                  Citrus Breeze
-                </h3>
-                <p className="mb-4" style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}>
-                  Fresh and invigorating with citrus and marine notes.
-                </p>
-                <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-(--text-primary)">
-                    $69.99
-                  </span>
-                  <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 rounded hover:bg-(--button-gold-hover) transition-colors uppercase text-sm font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}>
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FeaturedProducts products={featuredProducts} />
 
       {/* About Section */}
       <section className="py-16 bg-(--bridal-white)">
