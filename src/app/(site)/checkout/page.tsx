@@ -284,6 +284,7 @@ export default function CheckoutPage() {
       paymentsRef.current = payments;
       setPaymentsReady(true);
       card = await payments.card({
+        postalCode: snap.current.form.postcode || "1000",
         style: {
           input: {
             // Square enforces max 16px. Keep at 16px to avoid InvalidStylesError.
