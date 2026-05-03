@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { CATEGORIES } from "@/lib/products";
@@ -17,6 +18,66 @@ const fadeUp = {
     transition: { duration: 0.55, delay: i * 0.07, ease: EASE },
   }),
 };
+
+// ── Product Image with Thumbnail Dots ───────────────────────────────────────
+function ProductImage({
+  mainImage,
+  additionalImages,
+  alt,
+}: {
+  mainImage: string;
+  additionalImages: string[];
+  alt: string;
+}) {
+  const allImages = [mainImage, ...additionalImages];
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  if (allImages.length <= 1) {
+    return (
+      <Image
+        src={mainImage}
+        alt={alt}
+        fill
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+    );
+  }
+
+  return (
+    <div className="relative w-full h-full">
+      {/* Main Image */}
+      {allImages.map((img, idx) => (
+        <Image
+          key={idx}
+          src={img}
+          alt={`${alt} - view ${idx + 1}`}
+          fill
+          className={`object-cover transition-all duration-500 ${
+            idx === selectedIndex ? "opacity-100" : "opacity-0 absolute inset-0"
+          }`}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
+      ))}
+
+      {/* Thumbnail Dots */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-10">
+        {allImages.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setSelectedIndex(idx)}
+            className={`transition-all duration-300 ${
+              idx === selectedIndex
+                ? "w-4 h-0.5 bg-white"
+                : "w-1.5 h-1.5 rounded-full bg-white/50 hover:bg-white/80"
+            }`}
+            aria-label={`View image ${idx + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const BottleIcon = () => (
   <svg
@@ -272,11 +333,10 @@ export default function ShopPage() {
                       </span>
                     )}
                     {product.imageUrl ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={product.imageUrl}
+                      <ProductImage
+                        mainImage={product.imageUrl}
+                        additionalImages={product.imageUrls || []}
                         alt={product.name}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     ) : (
                       <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-(--muted-sand) transition-transform duration-700 group-hover:scale-105">
@@ -301,14 +361,21 @@ export default function ShopPage() {
 
                   {/* Card info */}
                   <div>
-                    <p className="text-[10px] tracking-[0.22em] uppercase mb-1.5" style={{ color: "#7C6D5A" }}>
+                    <p
+                      className="text-[10px] tracking-[0.22em] uppercase mb-1.5"
+                      style={{ color: "#7C6D5A" }}
+                    >
                       {product.notes}
                     </p>
                     <h3 className="font-heading text-xl font-semibold text-text-primary group-hover:text-(--button-gold) transition-colors duration-300 mb-2">
                       {product.name}
                     </h3>
-                    <p className="text-sm leading-relaxed line-clamp-2 mb-4"
-                      style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}
+                    <p
+                      className="text-sm leading-relaxed line-clamp-2 mb-4"
+                      style={{
+                        fontFamily: "var(--font-montserrat)",
+                        color: "#7C6D5A",
+                      }}
                     >
                       {product.description}
                     </p>
@@ -317,7 +384,8 @@ export default function ShopPage() {
                         <span className="font-heading text-lg font-semibold text-text-primary">
                           ${product.price50ml}
                         </span>
-                        <span className="text-[11px]"
+                        <span
+                          className="text-[11px]"
                           style={{ color: "#7C6D5A" }}
                         >
                           / 50ml
@@ -334,7 +402,10 @@ export default function ShopPage() {
                           })
                         }
                         className="text-[11px] tracking-[0.18em] uppercase font-bold bg-(--button-gold) px-4 py-2.5 hover:bg-(--button-gold-hover) transition-colors duration-300"
-                        style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}
+                        style={{
+                          color: "#FAF8F5",
+                          fontFamily: "var(--font-montserrat)",
+                        }}
                       >
                         Add to Cart
                       </button>
@@ -365,7 +436,8 @@ export default function ShopPage() {
               <br />
               or event experience?
             </h2>
-            <p className="leading-relaxed"
+            <p
+              className="leading-relaxed"
               style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}
             >
               Bring luxury fragrance to your celebration with our personalised
@@ -374,7 +446,11 @@ export default function ShopPage() {
             <Link
               href="/perfume-bar"
               className="inline-flex items-center gap-2.5 bg-(--button-gold) px-8 py-4 text-[12px] tracking-widest uppercase font-bold hover:bg-(--button-gold-hover) transition-colors duration-300"
-              style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)", fontWeight: 700 }}
+              style={{
+                color: "#FAF8F5",
+                fontFamily: "var(--font-montserrat)",
+                fontWeight: 700,
+              }}
             >
               Explore the Perfume Bar
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

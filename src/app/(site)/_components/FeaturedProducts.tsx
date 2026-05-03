@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import type { Product } from "@/lib/products";
@@ -90,11 +91,12 @@ export default function FeaturedProducts({ products }: Props) {
               {/* Product image area */}
               <div className="relative h-64 bg-linear-to-b from-[#f5ede0] to-[#ede4d4] flex items-center justify-center overflow-hidden">
                 {product.imageUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={product.imageUrl}
                     alt={product.name}
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 ) : (
                   <span className="text-[#c9a96e]/60 group-hover:scale-110 transition-transform duration-500">

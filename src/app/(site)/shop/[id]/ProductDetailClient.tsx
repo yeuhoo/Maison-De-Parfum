@@ -62,12 +62,14 @@ export default function ProductDetailClient({
   const [added, setAdded] = useState(false);
   const [selectedSize, setSelectedSize] = useState<"50ml" | "30ml">("50ml");
   const [selectedImage, setSelectedImage] = useState(0);
+  const [hoveredImage, setHoveredImage] = useState<number | null>(null);
   const { addToCart } = useCart();
 
   // Combine main image with additional images
   const allImages = product.imageUrl
     ? [product.imageUrl, ...(product.imageUrls || [])]
     : product.imageUrls || [];
+  const displayImage = hoveredImage ?? selectedImage;
 
   const detail = CATEGORY_DETAILS[product.category];
 
@@ -128,12 +130,25 @@ export default function ProductDetailClient({
                 </span>
               )}
               {allImages.length > 0 ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={allImages[selectedImage]}
-                  alt={product.name}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                <>
+                  {/* Main image with crossfade transitions */}
+                  {allImages.map((img, idx) => (
+                    <img
+                      key={idx}
+                      src={img}
+                      alt={`${product.name} view ${idx + 1}`}
+                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                        idx === displayImage ? "opacity-100" : "opacity-0"
+                      }`}
+                    />
+                  ))}
+
+                  {allImages.length > 1 && (
+                    <span className="absolute top-5 right-5 text-[10px] tracking-[0.14em] uppercase text-text-secondary bg-background/80 border border-(--muted-sand) px-2.5 py-1 z-10">
+                      View {displayImage + 1} / {allImages.length}
+                    </span>
+                  )}
+                </>
               ) : (
                 <>
                   <div
@@ -152,20 +167,25 @@ export default function ProductDetailClient({
               <div className="absolute -top-12 -left-12 w-36 h-36 rounded-full border border-(--muted-sand) opacity-15 pointer-events-none" />
             </div>
 
-            {/* Thumbnail gallery */}
+            {/* Thumbnails below main image */}
             {allImages.length > 1 && (
-              <div className="flex gap-2 mt-4 justify-center">
+              <div className="flex md:flex-col gap-2 mt-4 md:mt-0 justify-center md:justify-start md:absolute md:top-4 md:-right-20">
                 {allImages.map((img, idx) => (
                   <button
                     key={idx}
+                    type="button"
+                    onMouseEnter={() => setHoveredImage(idx)}
+                    onMouseLeave={() => setHoveredImage(null)}
+                    onFocus={() => setHoveredImage(idx)}
+                    onBlur={() => setHoveredImage(null)}
                     onClick={() => setSelectedImage(idx)}
                     className={`w-14 h-14 border overflow-hidden transition-colors ${
-                      selectedImage === idx
+                      displayImage === idx
                         ? "border-(--button-gold)"
-                        : "border-transparent hover:border-(--muted-sand)"
+                        : "border-(--muted-sand)"
                     }`}
+                    aria-label={`View image ${idx + 1} of ${allImages.length}`}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={img}
                       alt={`${product.name} ${idx + 1}`}
@@ -178,10 +198,16 @@ export default function ProductDetailClient({
 
             {/* Mood tag below image */}
             <div className="mt-4 flex items-center justify-between px-1">
-              <p className="text-[11px] tracking-[0.18em] uppercase" style={{ color: "#7C6D5A" }}>
+              <p
+                className="text-[11px] tracking-[0.18em] uppercase"
+                style={{ color: "#7C6D5A" }}
+              >
                 {detail?.accent}
               </p>
-              <p className="text-[11px] tracking-[0.12em]" style={{ color: "#7C6D5A" }}>
+              <p
+                className="text-[11px] tracking-[0.12em]"
+                style={{ color: "#7C6D5A" }}
+              >
                 {detail?.mood}
               </p>
             </div>
@@ -201,7 +227,10 @@ export default function ProductDetailClient({
                 <p className="text-[10px] tracking-[0.3em] uppercase text-(--button-gold) mb-3">
                   {product.category}
                 </p>
-                <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight" style={{ color: "#3C2218" }}>
+                <h1
+                  className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight"
+                  style={{ color: "#3C2218" }}
+                >
                   {product.name}
                 </h1>
               </div>
@@ -210,15 +239,22 @@ export default function ProductDetailClient({
               <div className="w-10 h-px bg-(--muted-sand)" />
 
               {/* Description */}
-              <p className="leading-relaxed text-base md:text-lg"
-                style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}
+              <p
+                className="leading-relaxed text-base md:text-lg"
+                style={{
+                  fontFamily: "var(--font-montserrat)",
+                  color: "#7C6D5A",
+                }}
               >
                 {product.description}
               </p>
 
               {/* Scent profile */}
               <div>
-                <p className="text-[10px] tracking-[0.22em] uppercase mb-3" style={{ color: "#7C6D5A" }}>
+                <p
+                  className="text-[10px] tracking-[0.22em] uppercase mb-3"
+                  style={{ color: "#7C6D5A" }}
+                >
                   Scent Profile
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -245,26 +281,34 @@ export default function ProductDetailClient({
             >
               {/* Size selector */}
               <div className="space-y-2">
-                <p className="text-[12px] tracking-[0.18em] uppercase font-bold" style={{ fontFamily: "var(--font-montserrat)", color: "#3C2218" }}>
+                <p
+                  className="text-[12px] tracking-[0.18em] uppercase font-bold"
+                  style={{
+                    fontFamily: "var(--font-montserrat)",
+                    color: "#3C2218",
+                  }}
+                >
                   Size
                 </p>
                 <div className="flex gap-3">
                   <button
                     onClick={() => setSelectedSize("50ml")}
-                    className={`px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${selectedSize === "50ml"
-                      ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
-                      : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
-                      }`}
+                    className={`px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${
+                      selectedSize === "50ml"
+                        ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
+                        : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
+                    }`}
                   >
                     50ml &middot; ${product.price50ml}
                   </button>
                   {product.price30ml > 0 && (
                     <button
                       onClick={() => setSelectedSize("30ml")}
-                      className={`px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${selectedSize === "30ml"
-                        ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
-                        : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
-                        }`}
+                      className={`px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${
+                        selectedSize === "30ml"
+                          ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
+                          : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
+                      }`}
                     >
                       30ml &middot; ${product.price30ml}
                     </button>
@@ -287,7 +331,13 @@ export default function ProductDetailClient({
 
               {/* Qty */}
               <div className="flex items-center gap-5">
-                <p className="text-[12px] tracking-[0.18em] uppercase font-bold" style={{ fontFamily: "var(--font-montserrat)", color: "#3C2218" }}>
+                <p
+                  className="text-[12px] tracking-[0.18em] uppercase font-bold"
+                  style={{
+                    fontFamily: "var(--font-montserrat)",
+                    color: "#3C2218",
+                  }}
+                >
                   Qty
                 </p>
                 <div className="flex items-center border border-(--muted-sand)">
@@ -315,7 +365,10 @@ export default function ProductDetailClient({
               <button
                 onClick={handleAddToBag}
                 className="w-full text-[12px] tracking-widest uppercase py-4 font-bold transition-colors duration-300 bg-(--button-gold) hover:bg-(--button-gold-hover)"
-                style={{ color: "#FAF8F5", fontFamily: "var(--font-montserrat)" }}
+                style={{
+                  color: "#FAF8F5",
+                  fontFamily: "var(--font-montserrat)",
+                }}
               >
                 {added ? "Added to Cart ✓" : "Add to Cart"}
               </button>
@@ -361,7 +414,10 @@ export default function ProductDetailClient({
               custom={4}
               className="border-t border-(--muted-sand) pt-6 space-y-2"
             >
-              <p className="text-[10px] tracking-[0.22em] uppercase mb-2" style={{ color: "#B28E3B" }}>
+              <p
+                className="text-[10px] tracking-[0.22em] uppercase mb-2"
+                style={{ color: "#B28E3B" }}
+              >
                 Ingredients
               </p>
               <p className="text-[12px] text-text-secondary leading-relaxed">
@@ -377,7 +433,10 @@ export default function ProductDetailClient({
               custom={5}
               className="border-t border-(--muted-sand) pt-6 space-y-2"
             >
-              <p className="text-[10px] tracking-[0.22em] uppercase mb-2" style={{ color: "#B28E3B" }}>
+              <p
+                className="text-[10px] tracking-[0.22em] uppercase mb-2"
+                style={{ color: "#B28E3B" }}
+              >
                 Warning
               </p>
               <p className="text-[12px] text-text-secondary leading-relaxed">
@@ -393,7 +452,10 @@ export default function ProductDetailClient({
               custom={6}
               className="border-t border-(--muted-sand) pt-6 space-y-2"
             >
-              <p className="text-[10px] tracking-[0.22em] uppercase mb-2" style={{ color: "#B28E3B" }}>
+              <p
+                className="text-[10px] tracking-[0.22em] uppercase mb-2"
+                style={{ color: "#B28E3B" }}
+              >
                 Manufactured For
               </p>
               <p className="text-[12px] text-text-secondary leading-relaxed">

@@ -88,7 +88,7 @@ const FIELDS: Field[] = [
   },
   {
     name: "postcode",
-    label: "Postcode",
+    label: "Postcode (optional)",
     placeholder: "4000",
     autoComplete: "postal-code",
     half: true,
@@ -198,7 +198,6 @@ export default function CheckoutPage() {
     if (!f.addressLine1.trim()) errs.addressLine1 = "Required";
     if (!f.city.trim()) errs.city = "Required";
     if (!f.state.trim()) errs.state = "Required";
-    if (!f.postcode.trim()) errs.postcode = "Required";
     if (!f.country.trim()) errs.country = "Required";
     return errs;
   };
@@ -554,12 +553,6 @@ export default function CheckoutPage() {
                           label: "City",
                           autoComplete: "address-level2",
                           placeholder: "Brisbane",
-                        },
-                        {
-                          name: "postcode",
-                          label: "Postal Code",
-                          autoComplete: "postal-code",
-                          placeholder: "4000",
                         },
                       ].map((f) => (
                         <div key={f.name}>
