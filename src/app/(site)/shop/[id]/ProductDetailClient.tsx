@@ -123,7 +123,7 @@ export default function ProductDetailClient({
             custom={0}
             className="relative"
           >
-            <div className="relative aspect-square bg-(--bridal-white) border border-(--muted-sand) flex flex-col items-center justify-center gap-6 overflow-hidden">
+            <div className="group relative aspect-square bg-(--bridal-white) border border-(--muted-sand) flex flex-col items-center justify-center gap-6 overflow-hidden">
               {product.bestseller && (
                 <span className="absolute top-5 left-5 text-[10px] tracking-[0.2em] uppercase text-(--button-gold) bg-background border border-(--muted-sand) px-3 py-1.5 z-10">
                   Bestseller
@@ -144,9 +144,33 @@ export default function ProductDetailClient({
                   ))}
 
                   {allImages.length > 1 && (
-                    <span className="absolute top-5 right-5 text-[10px] tracking-[0.14em] uppercase text-text-secondary bg-background/80 border border-(--muted-sand) px-2.5 py-1 z-10">
-                      View {displayImage + 1} / {allImages.length}
-                    </span>
+                    <>
+                      <span className="absolute top-5 right-5 text-[10px] tracking-[0.14em] uppercase text-text-secondary bg-background/80 border border-(--muted-sand) px-2.5 py-1 z-10">
+                        View {displayImage + 1} / {allImages.length}
+                      </span>
+
+                      {/* Prev arrow */}
+                      <button
+                        onClick={() => setSelectedImage((i) => (i - 1 + allImages.length) % allImages.length)}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 bg-white/90 border border-(--muted-sand) flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white"
+                        aria-label="Previous image"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <path d="M9 2L4 7l5 5" stroke="#3C2218" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </button>
+
+                      {/* Next arrow */}
+                      <button
+                        onClick={() => setSelectedImage((i) => (i + 1) % allImages.length)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 bg-white/90 border border-(--muted-sand) flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white"
+                        aria-label="Next image"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <path d="M5 2l5 5-5 5" stroke="#3C2218" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </button>
+                    </>
                   )}
                 </>
               ) : (
