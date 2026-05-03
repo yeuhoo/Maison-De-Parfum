@@ -109,15 +109,15 @@ export default function FeaturedProducts({ products }: Props) {
                     Bestseller
                   </span>
                 )}
-              {/* Hover reveal overlay */}
-              <Link
-                href={`/shop/${product.id}`}
-                className="img-overlay-slide absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-[#c9a96e]/20 to-transparent flex items-end justify-center pb-2.5"
-              >
-                <span className="text-[9px] tracking-[0.22em] uppercase text-text-primary font-medium">
-                  View Details →
-                </span>
-              </Link>
+                {/* Hover reveal overlay */}
+                <Link
+                  href={`/shop/${product.id}`}
+                  className="img-overlay-slide absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-[#c9a96e]/20 to-transparent flex items-end justify-center pb-2.5"
+                >
+                  <span className="text-[9px] tracking-[0.22em] uppercase text-text-primary font-medium">
+                    View Details →
+                  </span>
+                </Link>
               </div>
               {/* Details */}
               <div className="p-6">
