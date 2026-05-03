@@ -71,7 +71,8 @@ export default function FeaturedProducts({ products }: Props) {
           </div>
           <Link
             href="/shop"
-            className="hidden md:inline-block text-[11px] tracking-[0.2em] uppercase text-text-secondary hover:text-[#c9a96e] transition-colors border-b border-current pb-0.5"
+            className="hidden md:inline-block text-[11px] tracking-[0.2em] uppercase hover:text-[#c9a96e] transition-colors border-b border-current pb-0.5"
+            style={{ color: "#3C2218" }}
           >
             View All
           </Link>
@@ -108,50 +109,50 @@ export default function FeaturedProducts({ products }: Props) {
                     Bestseller
                   </span>
                 )}
-                {/* Hover reveal overlay */}
-                <div className="img-overlay-slide absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-[#c9a96e]/20 to-transparent flex items-end justify-center pb-2.5 pointer-events-none">
-                  <span className="text-[9px] tracking-[0.22em] uppercase text-text-primary font-medium">
-                    View Details →
-                  </span>
-                </div>
+              {/* Hover reveal overlay */}
+              <Link
+                href={`/shop/${product.id}`}
+                className="img-overlay-slide absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-[#c9a96e]/20 to-transparent flex items-end justify-center pb-2.5"
+              >
+                <span className="text-[9px] tracking-[0.22em] uppercase text-text-primary font-medium">
+                  View Details →
+                </span>
+              </Link>
               </div>
               {/* Details */}
               <div className="p-6">
-                <p className="text-[10px] tracking-[0.2em] uppercase text-[#c9a96e] mb-1">
+                <p className="text-[10px] tracking-[0.2em] uppercase mb-1" style={{ color: "#b28e3b" }}>
                   {product.category}
                 </p>
                 <h3 className="font-heading text-lg font-semibold text-text-primary mb-1">
                   {product.name}
                 </h3>
-                <p className="text-[11px] text-text-secondary mb-4 tracking-wide">
+                <p className="text-[11px] mb-4 tracking-wide uppercase" style={{ color: "#3C2218" }}>
                   {product.notes}
                 </p>
                 <div className="flex items-center justify-between">
                   <span className="font-heading text-xl font-semibold text-text-primary">
                     ${product.price50ml}
                   </span>
-                  <div className="flex items-center gap-2">
-                    <Link
-                      href={`/shop/${product.id}`}
-                      className="text-[10px] tracking-[0.15em] uppercase text-text-secondary hover:text-text-primary transition-colors"
-                    >
-                      Details
-                    </Link>
-                    <button
-                      onClick={() =>
-                        addToCart({
-                          id: product.id,
-                          name: product.name,
-                          price: product.price50ml,
-                          size: "50ml",
-                          imageUrl: product.imageUrl,
-                        })
-                      }
-                      className="bg-[#c9a96e] text-white text-[10px] tracking-[0.15em] uppercase px-4 py-2.5 hover:bg-[#b8935a] transition-colors"
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
+                  <button
+                    onClick={() =>
+                      addToCart({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price50ml,
+                        size: "50ml",
+                        imageUrl: product.imageUrl,
+                      })
+                    }
+                    className="text-[10px] tracking-widest uppercase px-4 py-2.5 hover:bg-[#b8935a] transition-colors font-bold"
+                    style={{
+                      color: "#FAF8F5",
+                      fontFamily: "var(--font-montserrat)",
+                      backgroundColor: "#c9a96e",
+                    }}
+                  >
+                    Add to Cart
+                  </button>
                 </div>
               </div>
             </motion.div>
@@ -161,7 +162,8 @@ export default function FeaturedProducts({ products }: Props) {
         <div className="text-center mt-10 md:hidden">
           <Link
             href="/shop"
-            className="text-[11px] tracking-[0.2em] uppercase text-text-secondary hover:text-[#c9a96e] transition-colors border-b border-current pb-0.5"
+            className="text-[11px] tracking-[0.2em] uppercase hover:text-[#c9a96e] transition-colors border-b border-current pb-0.5"
+            style={{ color: "#3C2218" }}
           >
             View All Fragrances
           </Link>
