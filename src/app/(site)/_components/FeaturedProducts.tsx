@@ -127,7 +127,7 @@ export default function FeaturedProducts({ products }: Props) {
                 <h3 className="font-heading text-lg font-semibold text-text-primary mb-1">
                   {product.name}
                 </h3>
-                <p className="text-[11px] mb-4 tracking-wide uppercase" style={{ color: "#3C2218" }}>
+                <p className="text-[11px] mb-4 tracking-wide uppercase" style={{ color: [1, 6, 8].includes(product.id) ? "#7C6D5A" : "#3C2218" }}>
                   {product.notes}
                 </p>
                 <div className="flex items-center justify-between">
