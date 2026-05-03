@@ -145,10 +145,6 @@ export default function ProductDetailClient({
 
                   {allImages.length > 1 && (
                     <>
-                      <span className="absolute top-5 right-5 text-[10px] tracking-[0.14em] uppercase text-text-secondary bg-background/80 border border-(--muted-sand) px-2.5 py-1 z-10">
-                        View {displayImage + 1} / {allImages.length}
-                      </span>
-
                       {/* Prev arrow */}
                       <button
                         onClick={() => setSelectedImage((i) => (i - 1 + allImages.length) % allImages.length)}
@@ -193,7 +189,7 @@ export default function ProductDetailClient({
 
             {/* Thumbnails below main image */}
             {allImages.length > 1 && (
-              <div className="flex md:flex-col gap-2 mt-4 md:mt-0 justify-center md:justify-start md:absolute md:top-4 md:-right-20">
+              <div className="flex flex-row gap-2 mt-4 justify-center flex-wrap">
                 {allImages.map((img, idx) => (
                   <button
                     key={idx}
