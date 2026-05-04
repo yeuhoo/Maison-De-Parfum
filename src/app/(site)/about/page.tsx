@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
@@ -110,11 +111,15 @@ export default function AboutPage() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
-              className="h-80 md:h-120 bg-(--soft-cream) rounded border border-(--muted-sand) flex items-center justify-center"
+              className="h-80 md:h-120 bg-(--soft-cream) rounded border border-(--muted-sand) flex items-center justify-center overflow-hidden"
             >
-              <p className="text-text-secondary text-sm tracking-widest uppercase">
-                [ Founder Photo ]
-              </p>
+              <Image
+                src="/7.png"
+                alt="The Beginning"
+                width={600}
+                height={480}
+                className="w-full h-full object-cover"
+              />
             </motion.div>
           </div>
         </div>
@@ -130,11 +135,15 @@ export default function AboutPage() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={0}
-              className="h-80 md:h-100 bg-(--bridal-white) rounded border border-(--muted-sand) flex items-center justify-center order-last md:order-first"
+              className="h-80 md:h-100 bg-(--bridal-white) rounded border border-(--muted-sand) flex items-center justify-center order-last md:order-first overflow-hidden"
             >
-              <p className="text-text-secondary text-sm tracking-widest uppercase">
-                [ Studio / Atelier Photo ]
-              </p>
+              <Image
+                src="/4.png"
+                alt="Our Mission"
+                width={600}
+                height={500}
+                className="w-full h-full object-cover"
+              />
             </motion.div>
             <motion.div
               variants={fadeUp}
@@ -224,11 +233,10 @@ export default function AboutPage() {
               The faces behind the fragrance
             </h2>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-2xl mx-auto">
             {[
-              { role: "Founder & Creative Director" },
-              { role: "Head Perfumer" },
-              { role: "Brand & Experience" },
+              { role: "Founder & Creative Director", image: "/6.png" },
+              { role: "Head Perfumer", image: "/8.png" },
             ].map((member, i) => (
               <motion.div
                 key={member.role}
@@ -239,8 +247,14 @@ export default function AboutPage() {
                 custom={i}
                 className="group"
               >
-                <div className="h-72 bg-(--bridal-white) border border-(--muted-sand) rounded mb-5 flex items-center justify-center text-text-secondary text-sm tracking-widest uppercase group-hover:border-(--button-gold) transition-colors duration-300">
-                  [ Photo ]
+                <div className="h-72 bg-(--bridal-white) border border-(--muted-sand) rounded mb-5 flex items-center justify-center text-text-secondary text-sm tracking-widest uppercase group-hover:border-(--button-gold) transition-colors duration-300 overflow-hidden">
+                  <Image
+                    src={member.image}
+                    alt={member.role}
+                    width={500}
+                    height={400}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <p className="font-heading text-[11px] tracking-[0.2em] uppercase text-[#B28E3B] mb-1">
                   {member.role}
