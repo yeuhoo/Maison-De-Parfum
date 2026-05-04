@@ -28,12 +28,17 @@ export default async function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="text-(--text-primary) py-24" style={{
-        backgroundImage: 'url(/sample_bg.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}>
-        <div className="px-4 sm:px-6 lg:px-24 py-24">
+      <section className="relative text-(--text-primary) py-24 overflow-hidden">
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          style={{ zIndex: 0 }}
+        >
+          <source src="/hero_vid.mp4" type="video/mp4" />
+        </video>
+        <div className="relative z-10 px-4 sm:px-6 lg:px-24 py-24">
           <div className="text-left">
             <h1
               className="text-5xl md:text-7xl font-bold mb-6 font-heading leading-tight"
