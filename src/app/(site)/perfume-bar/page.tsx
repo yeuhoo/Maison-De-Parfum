@@ -81,16 +81,23 @@ export default function PerfumeBarPage() {
     <div className="min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section
-        className="text-(--text-primary) py-24"
+        className="text-(--text-primary) py-24 relative overflow-hidden"
         style={{
-          backgroundImage: 'url(/perfume-bar.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
           color: '#FAF8F5',
           textShadow: '3px 3px 6px rgba(0, 0, 0, 0.5)'
         }}
       >
-        <div className="px-4 sm:px-6 lg:px-24 py-24">
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ zIndex: 0 }}
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/perfume_bar_vid.mp4" type="video/mp4" />
+        </video>
+        <div className="relative z-10 px-4 sm:px-6 lg:px-24 py-24">
           <div className="text-right max-w-3xl ml-auto">
             <motion.p
               variants={fadeUp}
