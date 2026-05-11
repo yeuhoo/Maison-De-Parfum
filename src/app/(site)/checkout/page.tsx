@@ -88,7 +88,7 @@ const FIELDS: Field[] = [
   },
   {
     name: "postcode",
-    label: "Postcode (optional)",
+    label: "Postcode",
     placeholder: "4000",
     autoComplete: "postal-code",
     half: true,
@@ -283,8 +283,12 @@ export default function CheckoutPage() {
       const payments = await window.Square!.payments(SQ_APP_ID, SQ_LOC_ID);
       paymentsRef.current = payments;
       setPaymentsReady(true);
+      // Pad AU postcode to 5 digits for Square sandbox (which requires US ZIP format).
+      // In production with an AU Square account this is not needed.
+      const rawPostcode = snap.current.form.postcode || "1000";
+      const paddedPostcode = rawPostcode.padEnd(5, "0");
       card = await payments.card({
-        postalCode: snap.current.form.postcode || "1000",
+        postalCode: paddedPostcode,
         style: {
           input: {
             // Square enforces max 16px. Keep at 16px to avoid InvalidStylesError.

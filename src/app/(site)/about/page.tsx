@@ -96,13 +96,20 @@ export default function AboutPage() {
                 <br /> fine fragrance.
               </h2>
               <p className="font-sans text-[#7C6D5A] text-base leading-relaxed mb-4">
-                [Placeholder — Founder story goes here. Describe how Maison de
-                Parfum began, what inspired the brand, and the journey from
-                concept to creation.]
+                Maison de Parfum was born from a simple but powerful belief —
+                that truly exceptional fragrance should not be reserved for the
+                few. Founded in Brisbane, Australia, our house was built by
+                people deeply passionate about the art of perfumery, frustrated
+                by the gap between what luxury fragrance could be and what it
+                often was: overpriced, overhyped, and underwhelming in
+                performance.
               </p>
               <p className="font-sans text-[#7C6D5A] text-base leading-relaxed">
-                [Placeholder — Continue with the brand's early milestones, first
-                collections, and the moment the vision became clear.]
+                From our very first formulation, we committed to one standard —
+                Extrait de Parfum concentration, the highest in fine perfumery.
+                No compromise on ingredients, no shortcuts in the creative
+                process. Every scent in our collection tells a story, and every
+                bottle is an invitation to wear it as your own.
               </p>
             </motion.div>
             <motion.div
