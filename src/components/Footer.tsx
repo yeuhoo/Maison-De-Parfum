@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="bg-(--bridal-white) text-(--text-primary) border-t border-(--muted-sand)">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <h3 className="text-lg font-semibold mb-4 font-heading">
               Maison de Parfum

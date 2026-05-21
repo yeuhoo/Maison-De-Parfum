@@ -425,7 +425,7 @@ export default function CheckoutPage() {
             </h1>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12">
+          <div className="grid grid-cols-1 xl:grid-cols-[1fr_400px] gap-12">
             {/* ── Left: Form ─────────────────────────────────────── */}
             <div className="space-y-10">
               {/* Contact & Shipping */}
@@ -531,7 +531,7 @@ export default function CheckoutPage() {
                   PAYMENT
                 </h2>
                 <div className="rounded-2xl shadow-xl border border-[#f0e8d9] bg-white/80 p-7 max-w-xl mx-auto flex flex-col gap-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Only Name, Address, City Inputs */}
                     <div className="flex flex-col gap-3">
                       {[

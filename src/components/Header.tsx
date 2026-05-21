@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 
@@ -17,6 +18,12 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { count, openDrawer } = useCart();
+  const router = useRouter();
+
+  const handleNavClick = (href: string) => {
+    setMenuOpen(false);
+    router.push(href);
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -41,7 +48,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex absolute left-[54%] top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-14">
+          <nav className="hidden lg:flex absolute left-[54%] top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-14">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
@@ -54,7 +61,7 @@ export default function Header() {
           </nav>
 
           {/* Right Actions */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-8">
             <button
               aria-label="Search"
               className="text-text-primary hover:text-(--button-gold) transition-colors duration-300"
@@ -102,11 +109,11 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Mobile Hamburger */}
+          {/* Mobile / Tablet Hamburger */}
           <button
             aria-label="Toggle menu"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden flex flex-col gap-1.5 p-1 text-text-primary hover:text-(--button-gold) transition-colors"
+            className="lg:hidden flex flex-col gap-1.5 p-1 text-text-primary hover:text-(--button-gold) transition-colors"
           >
             <span
               className={`block w-6 h-px bg-current transition-all duration-300 origin-center ${menuOpen ? "rotate-45 translate-y-2.5" : ""}`}
@@ -126,11 +133,12 @@ export default function Header() {
         {menuOpen && (
           <motion.div
             key="mobile-menu"
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-            className="fixed top-20 left-0 right-0 z-40 md:hidden bg-(--bridal-white) border-b border-(--muted-sand) shadow-md"
+            exit={{ opacity: 0, y: -6, pointerEvents: "none" }}
+            transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+            style={{ pointerEvents: menuOpen ? "auto" : "none" }}
+            className="fixed top-20 left-0 right-0 z-40 lg:hidden bg-(--bridal-white) border-b border-(--muted-sand) shadow-md"
           >
             <nav className="flex flex-col px-6 py-5">
               {[
@@ -147,25 +155,19 @@ export default function Header() {
                     ease: [0.25, 0.1, 0.25, 1],
                   }}
                 >
-                  {href === "#" ? (
-                    <button
-                      onClick={() => {
+                  <button
+                    onClick={() => {
+                      if (href === "#") {
                         setMenuOpen(false);
                         openDrawer();
-                      }}
-                      className="flex items-center w-full py-3 text-[13px] tracking-[0.12em] uppercase font-medium text-text-primary hover:text-(--button-gold) transition-colors duration-300 border-b border-(--muted-sand) last:border-0"
-                    >
-                      {label}
-                    </button>
-                  ) : (
-                    <Link
-                      href={href}
-                      onClick={() => setMenuOpen(false)}
-                      className="flex items-center py-3 text-[13px] tracking-[0.12em] uppercase font-medium text-text-primary hover:text-(--button-gold) transition-colors duration-300 border-b border-(--muted-sand) last:border-0"
-                    >
-                      {label}
-                    </Link>
-                  )}
+                      } else {
+                        handleNavClick(href);
+                      }
+                    }}
+                    className="flex items-center w-full py-3 text-[13px] tracking-[0.12em] uppercase font-medium text-text-primary hover:text-(--button-gold) transition-colors duration-300 border-b border-(--muted-sand) last:border-0"
+                  >
+                    {label}
+                  </button>
                 </motion.div>
               ))}
             </nav>
