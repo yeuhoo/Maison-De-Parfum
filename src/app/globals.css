@@ -13,14 +13,14 @@
   --button-gold-hover: #b8974e; /* Primary Button Hover Gold */
   --soft-cream: rgb(249, 249, 224); /* Soft Cream */
   --matte-black: #111111;
-  --warm-taupe: #b8a999;
+  --warm-taupe: #8c7d6e;
   --muted-sand: #d8c6af;
   --bridal-white: #faf8f5;
   --blush-nude: #e7d5c8;
 
   /* Typography Colors */
   --text-primary: rgb(60, 34, 24); /* Deep Espresso – headings & primary text */
-  --text-secondary: #b8a999; /* Warm Taupe – body copy & subtext */
+  --text-secondary: #8c7d6e; /* Warm Taupe – body copy & subtext */
 }
 
 @theme inline {
