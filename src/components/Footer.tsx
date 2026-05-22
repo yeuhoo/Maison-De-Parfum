@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="text-(--text-primary) pt-24 border-t border-(--muted-sand)" style={{ background: "linear-gradient(to bottom, #e8ddd0, #faf8f5)" }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="text-(--text-primary) pt-24" style={{ background: "linear-gradient(to bottom, #e8ddd0, #faf8f5)" }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-(--muted-sand)">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <h3 className="text-lg font-semibold mb-4 font-heading">
