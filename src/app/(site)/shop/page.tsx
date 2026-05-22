@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -106,11 +107,22 @@ const BottleIcon = () => (
   </svg>
 );
 
-export default function ShopPage() {
+import { Suspense } from "react";
+
+function ShopPage() {
+  const searchParams = useSearchParams();
   const [active, setActive] = useState<Category>("All");
   const [query, setQuery] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
   const { addToCart } = useCart();
+
+  // Set active category from URL param (e.g. /shop?category=Floral)
+  useEffect(() => {
+    const cat = searchParams.get("category") as Category | null;
+    if (cat && (["All", "Floral", "Woody", "Oriental", "Fresh"] as string[]).includes(cat)) {
+      setActive(cat);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     fetch("/api/products")
@@ -467,5 +479,13 @@ export default function ShopPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function ShopPageWrapper() {
+  return (
+    <Suspense>
+      <ShopPage />
+    </Suspense>
   );
 }
