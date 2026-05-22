@@ -174,7 +174,7 @@ function ShopPage({ initialProducts }: ShopContentProps) {
       </section>
 
       {/* ── Filter Bar ───────────────────────────────────────── */}
-      <div className="sticky top-20 z-30 border-b border-(--muted-sand)" style={{ background: "linear-gradient(to bottom, #faf8f5, #f5efe6)" }}>
+      <div className="sticky top-20 z-20 border-b border-(--muted-sand)" style={{ background: "linear-gradient(to bottom, #faf8f5, #f5efe6)" }}>
         <div className="max-w-6xl mx-auto px-6 lg:px-8 py-3">
           <div className="flex flex-wrap items-center gap-2 md:gap-4">
             {/* Category tabs */}

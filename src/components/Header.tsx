@@ -34,7 +34,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 ease-in-out bg-(--bridal-white) ${scrolled ? "shadow-sm border-b border-(--muted-sand)" : "border-b border-transparent"}`}
+        className={`fixed top-0 left-0 right-0 z-[100] h-20 transition-all duration-300 ease-in-out bg-(--bridal-white) ${scrolled ? "shadow-sm border-b border-(--muted-sand)" : "border-b border-transparent"}`}
       >
         <div className="max-w-330 mx-auto px-8 lg:px-12 h-full flex items-center justify-between relative">
           {/* Logo */}
@@ -138,7 +138,7 @@ export default function Header() {
             exit={{ opacity: 0, y: -6, pointerEvents: "none" }}
             transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
             style={{ pointerEvents: menuOpen ? "auto" : "none" }}
-            className="fixed top-20 left-0 right-0 z-40 lg:hidden bg-(--bridal-white) border-b border-(--muted-sand) shadow-md"
+            className="fixed top-20 left-0 right-0 z-[99] lg:hidden bg-(--bridal-white) border-b border-(--muted-sand) shadow-md"
           >
             <nav className="flex flex-col px-6 py-5">
               {[
