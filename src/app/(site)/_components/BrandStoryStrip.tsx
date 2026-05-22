@@ -6,7 +6,9 @@ const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
 export default function BrandStoryStrip() {
   return (
-    <section className="bg-[#f0e8dc] py-20 px-6 text-center overflow-hidden border-y border-[#e0d0bc]">
+    <section className="py-20 px-6 text-center overflow-hidden border-y border-[#e0d0bc] relative" style={{ background: "linear-gradient(to bottom, #ede4d4, #e8dbc8, #ede4d4)" }}>
+      {/* Centered radial gold glow */}
+      <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 80% at 50% 50%, rgba(201,169,110,0.14) 0%, transparent 70%)" }} />
       <div className="max-w-3xl mx-auto">
         <motion.div
           initial={{ scaleX: 0 }}

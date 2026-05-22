@@ -52,7 +52,11 @@ export default function FeaturedProducts({ products }: Props) {
   const { addToCart } = useCart();
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 relative overflow-hidden" style={{ background: "linear-gradient(to bottom, #faf8f5, #ede4d4)" }}>
+      {/* Radial gold glow — top right */}
+      <div className="pointer-events-none absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full" style={{ background: "radial-gradient(circle, rgba(201,169,110,0.13) 0%, transparent 70%)" }} />
+      {/* Radial gold glow — bottom left */}
+      <div className="pointer-events-none absolute -bottom-24 -left-24 w-[360px] h-[360px] rounded-full" style={{ background: "radial-gradient(circle, rgba(201,169,110,0.09) 0%, transparent 70%)" }} />
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

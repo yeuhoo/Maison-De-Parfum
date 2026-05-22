@@ -39,7 +39,9 @@ const SCENT_FAMILIES = [
 
 export default function ScentFamilies() {
   return (
-    <section className="py-20 bg-[#faf8f5]">
+    <section className="py-20 relative overflow-hidden" style={{ background: "linear-gradient(to bottom, #ede4d4, #faf8f5)" }}>
+      {/* Radial glow — top left */}
+      <div className="pointer-events-none absolute -top-20 -left-20 w-[400px] h-[400px] rounded-full" style={{ background: "radial-gradient(circle, rgba(201,169,110,0.11) 0%, transparent 70%)" }} />
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
