@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
@@ -36,24 +37,15 @@ export default function PerfumeBarSpotlight() {
   return (
     <section className="bg-[#faf8f5] border-t border-[#e8dfd4] overflow-hidden">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2">
-        {/* Left: editorial image placeholder */}
-        <div className="relative min-h-105 bg-linear-to-br from-[#f0e6d8] to-[#e8d8c4] flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_60%_50%,rgba(201,169,110,0.18),transparent)]" />
-          {/* Decorative bottle cluster */}
-          <div className="animate-float relative z-10 flex items-end gap-6 opacity-50">
-            {[58, 72, 64].map((h, i) => (
-              <div
-                key={i}
-                style={{ height: h }}
-                className="flex flex-col items-center justify-end text-[#c9a96e]"
-              >
-                <BottleIcon />
-              </div>
-            ))}
-          </div>
-          <div className="absolute bottom-8 left-8 text-[9px] tracking-[0.3em] uppercase text-[#c9a96e]/60">
-            Wedding Perfume Bar
-          </div>
+        {/* Left: editorial image */}
+        <div className="relative min-h-105 overflow-hidden">
+          <Image
+            src="/perfume-bar.png"
+            alt="Wedding Perfume Bar experience"
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
         </div>
         {/* Right: copy */}
         <motion.div
