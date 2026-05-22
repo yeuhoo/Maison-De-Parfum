@@ -145,11 +145,12 @@ function ShopPage() {
   return (
     <div className="min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative py-24 md:py-36 overflow-hidden">
-        <img src="/sample_bg.png" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+      <section className="relative overflow-hidden">
+        <img src="/sample_bg.png" alt="" aria-hidden="true" className="w-full h-auto block" />
         <div className="absolute inset-0 bg-[rgba(30,16,8,0.45)]" />
 
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="max-w-4xl w-full mx-auto px-6 lg:px-8 text-center">
           <motion.p
             variants={fadeUp}
             initial="hidden"
@@ -180,6 +181,7 @@ function ShopPage() {
             Discover our curated collection of luxury fragrances, hand-crafted
             from the world&apos;s finest raw ingredients.
           </motion.p>
+        </div>
         </div>
       </section>
 
