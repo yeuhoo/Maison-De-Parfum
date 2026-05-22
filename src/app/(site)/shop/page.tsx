@@ -187,7 +187,7 @@ function ShopPage() {
 
       {/* ── Filter Bar ───────────────────────────────────────── */}
       <div className="bg-background sticky top-20 z-30 border-b border-(--muted-sand)">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 py-3">
           <div className="flex flex-wrap items-center gap-2 md:gap-4">
             {/* Category tabs */}
             <div className="flex items-center overflow-x-auto shrink-0">
