@@ -174,7 +174,7 @@ function ShopPage({ initialProducts }: ShopContentProps) {
       </section>
 
       {/* ── Filter Bar ───────────────────────────────────────── */}
-      <div className="bg-background sticky top-20 z-30 border-b border-(--muted-sand)">
+      <div className="sticky top-20 z-30 border-b border-(--muted-sand)" style={{ background: "linear-gradient(to bottom, #faf8f5, #f5efe6)" }}>
         <div className="max-w-6xl mx-auto px-6 lg:px-8 py-3">
           <div className="flex flex-wrap items-center gap-2 md:gap-4">
             {/* Category tabs */}
@@ -232,7 +232,10 @@ function ShopPage({ initialProducts }: ShopContentProps) {
       </div>
 
       {/* ── Product Grid ─────────────────────────────────────── */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-24 relative overflow-hidden" style={{ background: "linear-gradient(to bottom, #f5efe6, #faf8f5, #ede4d4)" }}>
+        {/* Radial gold glows */}
+        <div className="pointer-events-none absolute -top-24 -right-24 w-[500px] h-[500px] rounded-full" style={{ background: "radial-gradient(circle, rgba(201,169,110,0.13) 0%, transparent 70%)" }} />
+        <div className="pointer-events-none absolute bottom-0 -left-24 w-[400px] h-[400px] rounded-full" style={{ background: "radial-gradient(circle, rgba(201,169,110,0.09) 0%, transparent 70%)" }} />
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <AnimatePresence mode="wait">
             {filtered.length === 0 && (
@@ -370,7 +373,8 @@ function ShopPage({ initialProducts }: ShopContentProps) {
       </section>
 
       {/* ── CTA Banner ───────────────────────────────────────── */}
-      <section className="py-20 bg-background border-t border-(--muted-sand)">
+      <section className="py-20 border-t border-[#e0d0bc] relative overflow-hidden" style={{ background: "linear-gradient(to bottom, #ede4d4, #e8dbc8, #ede4d4)" }}>
+        <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 80% at 50% 50%, rgba(201,169,110,0.14) 0%, transparent 70%)" }} />
         <div className="max-w-2xl mx-auto px-6 lg:px-8 text-center">
           <motion.div
             variants={fadeUp}
