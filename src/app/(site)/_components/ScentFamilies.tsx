@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
@@ -9,22 +10,30 @@ const SCENT_FAMILIES = [
   {
     name: "Floral",
     descriptor: "Rose · Jasmine · Peony",
-    bg: "bg-[#f5ece8]",
+    image: "/Floral.png",
+    bg: "#f5ece8",
+    imgClass: "scale-[0.82] group-hover:scale-[0.88]",
   },
   {
     name: "Woody",
     descriptor: "Sandalwood · Cedar · Vetiver",
-    bg: "bg-[#ede3d6]",
+    image: "/Woody.png",
+    bg: "transparent",
+    imgClass: "group-hover:scale-105",
   },
   {
     name: "Oriental",
     descriptor: "Oud · Amber · Vanilla",
-    bg: "bg-[#f0e5d0]",
+    image: "/Oriental.png",
+    bg: "#f0e5d0",
+    imgClass: "scale-[0.82] group-hover:scale-[0.88]",
   },
   {
     name: "Fresh",
     descriptor: "Citrus · Aquatic · Green Tea",
-    bg: "bg-[#deeae8]",
+    image: "/Fresh.png",
+    bg: "transparent",
+    imgClass: "group-hover:scale-105",
   },
 ];
 
@@ -60,21 +69,25 @@ export default function ScentFamilies() {
                 href={`/shop?category=${family.name}`}
                 className="group block relative rounded-2xl overflow-hidden"
               >
-                {/* Image placeholder */}
-                <div className={`${family.bg} aspect-[4/3] md:aspect-[3/2] w-full relative`}>
+                {/* Image */}
+                <div className="aspect-[4/3] md:aspect-[3/2] w-full relative" style={{ background: family.bg }}>
+                  <Image
+                    src={family.image}
+                    alt={family.name}
+                    fill
+                    className={`object-cover transition-transform duration-700 ${family.imgClass}`}
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                  />
                   {/* Subtle inner border */}
                   <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-[#c9a96e]/10" />
                   {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-[#3c2218] opacity-0 group-hover:opacity-[0.06] transition-opacity duration-400" />
-                  {/* Corner accent */}
-                  <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-[#c9a96e]/30 rounded-tl" />
-                  <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-[#c9a96e]/30 rounded-br" />
+                  <div className="absolute inset-0 bg-[#3c2218] opacity-0 group-hover:opacity-[0.12] transition-opacity duration-400" />
                   {/* Label overlay */}
-                  <div className="absolute inset-x-0 bottom-0 px-5 pb-5 pt-10 bg-linear-to-t from-[rgba(60,34,24,0.18)] to-transparent">
-                    <p className="font-heading text-lg md:text-xl font-semibold text-[#3c2218]">
+                  <div className="absolute inset-x-0 bottom-0 px-5 pb-5 pt-14 bg-linear-to-t from-[rgba(30,16,8,0.65)] to-transparent">
+                    <p className="font-heading text-lg md:text-xl font-semibold text-[#faf8f5]">
                       {family.name}
                     </p>
-                    <p className="text-[10px] tracking-wide text-[#7c6d5a] mt-0.5">
+                    <p className="text-[10px] tracking-wide text-[#e8ddd4] mt-0.5">
                       {family.descriptor}
                     </p>
                   </div>
