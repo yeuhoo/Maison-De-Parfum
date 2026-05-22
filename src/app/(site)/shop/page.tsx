@@ -2,7 +2,7 @@ import { sql } from "@/lib/db";
 import type { Product } from "@/lib/products";
 import ShopContent from "./ShopContent";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 async function getProducts(): Promise<Product[]> {
   const rows = await sql`

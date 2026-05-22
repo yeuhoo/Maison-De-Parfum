@@ -6,7 +6,7 @@ import type { Product } from "@/lib/products";
 import { sql } from "@/lib/db";
 import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Maison de Parfum — Luxury Extrait de Parfum, Brisbane Australia",
@@ -49,6 +49,7 @@ export default async function Home() {
           muted
           loop
           playsInline
+          preload="metadata"
           style={{ zIndex: 0 }}
         >
           <source src="/hero_vid.mp4" type="video/mp4" />

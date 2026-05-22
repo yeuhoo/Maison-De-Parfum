@@ -102,6 +102,7 @@ export default function FeaturedProducts({ products }: Props) {
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 33vw"
+                    priority={i === 0}
                   />
                 ) : (
                   <span className="text-[#c9a96e]/60 group-hover:scale-110 transition-transform duration-500">

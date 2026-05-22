@@ -1,12 +1,15 @@
+import { cache } from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import type { Product } from "@/lib/products";
 import { sql } from "@/lib/db";
 import ProductDetailClient from "./ProductDetailClient";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
-async function getProducts(): Promise<Product[]> {
+// cache() deduplicates: generateMetadata + page both call this,
+// but only one DB round-trip is made per request.
+const getProducts = cache(async (): Promise<Product[]> => {
   const rows = await sql`
     SELECT id, name, category, notes,
            price_50ml AS "price50ml", price_30ml AS "price30ml",
@@ -18,7 +21,7 @@ async function getProducts(): Promise<Product[]> {
     ORDER BY id
   `;
   return rows as Product[];
-}
+});
 
 // ── Per-product SEO metadata ──────────────────────────────────────────────────
 export async function generateMetadata({

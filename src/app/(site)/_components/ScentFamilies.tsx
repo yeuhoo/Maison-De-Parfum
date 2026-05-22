@@ -78,6 +78,7 @@ export default function ScentFamilies() {
                     fill
                     className={`object-cover transition-transform duration-700 group-hover:scale-105 ${family.position}`}
                     sizes="(max-width: 768px) 50vw, 33vw"
+                    priority={i < 2}
                   />
                   {/* Subtle inner border */}
                   <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-[#c9a96e]/10" />

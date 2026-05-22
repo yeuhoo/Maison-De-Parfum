@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import type { Product } from "@/lib/products";
@@ -133,13 +134,16 @@ export default function ProductDetailClient({
                 <>
                   {/* Main image with crossfade transitions */}
                   {allImages.map((img, idx) => (
-                    <img
+                    <Image
                       key={idx}
                       src={img}
                       alt={`${product.name} view ${idx + 1}`}
-                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                      fill
+                      className={`object-cover transition-opacity duration-300 ${
                         idx === displayImage ? "opacity-100" : "opacity-0"
                       }`}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority={idx === 0}
                     />
                   ))}
 
@@ -206,10 +210,12 @@ export default function ProductDetailClient({
                     }`}
                     aria-label={`View image ${idx + 1} of ${allImages.length}`}
                   >
-                    <img
+                    <Image
                       src={img}
                       alt={`${product.name} ${idx + 1}`}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="56px"
                     />
                   </button>
                 ))}
@@ -518,11 +524,12 @@ export default function ProductDetailClient({
                   <Link href={`/shop/${rel.id}`} className="group block">
                     <div className="relative h-52 bg-background border border-(--muted-sand) flex items-center justify-center mb-4 overflow-hidden">
                       {rel.imageUrl ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
+                        <Image
                           src={rel.imageUrl}
                           alt={rel.name}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
+                          sizes="(max-width: 640px) 100vw, 33vw"
                         />
                       ) : (
                         <div className="text-(--muted-sand) transition-transform duration-500 group-hover:scale-110">
