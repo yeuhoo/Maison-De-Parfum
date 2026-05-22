@@ -14,9 +14,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Maison de Parfum — Luxury Extrait de Parfum, Brisbane Australia",
+  title: "Maison de Parfum - Elegant Perfumes",
   description:
-    "Discover handcrafted Extrait de Parfum by Maison de Parfum. Luxury fragrances compounded in Australia from the world's finest raw ingredients.",
+    "Discover exquisite perfumes at Maison de Parfum. Shop our collection of luxury fragrances with elegant scents for every occasion.",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-AU">
+    <html lang="en">
       <body
         className={`${playfair.variable} ${montserrat.variable} antialiased`}
       >
