@@ -29,6 +29,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Preconnect to speed up Google Fonts (already used by Next.js font loader) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Preload hero poster so the LCP image resolves immediately */}
+        <link rel="preload" as="image" href="/0D0A4272.jpg" />
+      </head>
       <body
         className={`${playfair.variable} ${montserrat.variable} antialiased`}
       >

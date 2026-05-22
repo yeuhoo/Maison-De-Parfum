@@ -66,7 +66,7 @@ export default function FeaturedProducts({ products }: Props) {
           className="flex items-end justify-between mb-12"
         >
           <div>
-            <p className="text-[10px] tracking-[0.35em] uppercase text-[#c9a96e] mb-3">
+            <p className="text-[10px] tracking-[0.35em] uppercase text-[#8B6914] mb-3">
               Bestsellers
             </p>
             <h2 className="font-heading text-3xl md:text-4xl font-semibold text-text-primary">
@@ -126,13 +126,13 @@ export default function FeaturedProducts({ products }: Props) {
               </div>
               {/* Details */}
               <div className="p-6">
-                <p className="text-[10px] tracking-[0.2em] uppercase mb-1" style={{ color: "#b28e3b" }}>
+                <p className="text-[10px] tracking-[0.2em] uppercase mb-1" style={{ color: "#8B6914" }}>
                   {product.category}
                 </p>
                 <h3 className="font-heading text-lg font-semibold text-text-primary mb-1">
                   {product.name}
                 </h3>
-                <p className="text-[11px] mb-4 tracking-wide uppercase" style={{ color: [1, 6, 8].includes(product.id) ? "#7C6D5A" : "#3C2218" }}>
+                <p className="text-[11px] mb-4 tracking-wide uppercase" style={{ color: "#5a4535" }}>
                   {product.notes}
                 </p>
                 <div className="flex items-center justify-between">

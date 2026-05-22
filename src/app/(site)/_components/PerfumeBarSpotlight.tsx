@@ -57,7 +57,7 @@ export default function PerfumeBarSpotlight() {
           transition={{ duration: 0.7, ease: EASE }}
           className="flex flex-col justify-center px-6 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14 xl:px-16 xl:py-16"
         >
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#c9a96e] mb-5">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#8B6914] mb-5">
             Signature Experience
           </p>
           <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-semibold text-text-primary leading-snug mb-5">

@@ -50,6 +50,7 @@ export default async function Home() {
           loop
           playsInline
           preload="metadata"
+          poster="/0D0A4272.jpg"
           style={{ zIndex: 0 }}
         >
           <source src="/hero_vid.mp4" type="video/mp4" />

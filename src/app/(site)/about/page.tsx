@@ -48,7 +48,7 @@ export default function AboutPage() {
             initial="hidden"
             animate="visible"
             custom={0}
-            className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#B28E3B] mb-6"
+            className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#8B6914] mb-6"
           >
             Maison de Parfum · Our Story
           </motion.p>
@@ -61,14 +61,14 @@ export default function AboutPage() {
           >
             Crafted with intention,
             <br className="hidden md:block" />
-            <span className="text-[#B28E3B]"> worn with meaning.</span>
+            <span className="text-[#8B6914]"> worn with meaning.</span>
           </motion.h1>
           <motion.p
             variants={fadeUp}
             initial="hidden"
             animate="visible"
             custom={2}
-            className="font-sans text-[#7C6D5A] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
+            className="font-sans text-[#5a4535] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
           >
             We are an Australian luxury fragrance house dedicated to creating
             performance-driven Extrait de Parfum — and unforgettable scent
@@ -88,14 +88,14 @@ export default function AboutPage() {
               viewport={{ once: true }}
               custom={0}
             >
-              <p className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#B28E3B] mb-4">
+              <p className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#8B6914] mb-4">
                 01 · The Beginning
               </p>
               <h2 className="font-heading text-3xl md:text-4xl font-semibold text-[#3C2218] mb-6 leading-snug">
                 Born from a love of
                 <br /> fine fragrance.
               </h2>
-              <p className="font-sans text-[#7C6D5A] text-base leading-relaxed mb-4">
+              <p className="font-sans text-[#5a4535] text-base leading-relaxed mb-4">
                 Maison de Parfum was born from a simple but powerful belief —
                 that truly exceptional fragrance should not be reserved for the
                 few. Founded in Brisbane, Australia, our house was built by
@@ -104,7 +104,7 @@ export default function AboutPage() {
                 often was: overpriced, overhyped, and underwhelming in
                 performance.
               </p>
-              <p className="font-sans text-[#7C6D5A] text-base leading-relaxed">
+              <p className="font-sans text-[#5a4535] text-base leading-relaxed">
                 From our very first formulation, we committed to one standard —
                 Extrait de Parfum concentration, the highest in fine perfumery.
                 No compromise on ingredients, no shortcuts in the creative
@@ -159,20 +159,20 @@ export default function AboutPage() {
               viewport={{ once: true }}
               custom={1}
             >
-              <p className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#B28E3B] mb-4">
+              <p className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#8B6914] mb-4">
                 02 · Our Mission
               </p>
               <h2 className="font-heading text-3xl md:text-4xl font-semibold text-[#3C2218] mb-6 leading-snug">
                 Luxury performance,
                 <br /> without the markup.
               </h2>
-              <p className="font-sans text-[#7C6D5A] text-base leading-relaxed mb-4">
+              <p className="font-sans text-[#5a4535] text-base leading-relaxed mb-4">
                 Our mission is to create meaningful fragrance experiences
                 through elevated Extrait de Parfum formulations — and
                 unforgettable wedding scent experiences through our Perfume Bar
                 service.
               </p>
-              <p className="font-sans text-[#7C6D5A] text-base leading-relaxed">
+              <p className="font-sans text-[#5a4535] text-base leading-relaxed">
                 We believe great fragrance should be accessible without
                 compromise. Every bottle we craft meets the same standard as the
                 world&apos;s finest perfume houses — at a price that respects
@@ -193,7 +193,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <p className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#B28E3B] mb-4">
+            <p className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#8B6914] mb-4">
               03 · What We Stand For
             </p>
             <h2 className="font-heading text-3xl md:text-4xl font-semibold text-[#3C2218]">
@@ -214,7 +214,7 @@ export default function AboutPage() {
                 <h3 className="font-heading text-xl font-semibold text-[#3C2218] mb-3">
                   {v.title}
                 </h3>
-                <p className="font-sans text-[#7C6D5A] text-base leading-relaxed">
+                <p className="font-sans text-[#5a4535] text-base leading-relaxed">
                   {v.body}
                 </p>
               </motion.div>
@@ -233,7 +233,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <p className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#B28E3B] mb-4">
+            <p className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#8B6914] mb-4">
               04 · The People
             </p>
             <h2 className="font-heading text-3xl md:text-4xl font-semibold text-[#3C2218]">
@@ -263,13 +263,13 @@ export default function AboutPage() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <p className="font-heading text-[11px] tracking-[0.2em] uppercase text-[#B28E3B] mb-1">
+                <p className="font-heading text-[11px] tracking-[0.2em] uppercase text-[#8B6914] mb-1">
                   {member.role}
                 </p>
                 <h3 className="font-heading text-lg font-semibold text-[#3C2218] mb-1">
                   [Team Member Name]
                 </h3>
-                <p className="font-sans text-[#7C6D5A] text-sm leading-relaxed">
+                <p className="font-sans text-[#5a4535] text-sm leading-relaxed">
                   [Short bio placeholder — background, expertise, and what they
                   bring to Maison de Parfum.]
                 </p>
@@ -290,7 +290,7 @@ export default function AboutPage() {
             className="space-y-6"
           >
             <p className="font-heading text-[11px] tracking-[0.3em] uppercase"
-              style={{ color: "#B28E3B" }}
+              style={{ color: "#8B6914" }}
             >
               Explore
             </p>
@@ -308,7 +308,7 @@ export default function AboutPage() {
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2.5 border px-8 py-4 text-[12px] font-sans tracking-widest uppercase hover:bg-(--button-gold) hover:text-(--bridal-white) transition-colors duration-300"
-                style={{ borderColor: "#B28E3B", color: "#B28E3B" }}
+                style={{ borderColor: "#8B6914", color: "#8B6914" }}
               >
                 Get in Touch
               </Link>

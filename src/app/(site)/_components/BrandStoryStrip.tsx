@@ -40,7 +40,7 @@ export default function BrandStoryStrip() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
-          className="text-[11px] tracking-[0.35em] uppercase text-[#c9a96e]"
+          className="text-[11px] tracking-[0.35em] uppercase text-[#8B6914]"
         >
           All Extrait concentration · Compounded in Australia
         </motion.p>

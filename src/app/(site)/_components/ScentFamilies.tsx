@@ -50,7 +50,7 @@ export default function ScentFamilies() {
           transition={{ duration: 0.6, ease: EASE }}
           className="text-center mb-12"
         >
-          <p className="text-[10px] tracking-[0.35em] uppercase text-[#c9a96e] mb-3">
+          <p className="text-[10px] tracking-[0.35em] uppercase text-[#8B6914] mb-3">
             Explore by Family
           </p>
           <h2 className="font-heading text-3xl md:text-4xl font-semibold text-text-primary">

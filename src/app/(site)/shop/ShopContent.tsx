@@ -133,11 +133,11 @@ function ShopPage({ initialProducts }: ShopContentProps) {
   return (
     <div className="min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden min-h-[55vh] bg-[#1e1008]">
-        <Image src="/sample_bg.png" alt="" aria-hidden={true} width={2400} height={1200} className="w-full h-auto block" priority />
+      <section className="relative overflow-hidden bg-[#1e1008]">
+        <Image src="/sample_bg.png" alt="" aria-hidden={true} fill className="object-cover object-center" priority />
         <div className="absolute inset-0 bg-[rgba(30,16,8,0.45)]" />
 
-        <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="relative z-10 min-h-[55vh] flex items-center justify-center py-16 sm:py-20">
           <div className="max-w-4xl w-full mx-auto px-6 lg:px-8 text-center">
             <motion.p
               variants={fadeUp}
@@ -184,7 +184,7 @@ function ShopPage({ initialProducts }: ShopContentProps) {
                   key={cat}
                   onClick={() => setActive(cat)}
                   className="relative px-5 py-5 text-[11px] tracking-[0.2em] uppercase font-medium whitespace-nowrap transition-colors duration-200"
-                  style={{ color: "#7C6D5A" }}
+                  style={{ color: "#5a4535" }}
                 >
                   {cat}
                   {active === cat && (

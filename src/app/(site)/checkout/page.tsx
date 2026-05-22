@@ -4,7 +4,13 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import Script from "next/script";
 import { useCart } from "@/context/CartContext";
+
+const SQ_APP_ID_ENV = process.env.NEXT_PUBLIC_SQUARE_APPLICATION_ID ?? "";
+const SQ_SCRIPT_URL = SQ_APP_ID_ENV.startsWith("sandbox-")
+  ? "https://sandbox.web.squarecdn.com/v1/square.js"
+  : "https://web.squarecdn.com/v1/square.js";
 
 // ── Square Web Payments SDK types ──────────────────────────────────────────────
 interface SqCard {
@@ -413,6 +419,11 @@ export default function CheckoutPage() {
 
   return (
     <>
+      <Script
+        src={SQ_SCRIPT_URL}
+        strategy="afterInteractive"
+        onLoad={() => setSqLoaded(true)}
+      />
       <div className="min-h-screen bg-background">
         <div className="max-w-6xl mx-auto px-6 lg:px-8 py-16">
           {/* Header */}
