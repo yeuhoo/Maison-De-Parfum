@@ -364,7 +364,6 @@ export default function ContactPage() {
               {[
                 { label: "Instagram", handle: "@maisondeparfum" },
                 { label: "TikTok", handle: "@maisondeparfum" },
-                { label: "Pinterest", handle: "@maisondeparfum" },
               ].map((s) => (
                 <div key={s.label} className="text-center">
                   <p className="text-[10px] tracking-[0.2em] uppercase text-text-secondary mb-0.5">
