@@ -153,7 +153,7 @@ function ShopPage({ initialProducts }: ShopContentProps) {
               initial="hidden"
               animate="visible"
               custom={1}
-              className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight text-[#faf8f5] mb-6"
+              className="font-heading text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight text-[#faf8f5] mb-6"
               style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.4)" }}
             >
               The Art of Fragrance
@@ -213,7 +213,7 @@ function ShopPage({ initialProducts }: ShopContentProps) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search fragrances…"
-                className="pl-8 pr-4 py-2 w-44 md:w-56 bg-(--soft-cream) border border-(--muted-sand) rounded text-[12px] text-text-primary placeholder:text-(--warm-taupe) focus:outline-none focus:border-(--button-gold) focus:w-64 transition-all duration-300"
+                className="pl-8 pr-4 py-2 w-32 sm:w-44 md:w-56 bg-(--soft-cream) border border-(--muted-sand) rounded text-[12px] text-text-primary placeholder:text-(--warm-taupe) focus:outline-none focus:border-(--button-gold) focus:w-40 sm:focus:w-64 transition-all duration-300"
               />
               {query && (
                 <button
@@ -271,7 +271,7 @@ function ShopPage({ initialProducts }: ShopContentProps) {
 
           <motion.div
             layout
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 sm:gap-x-6 sm:gap-y-12 lg:gap-x-8 lg:gap-y-16"
           >
             <AnimatePresence mode="popLayout">
               {filtered.map((product, i) => (
@@ -292,7 +292,7 @@ function ShopPage({ initialProducts }: ShopContentProps) {
                   className="group"
                 >
                   {/* Image area */}
-                  <div className="relative h-72 md:h-80 bg-(--bridal-white) border border-(--muted-sand) rounded overflow-hidden mb-5">
+                  <div className="relative h-56 sm:h-64 md:h-72 lg:h-80 bg-(--bridal-white) border border-(--muted-sand) rounded overflow-hidden mb-5">
                     {product.bestseller && (
                       <span className="absolute top-4 left-4 text-[10px] tracking-[0.18em] uppercase text-(--button-gold) bg-background border border-(--muted-sand) px-2.5 py-1 z-10">
                         Bestseller

@@ -40,7 +40,7 @@ export default function PerfumeBarSpotlight() {
       <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-full" style={{ background: "radial-gradient(ellipse 80% 80% at 80% 50%, rgba(201,169,110,0.12) 0%, transparent 70%)" }} />
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2">
         {/* Left: editorial image */}
-        <div className="relative min-h-105 overflow-hidden">
+        <div className="relative h-64 sm:h-80 lg:min-h-[420px] overflow-hidden">
           <Image
             src="/perfume-bar.png"
             alt="Wedding Perfume Bar experience"
@@ -55,12 +55,12 @@ export default function PerfumeBarSpotlight() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="flex flex-col justify-center px-10 py-16 lg:px-16"
+          className="flex flex-col justify-center px-6 py-10 sm:px-8 sm:py-12 lg:px-16 lg:py-16"
         >
           <p className="text-[10px] tracking-[0.4em] uppercase text-[#c9a96e] mb-5">
             Signature Experience
           </p>
-          <h2 className="font-heading text-3xl md:text-4xl font-semibold text-text-primary leading-snug mb-5">
+          <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-semibold text-text-primary leading-snug mb-5">
             Your Wedding Scent,
             <br />
             <em className="italic font-light text-[#c9a96e]">
@@ -75,7 +75,7 @@ export default function PerfumeBarSpotlight() {
           <p className="text-text-secondary text-sm leading-relaxed mb-8">
             Available across Australia. Enquire now to check your date.
           </p>
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/perfume-bar"
               className="inline-block bg-[#c9a96e] text-white px-8 py-3.5 text-[11px] tracking-[0.25em] uppercase font-semibold hover:bg-[#b8935a] transition-colors"

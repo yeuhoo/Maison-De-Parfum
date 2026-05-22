@@ -77,7 +77,7 @@ export default function ContactPage() {
             initial="hidden"
             animate="visible"
             custom={1}
-            className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight text-text-primary mb-6"
+            className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold leading-tight text-text-primary mb-6"
           >
             We&apos;d love to
             <br className="hidden md:block" />
@@ -102,7 +102,7 @@ export default function ContactPage() {
       {/* ── Contact Grid ─────────────────────────────────────── */}
       <section className="py-20 md:py-28 bg-(--bridal-white)">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-16">
             {/* Left — Info */}
             <motion.div
               variants={fadeUp}

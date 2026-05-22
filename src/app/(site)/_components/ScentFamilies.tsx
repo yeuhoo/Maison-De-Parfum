@@ -58,7 +58,7 @@ export default function ScentFamilies() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-4 md:gap-5">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-5">
           {SCENT_FAMILIES.map((family, i) => (
             <motion.div
               key={family.name}
@@ -85,8 +85,8 @@ export default function ScentFamilies() {
                   {/* Hover overlay */}
                   <div className="absolute inset-0 bg-[#3c2218] opacity-0 group-hover:opacity-[0.12] transition-opacity duration-400" />
                   {/* Label overlay */}
-                  <div className="absolute inset-x-0 bottom-0 px-5 pb-5 pt-14 bg-linear-to-t from-[rgba(30,16,8,0.65)] to-transparent">
-                    <p className="font-heading text-lg md:text-xl font-semibold text-[#faf8f5]">
+                  <div className="absolute inset-x-0 bottom-0 px-3 pb-3 pt-10 sm:px-5 sm:pb-5 sm:pt-14 bg-linear-to-t from-[rgba(30,16,8,0.65)] to-transparent">
+                    <p className="font-heading text-base sm:text-lg md:text-xl font-semibold text-[#faf8f5]">
                       {family.name}
                     </p>
                     <p className="text-[10px] tracking-wide text-[#e8ddd4] mt-0.5">

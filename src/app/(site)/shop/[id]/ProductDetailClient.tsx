@@ -115,7 +115,7 @@ export default function ProductDetailClient({
 
       {/* ── Main product section ── */}
       <section className="max-w-6xl mx-auto px-6 lg:px-8 py-14 md:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
           {/* Left — visual */}
           <motion.div
             variants={fadeUp}
@@ -152,7 +152,7 @@ export default function ProductDetailClient({
                       {/* Prev arrow */}
                       <button
                         onClick={() => setSelectedImage((i) => (i - 1 + allImages.length) % allImages.length)}
-                        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 bg-white/90 border border-(--muted-sand) flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 bg-white/90 border border-(--muted-sand) flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200 hover:bg-white"
                         aria-label="Previous image"
                       >
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -163,7 +163,7 @@ export default function ProductDetailClient({
                       {/* Next arrow */}
                       <button
                         onClick={() => setSelectedImage((i) => (i + 1) % allImages.length)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 bg-white/90 border border-(--muted-sand) flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 bg-white/90 border border-(--muted-sand) flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200 hover:bg-white"
                         aria-label="Next image"
                       >
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -319,7 +319,7 @@ export default function ProductDetailClient({
                 <div className="flex gap-3">
                   <button
                     onClick={() => setSelectedSize("50ml")}
-                    className={`px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${
+                    className={`flex-1 sm:flex-none px-4 sm:px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${
                       selectedSize === "50ml"
                         ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
                         : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
@@ -330,7 +330,7 @@ export default function ProductDetailClient({
                   {product.price30ml > 0 && (
                     <button
                       onClick={() => setSelectedSize("30ml")}
-                      className={`px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${
+                      className={`flex-1 sm:flex-none px-4 sm:px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${
                         selectedSize === "30ml"
                           ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
                           : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
@@ -511,7 +511,7 @@ export default function ProductDetailClient({
               </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {related.map((rel, i) => (
                 <motion.div
                   key={rel.id}

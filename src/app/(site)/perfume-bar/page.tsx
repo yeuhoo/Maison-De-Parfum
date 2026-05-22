@@ -97,8 +97,8 @@ export default function PerfumeBarPage() {
         >
           <source src="/perfume_bar_vid.mp4" type="video/mp4" />
         </video>
-        <div className="relative z-10 px-4 sm:px-6 lg:px-24 py-24">
-          <div className="text-right max-w-3xl ml-auto">
+        <div className="relative z-10 px-4 sm:px-6 lg:px-24 py-12 sm:py-16 md:py-24">
+          <div className="text-center sm:text-right max-w-3xl sm:ml-auto">
             <motion.p
               variants={fadeUp}
               initial="hidden"
@@ -114,7 +114,7 @@ export default function PerfumeBarPage() {
               initial="hidden"
               animate="visible"
               custom={1}
-              className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight mb-6"
+              className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold leading-tight mb-6"
               style={{ color: "#FAF8F5", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
             >
               More than a wedding favour —<br className="hidden md:block" />
@@ -164,7 +164,7 @@ export default function PerfumeBarPage() {
       {/* ── Section 1: Bespoke Guest Experience ─────────────── */}
       <section className="py-24 bg-(--bridal-white)">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -214,7 +214,7 @@ export default function PerfumeBarPage() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
-              className="h-80 md:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center overflow-hidden"
+              className="h-56 sm:h-64 md:h-80 lg:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center overflow-hidden"
             >
               <img
                 src="/0D0A4312-2.jpg"
@@ -229,14 +229,14 @@ export default function PerfumeBarPage() {
       {/* ── Section 2: Interactive Entertainment ────────────── */}
       <section id="how-it-works" className="py-24 bg-(--soft-cream)">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             <motion.div
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               custom={0}
-              className="h-80 md:h-96 bg-(--bridal-white) rounded-lg border border-(--muted-sand) flex items-center justify-center order-last md:order-first overflow-hidden"
+              className="h-56 sm:h-64 md:h-80 lg:h-96 bg-(--bridal-white) rounded-lg border border-(--muted-sand) flex items-center justify-center order-last md:order-first overflow-hidden"
             >
               <img
                 src="/0D0A4844-2.jpg"
@@ -281,7 +281,7 @@ export default function PerfumeBarPage() {
       {/* ── Section 3: Luxury Personalisation ───────────────── */}
       <section className="py-24 bg-(--bridal-white)">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -335,7 +335,7 @@ export default function PerfumeBarPage() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
-              className="h-80 md:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center overflow-hidden"
+              className="h-56 sm:h-64 md:h-80 lg:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center overflow-hidden"
             >
               <img
                 src="/0D0A4272.jpg"
@@ -409,7 +409,7 @@ export default function PerfumeBarPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-(--button-gold) text-(--bridal-white) px-8 py-4 rounded text-sm font-medium uppercase tracking-widest hover:bg-(--button-gold-hover) transition-colors duration-300"
+                className="inline-flex items-center justify-center gap-2 bg-(--button-gold) text-(--bridal-white) w-full sm:w-auto px-6 sm:px-8 py-4 rounded text-sm font-medium uppercase tracking-widest hover:bg-(--button-gold-hover) transition-colors duration-300"
                 style={{ fontFamily: "var(--font-montserrat)", fontWeight: 700, color: "#FAF8F5" }}
               >
                 Enquire Now
@@ -425,7 +425,7 @@ export default function PerfumeBarPage() {
               </Link>
               <Link
                 href="/shop"
-                className="inline-flex items-center justify-center gap-2 border border-[#B28E3B] text-[#B28E3B] px-8 py-4 rounded text-sm font-medium uppercase tracking-widest hover:bg-(--button-gold) hover:text-(--bridal-white) transition-colors duration-300"
+                className="inline-flex items-center justify-center gap-2 border border-[#B28E3B] text-[#B28E3B] w-full sm:w-auto px-6 sm:px-8 py-4 rounded text-sm font-medium uppercase tracking-widest hover:bg-(--button-gold) hover:text-(--bridal-white) transition-colors duration-300"
                 style={{ fontFamily: "var(--font-montserrat)" }}
               >
                 See Our Fragrances

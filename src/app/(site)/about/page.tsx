@@ -57,7 +57,7 @@ export default function AboutPage() {
             initial="hidden"
             animate="visible"
             custom={1}
-            className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight text-[#3C2218] mb-6"
+            className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold leading-tight text-[#3C2218] mb-6"
           >
             Crafted with intention,
             <br className="hidden md:block" />
@@ -80,7 +80,7 @@ export default function AboutPage() {
       {/* ── Our Story ────────────────────────────────────────── */}
       <section className="py-24 bg-(--bridal-white)">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -118,7 +118,7 @@ export default function AboutPage() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
-              className="h-80 md:h-120 bg-(--soft-cream) rounded border border-(--muted-sand) flex items-center justify-center overflow-hidden"
+              className="h-60 sm:h-72 md:h-96 lg:h-[480px] bg-(--soft-cream) rounded border border-(--muted-sand) flex items-center justify-center overflow-hidden"
             >
               <Image
                 src="/7.png"
@@ -135,14 +135,14 @@ export default function AboutPage() {
       {/* ── Mission ──────────────────────────────────────────── */}
       <section className="py-24 bg-(--soft-cream)">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             <motion.div
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               custom={0}
-              className="h-80 md:h-100 bg-(--bridal-white) rounded border border-(--muted-sand) flex items-center justify-center order-last md:order-first overflow-hidden"
+              className="h-60 sm:h-72 md:h-96 lg:h-[400px] bg-(--bridal-white) rounded border border-(--muted-sand) flex items-center justify-center order-last md:order-first overflow-hidden"
             >
               <Image
                 src="/4.png"

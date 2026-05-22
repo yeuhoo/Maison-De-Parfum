@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="text-(--text-primary) pt-24" style={{ background: "linear-gradient(to bottom, #e8ddd0, #faf8f5)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-(--muted-sand)">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
           <div>
             <h3 className="text-lg font-semibold mb-4 font-heading">
               Maison de Parfum
@@ -86,13 +86,13 @@ export default function Footer() {
             <p className="text-(--text-secondary) mb-4">
               Stay updated with our latest fragrances
             </p>
-            <div className="flex">
+            <div className="flex flex-col sm:flex-row">
               <input
                 type="email"
                 placeholder="Your email"
-                className="flex-1 px-3 py-2 border border-(--muted-sand) bg-(--bridal-white) text-(--text-primary) placeholder-(--text-secondary) focus:border-(--button-gold) focus:outline-none"
+                className="flex-1 w-full px-3 py-3 border border-(--muted-sand) bg-(--bridal-white) text-(--text-primary) placeholder-(--text-secondary) focus:border-(--button-gold) focus:outline-none"
               />
-              <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-2 hover:bg-(--button-gold-hover) transition-colors font-bold" style={{ color: "#FAF8F5" }}>
+              <button className="bg-(--button-gold) text-(--bridal-white) px-4 py-3 hover:bg-(--button-gold-hover) transition-colors font-bold whitespace-nowrap" style={{ color: "#FAF8F5" }}>
                 Subscribe
               </button>
             </div>

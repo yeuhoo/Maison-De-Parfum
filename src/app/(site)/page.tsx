@@ -54,16 +54,16 @@ export default async function Home() {
         >
           <source src="/hero_vid.mp4" type="video/mp4" />
         </video>
-        <div className="relative z-10 px-4 sm:px-6 lg:px-24 py-24">
+        <div className="relative z-10 px-4 sm:px-6 lg:px-24 py-12 sm:py-16 md:py-24">
           <div className="text-left">
             <h1
-              className="text-5xl md:text-7xl font-bold mb-6 font-heading leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 font-heading leading-tight"
               style={{ color: "#FAF8F5", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
             >
               Discover Your Signature Scent
             </h1>
             <p
-              className="text-xl md:text-2xl mb-8 max-w-3xl"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 max-w-3xl"
               style={{ fontFamily: "var(--font-montserrat)", color: "#FAF8F5", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
             >
               Explore our curated collection of luxury perfumes, crafted with
@@ -71,7 +71,7 @@ export default async function Home() {
             </p>
             <a
               href="/shop"
-              className="inline-block px-8 py-3 rounded font-bold transition-colors uppercase text-sm border border-(--bridal-white)"
+              className="inline-block px-6 sm:px-8 py-3 rounded font-bold transition-colors uppercase text-sm border border-(--bridal-white)"
               style={{ fontFamily: "var(--font-montserrat)", color: "#FAF8F5", backgroundColor: "transparent", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
             >
               Shop Now

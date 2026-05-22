@@ -58,7 +58,7 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.4, ease: EASE }}
-            className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-(--bridal-white) flex flex-col shadow-2xl"
+            className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-[90vw] sm:max-w-md bg-(--bridal-white) flex flex-col shadow-2xl"
             role="dialog"
             aria-label="Shopping cart"
           >
@@ -201,7 +201,7 @@ export default function CartDrawer() {
                                 )
                               }
                               disabled={item.quantity <= 1}
-                              className="w-7 h-7 flex items-center justify-center text-text-secondary hover:text-(--button-gold) transition-colors disabled:opacity-30"
+                              className="w-9 h-9 flex items-center justify-center text-text-secondary hover:text-(--button-gold) transition-colors disabled:opacity-30"
                               aria-label="Decrease quantity"
                             >
                               <svg
@@ -218,7 +218,7 @@ export default function CartDrawer() {
                                 />
                               </svg>
                             </button>
-                            <span className="w-7 text-center text-sm text-text-primary font-medium">
+                            <span className="w-9 text-center text-sm text-text-primary font-medium">
                               {item.quantity}
                             </span>
                             <button
@@ -229,7 +229,7 @@ export default function CartDrawer() {
                                   item.quantity + 1,
                                 )
                               }
-                              className="w-7 h-7 flex items-center justify-center text-text-secondary hover:text-(--button-gold) transition-colors"
+                              className="w-9 h-9 flex items-center justify-center text-text-secondary hover:text-(--button-gold) transition-colors"
                               aria-label="Increase quantity"
                             >
                               <svg
