@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const faqs = [
@@ -216,10 +217,12 @@ export default function PerfumeBarPage() {
               custom={1}
               className="h-80 md:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center overflow-hidden"
             >
-              <img
+              <Image
                 src="/0D0A4312-2.jpg"
                 alt="Bespoke experience event"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </motion.div>
           </div>
@@ -238,10 +241,12 @@ export default function PerfumeBarPage() {
               custom={0}
               className="h-80 md:h-96 bg-(--bridal-white) rounded-lg border border-(--muted-sand) flex items-center justify-center order-last md:order-first overflow-hidden"
             >
-              <img
+              <Image
                 src="/0D0A4844-2.jpg"
                 alt="Interactive perfume bar entertainment"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </motion.div>
             <motion.div
@@ -337,10 +342,12 @@ export default function PerfumeBarPage() {
               custom={1}
               className="h-80 md:h-96 bg-(--soft-cream) rounded-lg border border-(--muted-sand) flex items-center justify-center overflow-hidden"
             >
-              <img
+              <Image
                 src="/0D0A4272.jpg"
                 alt="Luxury personalised perfume bar presentation"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </motion.div>
           </div>
