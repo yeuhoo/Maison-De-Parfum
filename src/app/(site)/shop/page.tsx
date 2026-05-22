@@ -145,9 +145,9 @@ function ShopPage() {
   return (
     <div className="min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative bg-background py-24 md:py-36 overflow-hidden">
-        <div className="absolute -top-28 -right-28 w-md h-md rounded-full border border-(--muted-sand) opacity-25 pointer-events-none" />
-        <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full border border-(--muted-sand) opacity-15 pointer-events-none" />
+      <section className="relative py-24 md:py-36 overflow-hidden">
+        <img src="/sample_bg.png" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-[rgba(30,16,8,0.45)]" />
 
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
           <motion.p
@@ -155,7 +155,7 @@ function ShopPage() {
             initial="hidden"
             animate="visible"
             custom={0}
-            className="text-[11px] tracking-[0.3em] uppercase text-(--button-gold) mb-6"
+            className="text-[11px] tracking-[0.3em] uppercase text-[#c9a96e] mb-6"
           >
             Maison de Parfum · Collection
           </motion.p>
@@ -164,7 +164,8 @@ function ShopPage() {
             initial="hidden"
             animate="visible"
             custom={1}
-            className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight text-text-primary mb-6"
+            className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight text-[#faf8f5] mb-6"
+            style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.4)" }}
           >
             The Art of Fragrance
           </motion.h1>
@@ -173,8 +174,8 @@ function ShopPage() {
             initial="hidden"
             animate="visible"
             custom={2}
-            className="text-lg md:text-xl max-w-xl mx-auto leading-relaxed"
-            style={{ fontFamily: "var(--font-montserrat)", color: "#7C6D5A" }}
+            className="text-lg md:text-xl max-w-xl mx-auto leading-relaxed text-[#e8ddd4]"
+            style={{ fontFamily: "var(--font-montserrat)" }}
           >
             Discover our curated collection of luxury fragrances, hand-crafted
             from the world&apos;s finest raw ingredients.
