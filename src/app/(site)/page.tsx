@@ -54,10 +54,10 @@ export default async function Home() {
         >
           <source src="/hero_vid.mp4" type="video/mp4" />
         </video>
-        <div className="relative z-10 px-4 sm:px-6 lg:px-24 py-12 sm:py-16 md:py-24">
+        <div className="relative z-10 px-4 sm:px-6 lg:px-16 xl:px-24 py-12 sm:py-16 md:py-24">
           <div className="text-left">
             <h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 font-heading leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 font-heading leading-tight"
               style={{ color: "#FAF8F5", textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5)" }}
             >
               Discover Your Signature Scent

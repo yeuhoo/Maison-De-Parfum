@@ -153,7 +153,7 @@ function ShopPage({ initialProducts }: ShopContentProps) {
               initial="hidden"
               animate="visible"
               custom={1}
-              className="font-heading text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight text-[#faf8f5] mb-6"
+              className="font-heading text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight text-[#faf8f5] mb-6"
               style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.4)" }}
             >
               The Art of Fragrance

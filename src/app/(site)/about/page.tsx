@@ -57,7 +57,7 @@ export default function AboutPage() {
             initial="hidden"
             animate="visible"
             custom={1}
-            className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold leading-tight text-[#3C2218] mb-6"
+            className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight text-[#3C2218] mb-6"
           >
             Crafted with intention,
             <br className="hidden md:block" />

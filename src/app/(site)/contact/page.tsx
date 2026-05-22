@@ -77,7 +77,7 @@ export default function ContactPage() {
             initial="hidden"
             animate="visible"
             custom={1}
-            className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold leading-tight text-text-primary mb-6"
+            className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight text-text-primary mb-6"
           >
             We&apos;d love to
             <br className="hidden md:block" />

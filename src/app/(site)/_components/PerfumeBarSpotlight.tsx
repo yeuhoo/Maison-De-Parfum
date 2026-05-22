@@ -55,7 +55,7 @@ export default function PerfumeBarSpotlight() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="flex flex-col justify-center px-6 py-10 sm:px-8 sm:py-12 lg:px-16 lg:py-16"
+          className="flex flex-col justify-center px-6 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14 xl:px-16 xl:py-16"
         >
           <p className="text-[10px] tracking-[0.4em] uppercase text-[#c9a96e] mb-5">
             Signature Experience
