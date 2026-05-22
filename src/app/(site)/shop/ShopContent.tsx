@@ -133,8 +133,8 @@ function ShopPage({ initialProducts }: ShopContentProps) {
   return (
     <div className="min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden">
-        <img src="/sample_bg.png" alt="" aria-hidden="true" className="w-full h-auto block" />
+      <section className="relative overflow-hidden min-h-[55vh] bg-[#1e1008]">
+        <img src="/sample_bg.png" alt="" aria-hidden="true" className="w-full h-auto block" loading="eager" />
         <div className="absolute inset-0 bg-[rgba(30,16,8,0.45)]" />
 
         <div className="absolute inset-0 flex items-center justify-center z-10">
