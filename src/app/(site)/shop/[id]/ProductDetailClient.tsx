@@ -408,7 +408,7 @@ export default function ProductDetailClient({
             >
               {[
                 ["Category", product.category],
-                ["Concentration", "Eau de Parfum"],
+                ["Concentration", "Extrait de Parfum"],
                 [
                   "Available in",
                   product.price30ml > 0 ? "50ml · 30ml" : "50ml",

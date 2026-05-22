@@ -35,8 +35,8 @@ function SuccessContent() {
           Thank You
         </h1>
         <p className="text-[#666] text-sm leading-relaxed mb-6">
-          Your order has been placed successfully. We will be in touch shortly
-          to process your payment and confirm dispatch.
+          Your payment was successful and your order has been confirmed.
+          We will prepare your order and be in touch with dispatch details soon.
         </p>
 
         {orderId && (
