@@ -35,7 +35,7 @@ const BottleIcon = () => (
 
 export default function PerfumeBarSpotlight() {
   return (
-    <section className="border-t border-[#e8dfd4] overflow-hidden relative" style={{ background: "linear-gradient(to bottom right, #faf8f5, #ede4d4)" }}>
+    <section className="overflow-hidden relative" style={{ background: "linear-gradient(to bottom, #faf8f5, #e8ddd0)" }}>
       {/* Radial gold glow — right side behind text */}
       <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-full" style={{ background: "radial-gradient(ellipse 80% 80% at 80% 50%, rgba(201,169,110,0.12) 0%, transparent 70%)" }} />
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2">
