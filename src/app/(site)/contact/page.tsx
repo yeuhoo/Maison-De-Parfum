@@ -123,15 +123,15 @@ export default function ContactPage() {
                     <span style={{ color: "#5a4535", fontFamily: "var(--font-montserrat)" }}>
                       Email:
                     </span>{" "}
-                    <span className="text-text-primary" style={{ fontFamily: "var(--font-montserrat)" }}>
-                      [hello@maisondeparfum.com.au]
-                    </span>
+                    <a href="mailto:maisondeparfum.au@gmail.com" className="text-text-primary hover:text-(--button-gold) transition-colors" style={{ fontFamily: "var(--font-montserrat)" }}>
+                      maisondeparfum.au@gmail.com
+                    </a>
                   </p>
                   <p>
                     <span style={{ color: "#5a4535", fontFamily: "var(--font-montserrat)" }}>
                       Phone:
                     </span>{" "}
-                    <span className="text-text-primary" style={{ fontFamily: "var(--font-montserrat)" }}>[+61 XXX XXX XXX]</span>
+                    <a href="tel:+61451000329" className="text-text-primary hover:text-(--button-gold) transition-colors" style={{ fontFamily: "var(--font-montserrat)" }}>0451 000 329</a>
                   </p>
                   <p style={{ color: "#5a4535", fontFamily: "var(--font-montserrat)" }}>
                     Response time: within 1–2 business days
@@ -148,9 +148,9 @@ export default function ContactPage() {
                 </p>
                 <div className="space-y-1 text-text-secondary text-sm leading-relaxed">
                   <p className="text-text-primary" style={{ fontFamily: "var(--font-montserrat)" }}>
-                    [Studio / Showroom Address]
+                    54 Grahams Road
                   </p>
-                  <p style={{ color: "#5a4535", fontFamily: "var(--font-montserrat)" }}>[Suburb, State, Postcode]</p>
+                  <p style={{ color: "#5a4535", fontFamily: "var(--font-montserrat)" }}>Strathpine, QLD 4500</p>
                   <p style={{ color: "#5a4535", fontFamily: "var(--font-montserrat)" }}>Australia</p>
                 </div>
               </div>
