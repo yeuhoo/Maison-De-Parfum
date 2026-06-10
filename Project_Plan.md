@@ -6,7 +6,7 @@ This plan outlines a 4-week phased approach to build and launch a perfume ecomme
 
 **Key Assumptions:**
 
-- Business & Product Catalog docs are finalized (aligned with blueprint: focus on Extrait de Parfum, Wedding Perfume Bar (more like specific page for inquiries, in the menu bar), bundles for AOV $110+). Informational and Ecommerce focused
+- Business & Product Catalog docs are finalized (aligned with blueprint: focus on High Concentration Eau de Parfum, Wedding Perfume Bar (more like specific page for inquiries, in the menu bar), bundles for AOV $110+). Informational and Ecommerce focused
 - Tech stack: Next.js (frontend), Node.js/Express (backend), MongoDB (database), Square (payments), custom ecommerce build.
 - CRM: Separate admin web app for stock management, analytics, customer profiles, and email automation (integrated with main site via real-time sync/webhooks).
 - Email: SendGrid (free tier) for customer confirmations and admin notifications.
@@ -100,7 +100,7 @@ This plan outlines a 4-week phased approach to build and launch a perfume ecomme
 
 ### Day 15-16: Frontend Core (Ecommerce)
 
-- Build product listing, search, filters (focused on Extrait 30ml/50ml, scent families, bundles).
+- Build product listing, search, filters (focused on High Concentration Eau de Parfum 30ml/50ml, scent families, bundles).
 - Implement product detail page with add-to-cart and Wedding Perfume Bar enquiry form.
 - Create cart and checkout flow with bundle pricing optimization.
 - **Deliverable:** Functional ecommerce frontend aligned with brand blueprint.

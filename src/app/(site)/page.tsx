@@ -9,13 +9,14 @@ import type { Metadata } from "next";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Maison de Parfum — Luxury Extrait de Parfum, Brisbane Australia",
+  title:
+    "Maison de Parfum — High Concentration Eau de Parfum, Brisbane Australia",
   description:
-    "Discover handcrafted Extrait de Parfum by Maison de Parfum. Luxury fragrances compounded in Australia, crafted from the world's finest raw ingredients.",
+    "Discover handcrafted High Concentration Eau de Parfum by Maison de Parfum. Luxury fragrances compounded in Australia, crafted from the world's finest raw ingredients.",
   openGraph: {
-    title: "Maison de Parfum — Luxury Extrait de Parfum",
+    title: "Maison de Parfum — High Concentration Eau de Parfum",
     description:
-      "Discover handcrafted Extrait de Parfum by Maison de Parfum. Luxury fragrances compounded in Australia.",
+      "Discover handcrafted High Concentration Eau de Parfum by Maison de Parfum. Luxury fragrances compounded in Australia.",
     type: "website",
   },
 };

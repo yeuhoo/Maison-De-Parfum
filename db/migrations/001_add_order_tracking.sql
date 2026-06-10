@@ -1,0 +1,5 @@
+ALTER TABLE orders
+  ADD COLUMN IF NOT EXISTS courier TEXT,
+  ADD COLUMN IF NOT EXISTS tracking_number TEXT,
+  ADD COLUMN IF NOT EXISTS tracking_status TEXT,
+  ADD COLUMN IF NOT EXISTS tracking_updated_at TIMESTAMPTZ;

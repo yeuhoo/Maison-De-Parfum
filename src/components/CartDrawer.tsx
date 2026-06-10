@@ -186,7 +186,7 @@ export default function CartDrawer() {
                           {item.name}
                         </h3>
                         <p className="text-[11px] tracking-widest uppercase text-[#7C6D5A] mt-0.5 mb-3">
-                          {item.size} · Extrait de Parfum
+                          {item.size} · High Concentration Eau de Parfum
                         </p>
 
                         {/* Quantity + remove */}

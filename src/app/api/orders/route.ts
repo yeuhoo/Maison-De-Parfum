@@ -9,7 +9,10 @@ export async function GET() {
       city, state, postcode, country,
       delivery_method AS "deliveryMethod",
       items, subtotal, shipping_cost AS "shippingCost", total,
-      status, created_at AS "createdAt"
+      status, courier, tracking_number AS "trackingNumber",
+      tracking_status AS "trackingStatus",
+      tracking_updated_at AS "trackingUpdatedAt",
+      created_at AS "createdAt"
     FROM orders
     ORDER BY created_at DESC
   `;

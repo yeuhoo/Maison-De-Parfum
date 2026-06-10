@@ -18,7 +18,7 @@ const fadeUp = {
 const values = [
   {
     title: "Uncompromising Quality",
-    body: "Every fragrance is formulated at Extrait de Parfum concentration — the highest standard in fine perfumery — ensuring exceptional longevity and depth.",
+    body: "Every fragrance is crafted as a High Concentration Eau de Parfum, ensuring exceptional longevity and depth.",
   },
   {
     title: "Modern Luxury",
@@ -31,6 +31,21 @@ const values = [
   {
     title: "Experiential Storytelling",
     body: "Fragrance is memory. We design each scent to evoke a moment, a mood, a feeling — not just to smell beautiful, but to mean something.",
+  },
+];
+
+const teamMembers = [
+  {
+    name: "Regine Obial",
+    role: "Founder",
+    image: "/6.png",
+    bio: "Regine founded Maison de Parfum with a passion for creating meaningful and memorable experiences through fragrance. Inspired by the belief that scent is deeply personal, she envisioned a space where people could discover, create, and connect with fragrances that reflect their unique story. Her dedication to elegance, creativity, and exceptional guest experiences continues to shape the heart of the brand.",
+  },
+  {
+    name: "Joshua Obial",
+    role: "Head Perfumer",
+    image: "/8.png",
+    bio: "Joshua's passion for perfume is the foundation of Maison de Parfum. Drawn to the way fragrances can evoke emotions, capture memories, and express individuality, he pursued the art of perfumery to help others find scents that truly resonate with them. Through thoughtful craftsmanship and a deep appreciation for fine fragrance, Joshua creates blends that are personal, memorable, and designed to leave a lasting impression.",
   },
 ];
 
@@ -70,9 +85,9 @@ export default function AboutPage() {
             custom={2}
             className="font-sans text-[#5a4535] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
           >
-            We are an Australian luxury fragrance house dedicated to creating
-            performance-driven Extrait de Parfum — and unforgettable scent
-            experiences.
+            Maison de Parfum is an Australian-Filipino luxury fragrance house
+            devoted to crafting high-concentration Eau de Parfum and memorable
+            fragrance experiences that linger long after the moment has passed.
           </motion.p>
         </div>
       </section>
@@ -106,10 +121,10 @@ export default function AboutPage() {
               </p>
               <p className="font-sans text-[#5a4535] text-base leading-relaxed">
                 From our very first formulation, we committed to one standard —
-                Extrait de Parfum concentration, the highest in fine perfumery.
-                No compromise on ingredients, no shortcuts in the creative
-                process. Every scent in our collection tells a story, and every
-                bottle is an invitation to wear it as your own.
+                High Concentration Eau de Parfum. No compromise on ingredients,
+                no shortcuts in the creative process. Every scent in our
+                collection tells a story, and every bottle is an invitation to
+                wear it as your own.
               </p>
             </motion.div>
             <motion.div
@@ -168,7 +183,8 @@ export default function AboutPage() {
               </h2>
               <p className="font-sans text-[#5a4535] text-base leading-relaxed mb-4">
                 Our mission is to create meaningful fragrance experiences
-                through elevated Extrait de Parfum formulations — and
+                through elevated High Concentration Eau de Parfum formulations —
+                and
                 unforgettable wedding scent experiences through our Perfume Bar
                 service.
               </p>
@@ -240,13 +256,10 @@ export default function AboutPage() {
               The faces behind the fragrance
             </h2>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-2xl mx-auto">
-            {[
-              { role: "Founder & Creative Director", image: "/6.png" },
-              { role: "Head Perfumer", image: "/8.png" },
-            ].map((member, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 max-w-4xl mx-auto">
+            {teamMembers.map((member, i) => (
               <motion.div
-                key={member.role}
+                key={member.name}
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
@@ -254,24 +267,23 @@ export default function AboutPage() {
                 custom={i}
                 className="group"
               >
-                <div className="h-72 bg-(--bridal-white) border border-(--muted-sand) rounded mb-5 flex items-center justify-center text-text-secondary text-sm tracking-widest uppercase group-hover:border-(--button-gold) transition-colors duration-300 overflow-hidden">
+                <div className="h-80 lg:h-96 bg-(--bridal-white) border border-(--muted-sand) rounded mb-6 flex items-center justify-center text-text-secondary text-sm tracking-widest uppercase group-hover:border-(--button-gold) transition-colors duration-300 overflow-hidden">
                   <Image
                     src={member.image}
-                    alt={member.role}
+                    alt={`${member.name}, ${member.role}`}
                     width={500}
-                    height={400}
+                    height={600}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <p className="font-heading text-[11px] tracking-[0.2em] uppercase text-[#8B6914] mb-1">
                   {member.role}
                 </p>
-                <h3 className="font-heading text-lg font-semibold text-[#3C2218] mb-1">
-                  [Team Member Name]
+                <h3 className="font-heading text-2xl font-semibold text-[#3C2218] mb-3">
+                  {member.name}
                 </h3>
-                <p className="font-sans text-[#5a4535] text-sm leading-relaxed">
-                  [Short bio placeholder — background, expertise, and what they
-                  bring to Maison de Parfum.]
+                <p className="font-sans text-[#5a4535] text-sm md:text-base leading-relaxed">
+                  {member.bio}
                 </p>
               </motion.div>
             ))}

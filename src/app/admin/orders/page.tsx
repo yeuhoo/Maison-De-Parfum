@@ -34,8 +34,20 @@ interface Order {
   shippingCost: number;
   total: number;
   status: OrderStatus;
+  courier: string | null;
+  trackingNumber: string | null;
+  trackingStatus: string | null;
+  trackingUpdatedAt: string | null;
   createdAt: string;
 }
+
+type ShipmentDraft = {
+  courier: string;
+  trackingNumber: string;
+};
+
+const COURIERSPLEASE_TRACKING_URL =
+  "https://www.couriersplease.com.au/tools-track";
 
 const STATUS_CONFIG: Record<OrderStatus, { label: string; classes: string }> = {
   pending: {
@@ -76,9 +88,12 @@ export default function OrdersPage() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<OrderStatus | "All">("All");
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [shipmentDrafts, setShipmentDrafts] = useState<
+    Record<string, ShipmentDraft>
+  >({});
+  const [savingShipment, setSavingShipment] = useState<string | null>(null);
 
-  const loadOrders = () => {
-    setLoading(true);
+  useEffect(() => {
     fetch("/api/orders")
       .then((r) => r.json())
       .then((data: Order[]) => {
@@ -86,10 +101,6 @@ export default function OrdersPage() {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  };
-
-  useEffect(() => {
-    loadOrders();
   }, []);
 
   const visible = orders.filter((o) => {
@@ -102,16 +113,70 @@ export default function OrdersPage() {
     return matchSearch && matchFilter;
   });
 
-  const updateStatus = (id: string, status: OrderStatus) => {
-    fetch(`/api/orders/${id}`, {
+  const updateStatus = async (id: string, status: OrderStatus) => {
+    const res = await fetch(`/api/orders/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
-    }).then(() =>
+    });
+
+    if (res.ok) {
       setOrders((prev) =>
         prev.map((o) => (o.id === id ? { ...o, status } : o)),
-      ),
-    );
+      );
+    }
+  };
+
+  const getShipmentDraft = (order: Order): ShipmentDraft =>
+    shipmentDrafts[order.id] ?? {
+      courier: order.courier || "CouriersPlease",
+      trackingNumber: order.trackingNumber || "",
+    };
+
+  const updateShipmentDraft = (
+    order: Order,
+    field: keyof ShipmentDraft,
+    value: string,
+  ) => {
+    setShipmentDrafts((prev) => ({
+      ...prev,
+      [order.id]: { ...getShipmentDraft(order), [field]: value },
+    }));
+  };
+
+  const saveShipment = async (order: Order) => {
+    const draft = getShipmentDraft(order);
+    if (!draft.trackingNumber.trim()) return;
+
+    setSavingShipment(order.id);
+    const res = await fetch(`/api/orders/${order.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        status: "shipped",
+        courier: draft.courier,
+        trackingNumber: draft.trackingNumber,
+      }),
+    });
+
+    if (res.ok) {
+      const updated = await res.json();
+      setOrders((prev) =>
+        prev.map((item) =>
+          item.id === order.id
+            ? {
+                ...item,
+                status: updated.status,
+                courier: updated.courier,
+                trackingNumber: updated.trackingNumber,
+                trackingStatus: updated.trackingStatus,
+                trackingUpdatedAt: updated.trackingUpdatedAt,
+              }
+            : item,
+        ),
+      );
+    }
+    setSavingShipment(null);
   };
 
   const counts = ALL_STATUSES.reduce<Record<string, number>>((acc, s) => {
@@ -220,6 +285,7 @@ export default function OrdersPage() {
               visible.map((order) => {
                 const cfg = STATUS_CONFIG[order.status];
                 const isExpanded = expanded === order.id;
+                const shipment = getShipmentDraft(order);
                 return (
                   <>
                     <tr
@@ -308,6 +374,68 @@ export default function OrdersPage() {
                           <div>
                             <strong className="text-[#555]">Items:</strong>{" "}
                             {formatItems(order.items)}
+                          </div>
+                          <div className="pt-4 mt-4 border-t border-[#e8e8e8]">
+                            <p className="text-[10px] tracking-[0.16em] uppercase text-[#999] mb-2">
+                              CouriersPlease delivery update
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr_auto] gap-2">
+                              <input
+                                value={shipment.courier}
+                                onChange={(event) =>
+                                  updateShipmentDraft(
+                                    order,
+                                    "courier",
+                                    event.target.value,
+                                  )
+                                }
+                                placeholder="Courier"
+                                className="bg-white border border-[#e5e5e5] px-3 py-2 outline-none focus:border-[#c9a96e]"
+                              />
+                              <input
+                                value={shipment.trackingNumber}
+                                onChange={(event) =>
+                                  updateShipmentDraft(
+                                    order,
+                                    "trackingNumber",
+                                    event.target.value,
+                                  )
+                                }
+                                placeholder="Tracking number"
+                                className="bg-white border border-[#e5e5e5] px-3 py-2 font-mono outline-none focus:border-[#c9a96e]"
+                              />
+                              <button
+                                type="button"
+                                disabled={
+                                  savingShipment === order.id ||
+                                  !shipment.trackingNumber.trim()
+                                }
+                                onClick={() => saveShipment(order)}
+                                className="bg-[#c9a96e] text-white px-4 py-2 text-[10px] tracking-[0.12em] uppercase disabled:opacity-40"
+                              >
+                                {savingShipment === order.id
+                                  ? "Saving…"
+                                  : "Mark shipped"}
+                              </button>
+                            </div>
+                            {order.trackingNumber && (
+                              <div className="flex flex-wrap gap-3 mt-2 text-[11px]">
+                                <span>
+                                  Saved tracking:{" "}
+                                  <strong className="font-mono text-[#555]">
+                                    {order.trackingNumber}
+                                  </strong>
+                                </span>
+                                <a
+                                  href={COURIERSPLEASE_TRACKING_URL}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="text-[#9a7a50] hover:underline"
+                                >
+                                  Open CouriersPlease tracking
+                                </a>
+                              </div>
+                            )}
                           </div>
                         </td>
                       </tr>

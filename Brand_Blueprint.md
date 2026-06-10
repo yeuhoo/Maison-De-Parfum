@@ -15,7 +15,7 @@ Target launch within 90 days from final brand approval.
 
 **Phase Strategy:**  
 **Phase 1 – MVP:**  
-• Core ecommerce (30ml & 50ml Extrait de Parfum)  
+• Core ecommerce (30ml & 50ml High Concentration Eau de Parfum)
 • Wedding Perfume Bar enquiry funnel  
 • Bundle pricing structure  
 • Compliance pages  
@@ -37,13 +37,13 @@ Target launch within 90 days from final brand approval.
 ## 2) Brand Fundamentals
 
 **Brand Mission:**  
-To create meaningful fragrance experiences through elevated extrait formulations and unforgettable wedding scent experiences.
+To create meaningful fragrance experiences through elevated High Concentration Eau de Parfum formulations and unforgettable wedding scent experiences.
 
 **Brand Vision:**  
 To become Australia's leading accessible luxury fragrance house known for performance, elegance, and experiential storytelling.
 
 **Brand Positioning:**  
-Luxury made accessible. High-concentration extrait formulations at attainable pricing.  
+Luxury made accessible. High Concentration Eau de Parfum formulations at attainable pricing.
 Modern identity over heritage legacy.
 
 **Brand Personality:**  
@@ -57,7 +57,7 @@ Modern identity over heritage legacy.
 Luxury performance without traditional luxury markups. Long-lasting, personally tested, and compliance-approved fragrances.
 
 **Differentiators:**  
-• All Extrait de Parfum concentration  
+• All High Concentration Eau de Parfum
 • Wedding Keepsake Perfume Bar experience  
 • Membership with unreleased scents  
 • Seasonal drops  
@@ -125,7 +125,7 @@ Age 20–30, mixed gender, urban.
 Motivation: Self-expression and identity.  
 Barriers: Blind-buy hesitation.  
 Channels: TikTok, Instagram.  
-Trust Drivers: Reviews, extrait strength, bundle value.
+Trust Drivers: Reviews, fragrance strength, bundle value.
 
 **Secondary Segment – Emerging Fragrance Collectors:**  
 Age 28–45, moderate-high income.  
@@ -151,8 +151,8 @@ To sell effectively, educate clearly, reduce returns, and increase blind-buy con
 • Reduce mismatch-related returns
 
 **Scope – Included:**  
-• 30ml Extrait  
-• 50ml Extrait  
+• 30ml High Concentration Eau de Parfum
+• 50ml High Concentration Eau de Parfum
 • 10ml samples  
 • Bundle sets
 
@@ -174,8 +174,8 @@ To sell effectively, educate clearly, reduce returns, and increase blind-buy con
 • Unisex
 
 **Subcategories:**  
-• Extrait 30ml  
-• Extrait 50ml  
+• High Concentration Eau de Parfum 30ml
+• High Concentration Eau de Parfum 50ml
 • Discovery Set  
 • Gift Set
 

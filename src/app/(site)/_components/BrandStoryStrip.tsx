@@ -24,7 +24,7 @@ export default function BrandStoryStrip() {
           transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
           className="font-heading text-2xl md:text-4xl lg:text-5xl font-light italic text-text-primary leading-[1.3] tracking-wide"
         >
-          &ldquo;Extrait de Parfum.
+          &ldquo;Eau de Parfum.
           <br />
           Crafted for presence.&rdquo;
         </motion.p>
@@ -42,7 +42,7 @@ export default function BrandStoryStrip() {
           transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
           className="text-[11px] tracking-[0.35em] uppercase text-[#8B6914]"
         >
-          All Extrait concentration · Compounded in Australia
+          High Concentration Eau de Parfum · Compounded in Australia
         </motion.p>
       </div>
     </section>
