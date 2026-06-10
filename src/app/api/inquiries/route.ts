@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sql } from "@/lib/db";
+import { sendNewInquiryEmails } from "@/lib/inquiry-notifications";
 
 export async function GET() {
   const rows = await sql`
@@ -13,22 +14,32 @@ export async function GET() {
 export async function POST(request: Request) {
   const { id, name, email, subject, message } = await request.json();
 
+  if (!id || !name?.trim() || !email?.trim() || !subject || !message?.trim()) {
+    return NextResponse.json(
+      { error: "Missing required fields" },
+      { status: 400 },
+    );
+  }
+
   const [inquiry] = await sql`
     INSERT INTO inquiries (id, name, email, subject, message, status)
     VALUES (${id}, ${name}, ${email}, ${subject}, ${message}, 'new')
     RETURNING *
   `;
 
-  // ── Placeholder: auto-acknowledgement email ───────────────────────────────
-  // TODO: uncomment when RESEND_API_KEY is available
-  // const resend = new Resend(process.env.RESEND_API_KEY);
-  // await resend.emails.send({
-  //   from: 'hello@maisondeparfum.com',
-  //   to: email,
-  //   subject: 'We received your message — Maison de Parfum',
-  //   html: `<p>Hi ${name}, thank you for reaching out. We'll get back to you within 1–2 business days.</p>`
-  // });
-  console.log(`[INQUIRY RECEIVED] #${id} from ${name} <${email}>`);
+  let emailSent = true;
+  let emailError: string | undefined;
 
-  return NextResponse.json(inquiry, { status: 201 });
+  try {
+    await sendNewInquiryEmails({ id, name, email, subject, message });
+  } catch (error) {
+    emailSent = false;
+    emailError = error instanceof Error ? error.message : "Email failed";
+    console.error(`[INQUIRY RECEIVED] Email failed for #${id}:`, error);
+  }
+
+  return NextResponse.json(
+    { ...inquiry, emailSent, emailError },
+    { status: 201 },
+  );
 }

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sql } from "@/lib/db";
+import { sendInquiryReply } from "@/lib/inquiry-notifications";
 
 export async function POST(
   request: Request,
@@ -16,32 +17,43 @@ export async function POST(
   }
 
   const [inquiry] = await sql`
-    UPDATE inquiries
-    SET reply = ${reply}, replied_at = NOW(), status = 'replied'
+    SELECT id, name, email, subject, message
+    FROM inquiries
     WHERE id = ${id}
-    RETURNING id, name, email, subject, message, status, reply, replied_at AS "repliedAt", created_at AS "createdAt"
   `;
 
   if (!inquiry) {
     return NextResponse.json({ error: "Inquiry not found" }, { status: 404 });
   }
 
-  // ── Placeholder: send reply email to customer ─────────────────────────────
-  // TODO: uncomment when RESEND_API_KEY is available
-  // const resend = new Resend(process.env.RESEND_API_KEY);
-  // await resend.emails.send({
-  //   from: 'hello@maisondeparfum.com',
-  //   to: inquiry.email,
-  //   subject: 'Re: Your enquiry — Maison de Parfum',
-  //   html: `
-  //     <p>Hi ${inquiry.name},</p>
-  //     <p>${reply}</p>
-  //     <hr/>
-  //     <p style="color:#aaa;font-size:12px;">Your original message: ${inquiry.message}</p>
-  //     <p style="color:#aaa;font-size:12px;">— Maison de Parfum Team</p>
-  //   `
-  // });
-  console.log(`[INQUIRY REPLIED] #${id} reply sent to ${inquiry.email}`);
+  try {
+    await sendInquiryReply(
+      {
+        id: inquiry.id,
+        name: inquiry.name,
+        email: inquiry.email,
+        subject: inquiry.subject,
+        message: inquiry.message,
+      },
+      reply.trim(),
+    );
+  } catch (error) {
+    console.error(`[INQUIRY REPLIED] Email failed for #${id}:`, error);
+    return NextResponse.json(
+      {
+        error:
+          error instanceof Error ? error.message : "Failed to send reply email",
+      },
+      { status: 502 },
+    );
+  }
 
-  return NextResponse.json(inquiry);
+  const [updatedInquiry] = await sql`
+    UPDATE inquiries
+    SET reply = ${reply.trim()}, replied_at = NOW(), status = 'replied'
+    WHERE id = ${id}
+    RETURNING id, name, email, subject, message, status, reply, replied_at AS "repliedAt", created_at AS "createdAt"
+  `;
+
+  return NextResponse.json(updatedInquiry);
 }
