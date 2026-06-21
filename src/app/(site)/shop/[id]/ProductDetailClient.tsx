@@ -61,7 +61,6 @@ export default function ProductDetailClient({
 }) {
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
-  const [selectedSize, setSelectedSize] = useState<"50ml" | "30ml">("50ml");
   const [selectedImage, setSelectedImage] = useState(0);
   const [hoveredImage, setHoveredImage] = useState<number | null>(null);
   const { addToCart } = useCart();
@@ -75,14 +74,12 @@ export default function ProductDetailClient({
   const detail = CATEGORY_DETAILS[product.category];
 
   const handleAddToBag = () => {
-    const selectedPrice =
-      selectedSize === "50ml" ? product.price50ml : product.price30ml;
     for (let i = 0; i < qty; i++) {
       addToCart({
         id: product.id,
         name: product.name,
-        price: selectedPrice,
-        size: selectedSize,
+        price: product.price50ml,
+        size: "50ml",
         imageUrl: product.imageUrl,
       });
     }
@@ -317,41 +314,19 @@ export default function ProductDetailClient({
                   Size
                 </p>
                 <div className="flex gap-3">
-                  <button
-                    onClick={() => setSelectedSize("50ml")}
-                    className={`flex-1 sm:flex-none px-4 sm:px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${
-                      selectedSize === "50ml"
-                        ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
-                        : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
-                    }`}
-                  >
-                    50ml &middot; ${product.price50ml}
-                  </button>
-                  {product.price30ml > 0 && (
-                    <button
-                      onClick={() => setSelectedSize("30ml")}
-                      className={`flex-1 sm:flex-none px-4 sm:px-5 py-3 border text-[12px] tracking-[0.12em] uppercase transition-colors duration-200 ${
-                        selectedSize === "30ml"
-                          ? "border-(--button-gold) text-text-primary bg-(--soft-cream)"
-                          : "border-(--muted-sand) text-text-secondary hover:border-(--button-gold)"
-                      }`}
-                    >
-                      30ml &middot; ${product.price30ml}
-                    </button>
-                  )}
+                  <div className="flex-1 sm:flex-none px-4 sm:px-5 py-3 border border-(--button-gold) text-text-primary bg-(--soft-cream) text-[12px] tracking-[0.12em] uppercase">
+                    50ml - ${product.price50ml}
+                  </div>
                 </div>
               </div>
 
               {/* Price */}
               <div className="flex items-baseline gap-2">
                 <span className="font-heading text-3xl font-semibold text-text-primary">
-                  $
-                  {selectedSize === "50ml"
-                    ? product.price50ml
-                    : product.price30ml}
+                  ${product.price50ml}
                 </span>
                 <span className="text-sm" style={{ color: "#7C6D5A" }}>
-                  / {selectedSize}
+                  / 50ml
                 </span>
               </div>
 
@@ -415,10 +390,7 @@ export default function ProductDetailClient({
               {[
                 ["Category", product.category],
                 ["Concentration", "Eau de Parfum"],
-                [
-                  "Available in",
-                  product.price30ml > 0 ? "50ml · 30ml" : "50ml",
-                ],
+                ["Available in", "50ml"],
               ].map(([label, value]) => (
                 <div
                   key={label}
